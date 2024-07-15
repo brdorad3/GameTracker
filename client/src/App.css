@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#root{
+   /* #f4c420
+    #180002 */
+    background-color: #180002;
+    height: 100vh;
+    overflow-x:hidden;
+}
