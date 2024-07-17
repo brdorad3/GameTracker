@@ -21,11 +21,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        console.log('Checking token:', token);
         if (token) {
             try {
                 const decoded: any = jwtDecode(token);
-                console.log('Decoded token:', decoded);
                 const { exp, ...userId } = decoded;
                 if (exp * 1000 > Date.now()) {
                     setIsAuthenticated(true);
