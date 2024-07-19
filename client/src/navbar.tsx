@@ -29,6 +29,7 @@ const Navbar: React.FC = () => {
                     <input type="text" 
                     className="w-full h-10 rounded-3xl pl-5"
                     placeholder="Search..."
+                    minLength={1}
                     onChange={(e)=> setValue(e.target.value)}
                     value={value}
                     />
