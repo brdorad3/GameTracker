@@ -4,7 +4,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from './App.tsx'
 import Login from './login.tsx';
 import Signup from './signup.tsx';
-import Search from "./search.tsx"
+import Search from "./search.tsx";
+import GameDetail from './gameDetail.tsx';
 import { AuthProvider, useAuth } from './authContext';
 
 
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
   {
     path: "/search",
     element: <Search />,
+  },
+  {
+    path: "/detail",
+    element: <GameDetail />,
   },
 ]);
 

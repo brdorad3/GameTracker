@@ -2,12 +2,12 @@ import { useAuth } from "./authContext";
 import Navbar from "./navbar";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Search = () => {
-  const { user } = useAuth();
   const location = useLocation();
   const [res, setRes] = useState<any[]>([]);
-  const [gamesWithCovers, setGamesWithCovers] = useState<any[]>([]);
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,19 +21,24 @@ const Search = () => {
               'Client-ID': '28k8glj9djgyr0opcwll92beduld5h',
               'Authorization': 'Bearer fos399vwik27rr0m3tprazhvafx4zj',
             },
-            body: `search "${location.state.value}"; fields name, id,cover.url, first_release_date; limit 5;`,
+            body: `search "${location.state.value}"; fields name, cover.url, first_release_date, platforms.name, total_rating, total_rating_count;
+             limit 8;
+             
+             `,
           }
         );
         const data = await response.json();
-     //   console.log(data)
+        //console.log(data)
         
 
         const gamesWithCovers = data.map((game: any, index: any) => ({
           ...game,
-          coverUrl: game.cover.url ? game.cover.url.replace('t_thumb', 't_cover_small_2x') : '',
+          coverUrl: game.cover ? game.cover.url.replace('t_thumb', 't_cover_small_2x') : '',
           rel: new Date(game.first_release_date * 1000).getFullYear(),
+          
+          
         }));
-       // console.log(gamesWithCovers)
+        console.log(gamesWithCovers)
         setRes(gamesWithCovers);
         
       } catch (err) {
@@ -47,21 +52,44 @@ const Search = () => {
   return (
     <>
       <Navbar />
+      {
+        res.length > 0 ?
+      
       <ul className="flex flex-col gap-10 px-36 py-10">
         {res.map((game, index) => (
-          <li key={index} className="text-white flex">
+          <li key={index} className="text-white flex gap-5 bg-sec p-5 rounded-xl">
             {game.cover && game.coverUrl ? (
               <img src={game.coverUrl} alt={game.name} className="w-[90px] h-[120px] bg-sec" />
             ) : (
               <div className="w-[150px] h-[150px] bg-sec"></div>
             )}
+            <div>
             <div className="flex gap-2">
-            <p className="text-white">{game.name}</p>
-            <p className="text-white">&#40; {game.rel} &#41;</p>
+           <Link to="/detail" state={game.id}> <p className="text-prim text-xl font-medium ">{game.name}</p> </Link>
+            <p className="text-prim text-xl">&#40; {game.rel} &#41;</p>
+            </div>
+            <div>
+            <ul className="flex gap-1">
+              
+                  { game.platforms && game.platforms.map((platform: any, index: number) => (
+                    <li key={index} className="text-[#0000008a] text-[12px] font-medium">{platform.name}       /</li>
+                  ))}
+                </ul>
+            </div>
+            <div>
+              {game.total_rating ? 
+            <p>{Math.floor(game.total_rating)}/100 &#40;{game.total_rating_count}&#41; </p>:
+            <p>No ratings yet</p>  
+            }
+              
+            </div>
             </div>
           </li>
         ))}
-      </ul>
+      </ul>:
+      <h1 className="text-white">Nuh uh</h1>
+
+}
     </>
   );
 };

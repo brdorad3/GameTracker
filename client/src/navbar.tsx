@@ -20,7 +20,7 @@ const Navbar: React.FC = () => {
     }
 
     return(
-        <div className="flex justify-evenly items-center w-screen h-20">
+        <div className="flex px-56 justify-between items-center w-screen h-[10%]">
             <div>
                 <h1 className="text-lg text-sec "><Link to="/">Robnite</Link></h1>
             </div>
