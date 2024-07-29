@@ -1,11 +1,14 @@
-import { useLocation } from "react-router-dom"
-import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom"
+import { useEffect, useState, useRef } from "react";
 import Navbar from "./navbar";
 import Icon from '@mdi/react';
 import { mdiStar } from '@mdi/js';
 import { mdiStarOutline } from '@mdi/js';
 import { mdiChevronDown } from '@mdi/js';
-
+import Cover from "./cover"
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
 
 
 
@@ -29,7 +32,16 @@ interface ress{
   themes: any,
   summary: string,
   genres: [],
-  platforms: []
+  platforms: [],
+  dev: any,
+  publisher: [],
+  game_modes: [],
+  player_perspectives: [],
+  storyline: string,
+  similar_games: [],
+  franchises: [],
+  collections: [],
+  expansions: [],
 }
 
 function t(test: any){
@@ -43,14 +55,34 @@ function t(test: any){
 
 const GameDetail = () => {
 
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
+
     const location = useLocation();
-    
+    const [chars, setChars] = useState(false)
+    const [summ, setSumm] = useState(false)
     const [res, setRes] = useState<ress>()
     const [gamesWithCovers, setGamesWithCovers] = useState<any[]>([])
 
+
+    const topRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 1000);
+    }, [location.state]);
+  
     useEffect(() => {
         const fetchData = async () => {
+          
           try {
+            
             const response = await fetch(
               "http://localhost:8080/https://api.igdb.com/v4/games",
               {
@@ -62,7 +94,10 @@ const GameDetail = () => {
                 },
                 body: `fields name, artworks.url, cover.url, first_release_date, age_ratings.*, videos.*,
                  aggregated_rating, aggregated_rating_count, rating, rating_count, themes.name,
-                 storyline, summary, genres.name, platforms.name, status, category
+                 storyline, summary, genres.name, platforms.name, category, status, involved_companies.*, involved_companies.company.name,
+                 game_modes.name, player_perspectives.name, similar_games.name, similar_games.cover.url, similar_games.aggregated_rating,
+                 franchises.name, expansions.name, collections.name
+                               
                  ;
                 where id = ${location.state};
                  `,
@@ -70,7 +105,7 @@ const GameDetail = () => {
             );
             
             const data = await response.json();
-            console.log(data)
+        //    console.log(data)
             if (data.length > 0) {
               const game = data[0];
               const filteredArtworks = game.artworks && game.artworks.filter((artwork: any) => {
@@ -78,11 +113,12 @@ const GameDetail = () => {
                 return url.startsWith("ar");
               })
             
-           console.log(game)
+        //   console.log(game)
+          // console.log(filteredArtworks)
             const gamesWithCovers = data.map((game: any, index: any) => ({
                 ...game,
-                coverUrl: game.artworks ? game.artworks[0].url.replace('t_thumb', 't_1080p') : console.error("no link") ,
-                filteredArtwork: filteredArtworks ? filteredArtworks[0].url.replace("t_thumb", "t_1080p") : "./public/vite.svg",
+               coverUrl: game.artworks ? game.artworks[0].url.replace('t_thumb', 't_1080p') : console.error("no link") ,
+               filteredArtwork: filteredArtworks && filteredArtworks.length > 0 ? filteredArtworks[0].url.replace("t_thumb", "t_1080p") : "./public/vite.svg",
                 realCover: game.cover ? game.cover.url.replace('t_thumb', 't_cover_big') : '',
                 rel: new Date(game.first_release_date * 1000).getFullYear(),
                 age: game.age_ratings && game.age_ratings.filter((slot: any)=>{
@@ -98,20 +134,31 @@ const GameDetail = () => {
                   else {
                     return null
                   }
-                })
+                }),
+                dev: game.involved_companies && game.involved_companies.filter((slot:any)=>{
+                  if(slot.developer == true) return slot
+                }),
+                publisher: game.involved_companies && game.involved_companies.filter((slot:any)=>{
+                  if(slot.publisher == true) return slot
+                }),
 
               
                 
               }));
+            
             console.log(gamesWithCovers)
+            
             setRes(gamesWithCovers[0]);
+            
             }
           } catch (err) {
             console.error(err);
           }
         };
+        
         fetchData();
-      }, []);
+        
+      }, [location.state]);
 
 
     return(
@@ -128,7 +175,7 @@ const GameDetail = () => {
    <h1 className="relative z-10 text-white text-6xl">{res?.name}</h1>
    <div className="flex gap-4">
     <p className="text-white relative font-normal">{res.rel}</p>
-    {res.age &&
+    {res.age && res.age.lenght > 0 &&
     <p className="text-white relative">{t(res.age[0].rating)}</p>
   }
    </div>
@@ -191,29 +238,151 @@ const GameDetail = () => {
     </ul>
   </div>
 }
-<div className="w-full h-[500px] bg-sec relative mt-14 rounded-t-lg py-2 px-5 border-2 border-prim outline outline-[7px] outline-sec">
+<div className={`w-full  bg-sec relative mt-14 rounded-t-lg py-3 px-4 border-2 border-prim outline outline-[7px] outline-sec`}>
   
-    
-<ul className="flex gap-2">
-  <p className="text-base font-semibold text-prim">Genre:</p>
+   <div className="bg-prim w-3/4 rounded-r-3xl p-2"> 
+<ul className="flex flex-wrap gap-2 items-center">
+  <p className="text-lg font-bold text-sec comic">Genre:</p>
 {res && res.genres &&
   res.genres.map((slot: any, index)=>(
-<li className="text-base font-semibold" key={index}>{slot.name},</li>
+<li className="text-[17px] chakra" key={index}>{slot.name},</li>
   ))
   }
  </ul>
- <ul className="flex gap-2">
-  <p className="text-base font-semibold text-prim">Platforms:</p>
+ <ul className="flex flex-wrap gap-2 items-center">
+  <p className="text-lg font-bold text-sec comic">Platforms:</p>
 {res && res.platforms &&
   res.platforms.map((slot: any, index)=>(
-<li className="text-base font-semibold" key={index}>{slot.name},</li>
+<li className="text-[17px] chakra" key={index}>{slot.name},</li>
   ))
   }
  </ul>
-  <h3 className="text-prim font-semibold">About</h3>
-  <p className=" text-base font-semibold text-prim">{res.summary}</p>
-  <div className="bg-prim w-full h-52 p-2">
+  </div>
   
+  {res.summary ?(
+      summ ?
+      <p className="text-prim chakra text-xl my-10">{res.summary.substring(0,10000)}
+      <button onClick={()=>setSumm(!summ)} className="text-indigo-800 m-1">Less</button>
+      </p>:
+      <p className="text-prim chakra text-xl my-10">{res.summary.substring(0,500)}
+      <button onClick={()=>setSumm(!summ)} className="text-indigo-800 text-ellipsis m-1">More</button>
+      </p>
+    ) :
+    <p>no story</p>
+   
+
+    }
+  <div className="bg-prim w-full  py-6 flex flex-col gap-8 px-10 ">
+    <div className="flex justify-evenly items-center">
+
+
+    <ol className="border-2 border-sec p-2 rounded-md h-4/5 sh w-56 list-disc">
+    <h2 className="bangers text-2xl text-sec">Main developer</h2>
+    <div className="w-[75%] h-[1px] bg-sec mb-3"></div>
+    {res.dev ? 
+    res.dev.map((slot: any, index: any)=> (
+      <li className="text-white indie text-xl ml-9" key={index}>{slot.company.name}</li>
+    )):
+    <p className="text-white indie text-xl font-black ml-7">-</p>}
+  </ol>
+  <ol className="border-2 border-sec py-2 pl-3 rounded-md h-4/5 sh w-56 list-disc">
+  <h2 className="text-2xl bangers text-sec  ">Main publisher</h2>
+  <div className="w-[75%] h-[1px] bg-sec mb-3"></div>
+    {res.publisher && res.publisher.length > 0 ? 
+    res.publisher.map((slot: any, index)=> (
+      <li className="text-white indie text-xl font-black ml-7" key={index}>{slot.company.name}</li>
+    )):
+    <p className="text-white indie text-xl font-black ml-7">-</p>}
+  </ol>
+  <ol className="border-2 border-sec p-2 rounded-md h-4/5 sh w-56 list-disc">
+  <h2 className="text-2xl bangers text-sec">Game modes</h2>
+  <div className="w-[75%] h-[1px] bg-sec mb-3"></div>
+    {res.game_modes ? 
+    res.game_modes.map((slot: any)=> (
+      <li className="text-white indie text-xl font-black ml-9">{slot.name}</li>
+    )):
+    <p className="text-white indie text-xl font-black ml-7">-</p>}
+  </ol>
+  <ol className="border-2 border-sec p-2 rounded-md h-4/5 sh w-56 list-disc">
+  <h2 className="text-2xl bangers text-sec">player perspectives</h2>
+  <div className="w-[75%] h-[1px] bg-sec mb-3"></div>
+    {res.player_perspectives ? 
+    res.player_perspectives.map((slot: any, index:any)=> (
+      <li className="text-white indie text-xl font-black ml-9" key={index}>{slot.name}</li>
+    )):
+    <p className="text-white indie text-xl font-black ml-7">-</p>}
+  </ol>
+  </div>
+  <div className="w-full h-20 bg-sec rounded-xl px-5 flex gap-10">
+    <div>
+      <h2>Franchises</h2>
+      {res.franchises ? 
+    res.franchises.map((slot: any)=>(
+      <p>{slot.name}</p>
+    ))  :
+    <p>-</p>
+    }
+    </div>
+    <div>
+    <h2>Series</h2>
+      {res.collections ? 
+    res.collections.map((slot: any)=>(
+      <p>{slot.name}</p>
+    ))  :
+    <p>-</p>
+    }
+    </div>
+    <div>
+    <h2>DLCs</h2>
+      {res.expansions ? 
+    res.expansions.map((slot: any)=>(
+      <p>{slot.name}</p>
+    ))  :
+    <p>-</p>
+    }
+    </div>
+  </div>
+   
+  </div>
+  
+  <div className={`relative mt-10  ${chars ? 'text-white':'text-white'} `}>
+    
+    <h1 className="text-prim text-4xl bangers mb-4 p-2">Story</h1>
+    {res.storyline &&
+    res.storyline.length < 1500 ?
+  <p className="text-prim chakra text-xl ">{res.storyline}</p>:
+  <div >
+
+    {res.storyline ?(
+      chars ?
+      <p className="text-prim chakra text-xl o">{res.storyline.substring(0,10000)}
+      <button onClick={()=>setChars(!chars)} className="text-indigo-800 m-1">Less</button>
+      </p>:
+      <p className="text-prim chakra text-xl o">{res.storyline.substring(0,1000)}
+      <button onClick={()=>setChars(!chars)} className="text-indigo-800 text-ellipsis m-1">More</button>
+      </p>
+    ) :
+    <p>no story</p>
+   
+
+    }
+  
+    
+    
+  
+  </div>
+  
+  
+  
+  }
+  </div>
+  <div className="flex box-border flex-col p-[10px] gap-11 my-20">
+    <h2 className="text-prim text-4xl bangers mt-3">Similar games</h2>
+    <div className=" w-full h-96 bg-prim border-2 border-sec outline outline-[10px] outline-prim pt-11">
+      
+  <Cover tests = {res.similar_games}  />
+    
+    </div>
   </div>
 </div>
  </div>:
