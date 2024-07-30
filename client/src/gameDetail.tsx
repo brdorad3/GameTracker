@@ -8,7 +8,7 @@ import { mdiChevronDown } from '@mdi/js';
 import Cover from "./cover"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
+
 
 
 
@@ -55,28 +55,18 @@ function t(test: any){
 
 const GameDetail = () => {
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
-
     const location = useLocation();
     const [chars, setChars] = useState(false)
     const [summ, setSumm] = useState(false)
     const [res, setRes] = useState<ress>()
-    const [gamesWithCovers, setGamesWithCovers] = useState<any[]>([])
-
-
-    const topRef = useRef<HTMLDivElement>(null);
+    
 
     useEffect(() => {
-      setTimeout(() => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }, 1000);
-    }, [location.state]);
+      const element = document.getElementById("ccc");
+  element?.scrollIntoView();
+  },[location.state]);
+  
+  
   
     useEffect(() => {
         const fetchData = async () => {
@@ -118,7 +108,7 @@ const GameDetail = () => {
             const gamesWithCovers = data.map((game: any, index: any) => ({
                 ...game,
                coverUrl: game.artworks ? game.artworks[0].url.replace('t_thumb', 't_1080p') : console.error("no link") ,
-               filteredArtwork: filteredArtworks && filteredArtworks.length > 0 ? filteredArtworks[0].url.replace("t_thumb", "t_1080p") : "./public/vite.svg",
+               filteredArtwork: filteredArtworks && filteredArtworks.length > 0 ? filteredArtworks[0].url.replace("t_thumb", "t_1080p") : [],
                 realCover: game.cover ? game.cover.url.replace('t_thumb', 't_cover_big') : '',
                 rel: new Date(game.first_release_date * 1000).getFullYear(),
                 age: game.age_ratings && game.age_ratings.filter((slot: any)=>{
@@ -162,10 +152,10 @@ const GameDetail = () => {
 
 
     return(
-      <div className="h-screen">
+      <div className="h-screen" id="ccc">
       <Navbar/>
         
-   {res?.filteredArtwork ? 
+   {res?.filteredArtwork && res.filteredArtwork.length > 0 ? 
    <div className="relative w-full h-[90%] px-64 py-12 text-white">
     <div className="flex flex-col gap-7">
    <div
@@ -259,24 +249,34 @@ const GameDetail = () => {
  </ul>
   </div>
   
-  {res.summary ?(
+  {res.summary && 
+    res.summary.length < 500 ?
+  <p className="text-prim chakra text-xl py-10">{res.summary}</p>:
+  <div >
+
+    {res.summary ?(
       summ ?
-      <p className="text-prim chakra text-xl my-10">{res.summary.substring(0,10000)}
+      <p className="text-prim chakra text-xl py-10">{res.summary.substring(0,10000)}
       <button onClick={()=>setSumm(!summ)} className="text-indigo-800 m-1">Less</button>
       </p>:
-      <p className="text-prim chakra text-xl my-10">{res.summary.substring(0,500)}
+      <p className="text-prim chakra text-xl py-10">{res.summary.substring(0,501)}
       <button onClick={()=>setSumm(!summ)} className="text-indigo-800 text-ellipsis m-1">More</button>
       </p>
     ) :
-    <p>no story</p>
+    <p>-</p>
    
 
     }
+  
+  </div>
+  }
+  
+
   <div className="bg-prim w-full  py-6 flex flex-col gap-8 px-10 ">
     <div className="flex justify-evenly items-center">
 
 
-    <ol className="border-2 border-sec p-2 rounded-md h-4/5 sh w-56 list-disc">
+    <ol className="border-2 border-sec p-2 rounded-md h-[200px] sh w-56 list-disc ">
     <h2 className="bangers text-2xl text-sec">Main developer</h2>
     <div className="w-[75%] h-[1px] bg-sec mb-3"></div>
     {res.dev ? 
@@ -285,7 +285,7 @@ const GameDetail = () => {
     )):
     <p className="text-white indie text-xl font-black ml-7">-</p>}
   </ol>
-  <ol className="border-2 border-sec py-2 pl-3 rounded-md h-4/5 sh w-56 list-disc">
+  <ol className="border-2 border-sec py-2 pl-3 rounded-md h-[200px] sh w-56 list-disc ">
   <h2 className="text-2xl bangers text-sec  ">Main publisher</h2>
   <div className="w-[75%] h-[1px] bg-sec mb-3"></div>
     {res.publisher && res.publisher.length > 0 ? 
@@ -294,7 +294,7 @@ const GameDetail = () => {
     )):
     <p className="text-white indie text-xl font-black ml-7">-</p>}
   </ol>
-  <ol className="border-2 border-sec p-2 rounded-md h-4/5 sh w-56 list-disc">
+  <ol className="border-2 border-sec p-2 rounded-md  sh w-56 list-disc h-[200px]">
   <h2 className="text-2xl bangers text-sec">Game modes</h2>
   <div className="w-[75%] h-[1px] bg-sec mb-3"></div>
     {res.game_modes ? 
@@ -303,7 +303,7 @@ const GameDetail = () => {
     )):
     <p className="text-white indie text-xl font-black ml-7">-</p>}
   </ol>
-  <ol className="border-2 border-sec p-2 rounded-md h-4/5 sh w-56 list-disc">
+  <ol className="border-2 border-sec p-2 rounded-md h-[200px] sh w-56 list-disc">
   <h2 className="text-2xl bangers text-sec">player perspectives</h2>
   <div className="w-[75%] h-[1px] bg-sec mb-3"></div>
     {res.player_perspectives ? 
@@ -313,32 +313,38 @@ const GameDetail = () => {
     <p className="text-white indie text-xl font-black ml-7">-</p>}
   </ol>
   </div>
-  <div className="w-full h-20 bg-sec rounded-xl px-5 flex gap-10">
-    <div>
-      <h2>Franchises</h2>
+    <div className="w-full px-5 flex gap-3">
+        <div className="bg-sec flex min-w-[60%] h-26 self-baseline justify-evenly rounded-lg  ">
+    <div className="py-5">
+      <h2 className="text-prim text-3xl bangers">Franchises</h2> 
+      <div className="h-[1px] w-[75%] bg-prim"></div>
       {res.franchises ? 
     res.franchises.map((slot: any)=>(
-      <p>{slot.name}</p>
+      <p className="text-prim text-lg chakra">{slot.name}</p>
     ))  :
-    <p>-</p>
+    <p className="text-lg text-prim">-</p>
     }
     </div>
-    <div>
-    <h2>Series</h2>
+    <div className="h-[200px] w-1 bg-prim "></div>
+    <div className="py-5">
+    <h2 className="text-prim text-3xl bangers">Series</h2>
+    <div className="h-[1px] w-[75%] bg-prim"></div>
       {res.collections ? 
     res.collections.map((slot: any)=>(
-      <p>{slot.name}</p>
+      <p className="text-prim text-lg chakra">{slot.name}</p>
     ))  :
-    <p>-</p>
+    <p className="text-lg text-prim">-</p>
     }
     </div>
-    <div>
-    <h2>DLCs</h2>
+    </div>
+      <div className="bg-sec rounded-lg p-2 w-full">
+    <h2 className="text-prim text-3xl bangers">DLCs</h2>
+    <div className="h-[1px] w-[5%] bg-prim"></div>
       {res.expansions ? 
     res.expansions.map((slot: any)=>(
-      <p>{slot.name}</p>
+      <p className="text-prim text-lg chakra">{slot.name}</p>
     ))  :
-    <p>-</p>
+    <p className="text-xl text-prim">-</p>
     }
     </div>
   </div>
@@ -362,17 +368,12 @@ const GameDetail = () => {
       <button onClick={()=>setChars(!chars)} className="text-indigo-800 text-ellipsis m-1">More</button>
       </p>
     ) :
-    <p>no story</p>
+    <p>-</p>
    
 
     }
   
-    
-    
-  
   </div>
-  
-  
   
   }
   </div>
@@ -388,7 +389,17 @@ const GameDetail = () => {
  </div>:
  
 
+//
+///
+////
+/////
+//////
+///////
+////////
  //tjbivbsdifbsvdfvbshjfkdbjfhsvbsjfdh
+    
+
+
 
 
 
@@ -407,7 +418,7 @@ const GameDetail = () => {
    </div>
   <div className="flex gap-5">
     <img src={res?.realCover} alt="" className="w-[270px] h-[400px] z-50 relative" />
-    {res?.vid ?
+    {res?.vid && res.vid.length > 0 ?
   <iframe src={`https://youtube.com/embed/${res.vid[0].video_id}`} className="relative min-w-[700px] h-[400px] " ></iframe>:
   res?.videos ?
   <iframe src={`https://youtube.com/embed/${res.videos[0].video_id}`} className="relative min-w-[700px] h-[400px]" ></iframe>:
@@ -466,6 +477,170 @@ const GameDetail = () => {
     </ul>
   </div>
 }
+
+{res &&
+
+<div className={`w-full  bg-sec relative mt-14 rounded-t-lg py-3 px-4 border-2 border-prim outline outline-[7px] outline-sec`}>
+  
+  <div className="bg-prim w-3/4 rounded-r-3xl p-2"> 
+<ul className="flex flex-wrap gap-2 items-center">
+ <p className="text-lg font-bold text-sec comic">Genre:</p>
+{res && res.genres &&
+ res.genres.map((slot: any, index)=>(
+<li className="text-[17px] chakra" key={index}>{slot.name},</li>
+ ))
+ }
+</ul>
+<ul className="flex flex-wrap gap-2 items-center">
+ <p className="text-lg font-bold text-sec comic">Platforms:</p>
+{res && res.platforms &&
+ res.platforms.map((slot: any, index)=>(
+<li className="text-[17px] chakra" key={index}>{slot.name},</li>
+ ))
+ }
+</ul>
+ </div>
+ 
+ {res.summary && 
+   res.summary.length < 500 ?
+ <p className="text-prim chakra text-xl py-10">{res.summary}</p>:
+ <div >
+
+   {res.summary ?(
+     summ ?
+     <p className="text-prim chakra text-xl py-10">{res.summary.substring(0,10000)}
+     <button onClick={()=>setSumm(!summ)} className="text-indigo-800 m-1">Less</button>
+     </p>:
+     <p className="text-prim chakra text-xl py-10">{res.summary.substring(0,501)}
+     <button onClick={()=>setSumm(!summ)} className="text-indigo-800 text-ellipsis m-1">More</button>
+     </p>
+   ) :
+   <p>-</p>
+  
+
+   }
+ 
+ </div>
+ }
+ 
+
+ <div className="bg-prim w-full  py-6 flex flex-col gap-8 px-10 ">
+   <div className="flex justify-evenly items-center">
+
+
+   <ol className="border-2 border-sec p-2 rounded-md h-[200px] sh w-56 list-disc ">
+   <h2 className="bangers text-2xl text-sec">Main developer</h2>
+   <div className="w-[75%] h-[1px] bg-sec mb-3"></div>
+   {res.dev ? 
+   res.dev.map((slot: any, index: any)=> (
+     <li className="text-white indie text-xl ml-9" key={index}>{slot.company.name}</li>
+   )):
+   <p className="text-white indie text-xl font-black ml-7">-</p>}
+ </ol>
+ <ol className="border-2 border-sec py-2 pl-3 rounded-md h-[200px] sh w-56 list-disc ">
+ <h2 className="text-2xl bangers text-sec  ">Main publisher</h2>
+ <div className="w-[75%] h-[1px] bg-sec mb-3"></div>
+   {res.publisher && res.publisher.length > 0 ? 
+   res.publisher.map((slot: any, index)=> (
+     <li className="text-white indie text-xl font-black ml-7" key={index}>{slot.company.name}</li>
+   )):
+   <p className="text-white indie text-xl font-black ml-7">-</p>}
+ </ol>
+ <ol className="border-2 border-sec p-2 rounded-md  sh w-56 list-disc h-[200px]">
+ <h2 className="text-2xl bangers text-sec">Game modes</h2>
+ <div className="w-[75%] h-[1px] bg-sec mb-3"></div>
+   {res.game_modes ? 
+   res.game_modes.map((slot: any)=> (
+     <li className="text-white indie text-xl font-black ml-9">{slot.name}</li>
+   )):
+   <p className="text-white indie text-xl font-black ml-7">-</p>}
+ </ol>
+ <ol className="border-2 border-sec p-2 rounded-md h-[200px] sh w-56 list-disc">
+ <h2 className="text-2xl bangers text-sec">player perspectives</h2>
+ <div className="w-[75%] h-[1px] bg-sec mb-3"></div>
+   {res.player_perspectives ? 
+   res.player_perspectives.map((slot: any, index:any)=> (
+     <li className="text-white indie text-xl font-black ml-9" key={index}>{slot.name}</li>
+   )):
+   <p className="text-white indie text-xl font-black ml-7">-</p>}
+ </ol>
+ </div>
+   <div className="w-full px-5 flex gap-3">
+       <div className="bg-sec flex min-w-[60%] h-26 self-baseline justify-evenly rounded-lg  ">
+   <div className="py-5">
+     <h2 className="text-prim text-3xl bangers">Franchises</h2> 
+     <div className="h-[1px] w-[75%] bg-prim"></div>
+     {res.franchises ? 
+   res.franchises.map((slot: any)=>(
+     <p className="text-prim text-lg chakra">{slot.name}</p>
+   ))  :
+   <p className="text-lg text-prim">-</p>
+   }
+   </div>
+   <div className="h-[200px] w-1 bg-prim "></div>
+   <div className="py-5">
+   <h2 className="text-prim text-3xl bangers">Series</h2>
+   <div className="h-[1px] w-[75%] bg-prim"></div>
+     {res.collections ? 
+   res.collections.map((slot: any)=>(
+     <p className="text-prim text-lg chakra">{slot.name}</p>
+   ))  :
+   <p className="text-lg text-prim">-</p>
+   }
+   </div>
+   </div>
+     <div className="bg-sec rounded-lg p-2 w-full">
+   <h2 className="text-prim text-3xl bangers">DLCs</h2>
+   <div className="h-[1px] w-[5%] bg-prim"></div>
+     {res.expansions ? 
+   res.expansions.map((slot: any)=>(
+     <p className="text-prim text-lg chakra">{slot.name}</p>
+   ))  :
+   <p className="text-xl text-prim">-</p>
+   }
+   </div>
+ </div>
+  
+ </div>
+ 
+ <div className={`relative mt-10  ${chars ? 'text-white':'text-white'} `}>
+   
+   <h1 className="text-prim text-4xl bangers mb-4 p-2">Story</h1>
+   {res.storyline &&
+   res.storyline.length < 1500 ?
+ <p className="text-prim chakra text-xl ">{res.storyline}</p>:
+ <div >
+
+   {res.storyline ?(
+     chars ?
+     <p className="text-prim chakra text-xl o">{res.storyline.substring(0,10000)}
+     <button onClick={()=>setChars(!chars)} className="text-indigo-800 m-1">Less</button>
+     </p>:
+     <p className="text-prim chakra text-xl o">{res.storyline.substring(0,1000)}
+     <button onClick={()=>setChars(!chars)} className="text-indigo-800 text-ellipsis m-1">More</button>
+     </p>
+   ) :
+   <p>-</p>
+  
+
+   }
+ 
+ </div>
+ 
+ }
+ </div>
+ <div className="flex box-border flex-col p-[10px] gap-11 my-20">
+   <h2 className="text-prim text-4xl bangers mt-3">Similar games</h2>
+   <div className=" w-full h-96 bg-prim border-2 border-sec outline outline-[10px] outline-prim pt-11">
+     
+ <Cover tests = {res.similar_games}  />
+   
+   </div>
+ </div>
+</div>
+
+}
+
 </div>
    
 

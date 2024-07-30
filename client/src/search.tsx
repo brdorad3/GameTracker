@@ -65,7 +65,7 @@ const Search = () => {
             )}
             <div>
             <div className="flex gap-2">
-           <Link to="/detail" state={game.id}> <p className="text-prim text-xl font-medium ">{game.name}</p> </Link>
+           <Link to={`/detail/${game.id}`} state={game.id}> <p className="text-prim text-xl font-medium ">{game.name}</p> </Link>
             <p className="text-prim text-xl">&#40; {game.rel} &#41;</p>
             </div>
             <div>
