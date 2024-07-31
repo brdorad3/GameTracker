@@ -36,7 +36,7 @@ const PopGames = (props: any) => {
                         'Client-ID': '28k8glj9djgyr0opcwll92beduld5h',
                         'Authorization': 'Bearer fos399vwik27rr0m3tprazhvafx4zj',
                       },
-                      body: `fields name, aggregated_rating, cover.url;
+                      body: `fields name, total_rating, cover.url;
                       where id = ${slot.game_id};
                        
                        
@@ -74,12 +74,12 @@ const PopGames = (props: any) => {
             
         {res.map((game: any) => (
             <Link to={`/detail/${game.id}`} state={game.id} key={game.id} className="bg-prim rounded-sm max-w-[190px]">
-            <div className="max-w-[190px]  bg-prim rounded-md border-4 border-prim"  >
+            <div className="max-w-[190px]  bg-prim rounded-md border-2 border-prim"  >
             <img src={game.coverUrl} className="w-full h-[220px]" alt="" />
             <p className="overflow-hidden text-nowrap text-ellipsis text-sec patrick text-2xl p-1">{game.name}</p>
-            {game.aggregated_rating?
+            {game.total_rating?
         <div className="py-[1px] px-3 text-sec float-end flex items-center bg-sec rounded-xl mb-2 mr-2 ">
-           <p className="text-prim"> {(game.aggregated_rating/10).toFixed(1)} </p>
+           <p className="text-prim"> {(game.total_rating/10).toFixed(1)} </p>
            <Icon path={mdiStar} size={0.8} className="text-prim" />
             </div>:
         <div className="py-[1px] px-3 bg-sec float-end flex items-center rounded-xl mb-2 mr-2">

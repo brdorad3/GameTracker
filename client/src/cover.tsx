@@ -21,7 +21,7 @@ const settings = {
     slidesToScroll: 1,
     
   };
-
+console.log(forCover)
 
     return (
         <>
@@ -33,9 +33,9 @@ const settings = {
             <div className="max-w-[190px]  bg-sec rounded-md" >
             <img src={game.coverUrl} className="w-full h-[220px]" alt="" />
             <p className="overflow-hidden text-nowrap text-ellipsis text-prim patrick text-2xl p-1">{game.name}</p>
-            {game.aggregated_rating?
+            {game.total_rating?
         <div className="py-[2px] px-3 text-prim float-end flex items-center bg-prim rounded-xl mb-1 mr-2 ">
-           <p className="text-sec"> {(game.aggregated_rating/10).toFixed(1)} </p>
+           <p className="text-sec"> {(game.total_rating/10).toFixed(1)} </p>
            <Icon path={mdiStar} size={0.8} className="text-sec" />
             </div>:
         <div className="py-[2px] px-3 text-prim float-end flex items-center bg-prim rounded-xl mb-1 mr-2">

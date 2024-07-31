@@ -20,7 +20,7 @@ const [res, setRes] = useState<any[]>([])
                   'Authorization': 'Bearer fos399vwik27rr0m3tprazhvafx4zj',
                 },
                 body: `fields game_id, popularity_type,value;
-                 limit 8;sort value desc;
+                 limit 10;sort value desc;
                  
                  `,
               }
@@ -43,10 +43,9 @@ const [res, setRes] = useState<any[]>([])
         <div className="px-36 py-12 flex flex-col gap-12">
         <h1 className="text-sec text-4xl">Popular right now</h1>
         <div className=" w-full h-96 pl-10 pt-11 bg-sec">
-          {res ?
-          <PopGames state={res} />:
-          <p className="text-3xl text-prim">Loading</p>
-        }
+          
+          <PopGames state={res} />
+        
             
             </div>
         </div>

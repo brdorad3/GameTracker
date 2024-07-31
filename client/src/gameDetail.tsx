@@ -85,7 +85,7 @@ const GameDetail = () => {
                 body: `fields name, artworks.url, cover.url, first_release_date, age_ratings.*, videos.*,
                  aggregated_rating, aggregated_rating_count, rating, rating_count, themes.name,
                  storyline, summary, genres.name, platforms.name, category, status, involved_companies.*, involved_companies.company.name,
-                 game_modes.name, player_perspectives.name, similar_games.name, similar_games.cover.url, similar_games.aggregated_rating,
+                 game_modes.name, player_perspectives.name, similar_games.name, similar_games.cover.url, similar_games.total_rating,
                  franchises.name, expansions.name, collections.name
                                
                  ;
@@ -276,7 +276,7 @@ const GameDetail = () => {
     <div className="flex justify-evenly items-center">
 
 
-    <ol className="border-2 border-sec p-2 rounded-md h-[200px] sh w-56 list-disc ">
+    <ol className="border-2 border-sec p-2 rounded-md h-[250px] sh w-56 list-disc ">
     <h2 className="bangers text-2xl text-sec">Main developer</h2>
     <div className="w-[75%] h-[1px] bg-sec mb-3"></div>
     {res.dev ? 
@@ -285,7 +285,7 @@ const GameDetail = () => {
     )):
     <p className="text-white indie text-xl font-black ml-7">-</p>}
   </ol>
-  <ol className="border-2 border-sec py-2 pl-3 rounded-md h-[200px] sh w-56 list-disc ">
+  <ol className="border-2 border-sec py-2 pl-3 rounded-md h-[250px] sh w-56 list-disc ">
   <h2 className="text-2xl bangers text-sec  ">Main publisher</h2>
   <div className="w-[75%] h-[1px] bg-sec mb-3"></div>
     {res.publisher && res.publisher.length > 0 ? 
@@ -294,7 +294,7 @@ const GameDetail = () => {
     )):
     <p className="text-white indie text-xl font-black ml-7">-</p>}
   </ol>
-  <ol className="border-2 border-sec p-2 rounded-md  sh w-56 list-disc h-[200px]">
+  <ol className="border-2 border-sec p-2 rounded-md  sh w-56 list-disc h-[250px]">
   <h2 className="text-2xl bangers text-sec">Game modes</h2>
   <div className="w-[75%] h-[1px] bg-sec mb-3"></div>
     {res.game_modes ? 
@@ -303,7 +303,7 @@ const GameDetail = () => {
     )):
     <p className="text-white indie text-xl font-black ml-7">-</p>}
   </ol>
-  <ol className="border-2 border-sec p-2 rounded-md h-[200px] sh w-56 list-disc">
+  <ol className="border-2 border-sec p-2 rounded-md h-[250px] sh w-56 list-disc">
   <h2 className="text-2xl bangers text-sec">player perspectives</h2>
   <div className="w-[75%] h-[1px] bg-sec mb-3"></div>
     {res.player_perspectives ? 
@@ -528,7 +528,7 @@ const GameDetail = () => {
    <div className="flex justify-evenly items-center">
 
 
-   <ol className="border-2 border-sec p-2 rounded-md h-[200px] sh w-56 list-disc ">
+   <ol className="border-2 border-sec p-2 rounded-md h-[250px] sh w-56 list-disc ">
    <h2 className="bangers text-2xl text-sec">Main developer</h2>
    <div className="w-[75%] h-[1px] bg-sec mb-3"></div>
    {res.dev ? 
@@ -537,7 +537,7 @@ const GameDetail = () => {
    )):
    <p className="text-white indie text-xl font-black ml-7">-</p>}
  </ol>
- <ol className="border-2 border-sec py-2 pl-3 rounded-md h-[200px] sh w-56 list-disc ">
+ <ol className="border-2 border-sec py-2 pl-3 rounded-md h-[250px] sh w-56 list-disc ">
  <h2 className="text-2xl bangers text-sec  ">Main publisher</h2>
  <div className="w-[75%] h-[1px] bg-sec mb-3"></div>
    {res.publisher && res.publisher.length > 0 ? 
@@ -546,7 +546,7 @@ const GameDetail = () => {
    )):
    <p className="text-white indie text-xl font-black ml-7">-</p>}
  </ol>
- <ol className="border-2 border-sec p-2 rounded-md  sh w-56 list-disc h-[200px]">
+ <ol className="border-2 border-sec p-2 rounded-md  sh w-56 list-disc h-[250px]">
  <h2 className="text-2xl bangers text-sec">Game modes</h2>
  <div className="w-[75%] h-[1px] bg-sec mb-3"></div>
    {res.game_modes ? 
@@ -555,7 +555,7 @@ const GameDetail = () => {
    )):
    <p className="text-white indie text-xl font-black ml-7">-</p>}
  </ol>
- <ol className="border-2 border-sec p-2 rounded-md h-[200px] sh w-56 list-disc">
+ <ol className="border-2 border-sec p-2 rounded-md h-[250px] sh w-56 list-disc">
  <h2 className="text-2xl bangers text-sec">player perspectives</h2>
  <div className="w-[75%] h-[1px] bg-sec mb-3"></div>
    {res.player_perspectives ? 
