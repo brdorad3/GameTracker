@@ -42,9 +42,13 @@ const [res, setRes] = useState<any[]>([])
         <>
         <div className="px-36 py-12 flex flex-col gap-12">
         <h1 className="text-sec text-4xl">Popular right now</h1>
-        <div className="text-prim w-full h-64 flex justify-center items-center bg-sec">
-            <PopGames state={res} />
-            <p>No entries yet.</p></div>
+        <div className=" w-full h-96 pl-10 pt-11 bg-sec">
+          {res ?
+          <PopGames state={res} />:
+          <p className="text-3xl text-prim">Loading</p>
+        }
+            
+            </div>
         </div>
         </>
     )
