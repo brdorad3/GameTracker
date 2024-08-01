@@ -6,6 +6,7 @@ import Login from './login.tsx';
 import Signup from './signup.tsx';
 import Search from "./search.tsx";
 import GameDetail from './gameDetail.tsx';
+import Top100 from './top.tsx';
 import { AuthProvider, useAuth } from './authContext';
 
 
@@ -27,12 +28,12 @@ const router = createBrowserRouter([
     element: <Search />,
   },
   {
-    path: "/detail",
-    element: <GameDetail />,
-  },
-  {
     path: "/detail/:gameId",
     element: <GameDetail/>
+  },
+  {
+    path: "/top100",
+    element: <Top100/>
   }
 ]);
 
