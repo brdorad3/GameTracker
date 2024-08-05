@@ -5,7 +5,7 @@
 #root{
    /* #f4c420
     #180002 */
-    background-color: #180002;
+    background-color: #e0e1dd;
     height: 100vh;
     overflow-x:hidden;
 }
@@ -23,36 +23,36 @@
   }
   .patrick {
     font-family: "Patrick Hand", cursive;
-    font-weight: 400;
+    
     font-style: normal;
   }
   .indie {
     font-family: "Indie Flower", cursive;
-    font-weight: 400;
+    
     font-style: normal;
   }
   .acme {
     font-family: "Acme", sans-serif;
-    font-weight: 400;
+    
     font-style: normal;
   }
   
   .bangers {
     font-family: "Bangers", system-ui;
-    font-weight: 400;
+    
     font-style: normal;
   }
 
   .marker {
     font-family: "Permanent Marker", cursive;
-    font-weight: 400;
+    
     font-style: normal;
   }
 
   .space {
     font-family: "Space Grotesk", sans-serif;
     font-optical-sizing: auto;
-    font-weight: 400;
+    
     font-style: normal;
   }
   
@@ -60,8 +60,13 @@
   
 
   .sh{
-    box-shadow: 3px 1px 5px #f4c420;
+    box-shadow: 3px 1px 5px #5C946E;
   }
-  .slick-slide{
-    padding-left: 70px;
+  .slick-arrow, .slick-next{
+    
+    color: #f4c420;
   }
+  .slick-prev:before,
+.slick-next:before {
+  color: #5C946E!important;
+}

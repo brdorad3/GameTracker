@@ -3,6 +3,10 @@ import Navbar from "./navbar";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Icon from '@mdi/react';
+import { mdiImageBroken } from '@mdi/js';
+
+
 
 const Search = () => {
   const location = useLocation();
@@ -35,6 +39,7 @@ const Search = () => {
           ...game,
           coverUrl: game.cover ? game.cover.url.replace('t_thumb', 't_cover_small_2x') : '',
           rel: new Date(game.first_release_date * 1000).getFullYear(),
+         
           
           
         }));
@@ -55,31 +60,34 @@ const Search = () => {
       {
         res.length > 0 ?
       
-      <ul className="flex flex-col gap-10 px-36 py-10">
+      <ul className="flex flex-col gap-10 px-64 py-10">
         {res.map((game, index) => (
-          <li key={index} className="text-white flex gap-5 bg-sec p-5 rounded-xl">
+          <li key={index} className="flex gap-5 bg-sec  rounded-xl">
             {game.cover && game.coverUrl ? (
-              <img src={game.coverUrl} alt={game.name} className="w-[90px] h-[120px] bg-sec" />
+             <Link to={`/detail/${game.id}`} state={game.id} > <img src={game.coverUrl} alt={game.name} className="w-[110px] h-[140px] bg-sec rounded-l-xl" /></Link>
             ) : (
-              <div className="w-[150px] h-[150px] bg-sec"></div>
+              <div className="w-[110px] h-[140px] bg-sec rounded-xl flex justify-center items-center">
+                <Icon path={mdiImageBroken} size={2} className="text-prim"/>
+              </div>
+              
             )}
             <div>
-            <div className="flex gap-2">
-           <Link to={`/detail/${game.id}`} state={game.id}> <p className="text-prim text-xl font-medium ">{game.name}</p> </Link>
+            <div className="flex gap-2 pt-3">
+           <Link to={`/detail/${game.id}`} state={game.id}> <p className="text-white text-xl font-medium ">{game.name}</p> </Link>
             <p className="text-prim text-xl">&#40; {game.rel} &#41;</p>
             </div>
             <div>
             <ul className="flex gap-1">
               
                   { game.platforms && game.platforms.map((platform: any, index: number) => (
-                    <li key={index} className="text-[#0000008a] text-[12px] font-medium">{platform.name}       /</li>
+                    <li key={index} className="text-acc text-[12px] font-semibold">{platform.name}       /</li>
                   ))}
                 </ul>
             </div>
             <div>
               {game.total_rating ? 
-            <p>{Math.floor(game.total_rating)}/100 &#40;{game.total_rating_count}&#41; </p>:
-            <p>No ratings yet</p>  
+            <p className="text-prim">{Math.floor(game.total_rating)}/100 &#40;{game.total_rating_count}&#41; </p>:
+            <p className="text-prim">No ratings yet</p>  
             }
               
             </div>

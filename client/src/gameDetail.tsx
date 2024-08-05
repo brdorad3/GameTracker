@@ -182,27 +182,27 @@ const GameDetail = () => {
     <div className=" bg-prim p-3 rounded-xl">
       <div className="flex gap-2 items-center">
 
-    <Icon path={mdiStar} size={2} className="text-sec"/>
+    <Icon path={mdiStar} size={2} className="text-acc"/>
     
-      <p className="text-4xl">{(res.rating/10).toFixed(1)}</p>
+      <p className="text-4xl text-sec chakra">{(res.rating/10).toFixed(1)}</p>
     </div>
-      <p className="text-lg">{res.rating_count} user ratings</p>
+      <p className=" text-sec chakra" >{res.rating_count} user ratings</p>
       </div>
     
     <div className="bg-prim p-3 rounded-xl">
-      <div className="flex items-center">
-    <Icon path={mdiStar} size={2} className="text-sec"/>
-      <p className="text-4xl">{(res.aggregated_rating/10).toFixed(1)}</p>
+      <div className="flex items-center gap-1">
+    <Icon path={mdiStar} size={2} className="text-acc"/>
+      <p className="text-4xl text-sec chakra">{(res.aggregated_rating/10).toFixed(1)}</p>
      </div>
-      <p>{res.aggregated_rating_count} critic reviews</p>
+      <p className="text-sec chakra">{res.aggregated_rating_count} critic reviews</p>
     </div>
 </div>
 <div className="flex flex-col gap-7 items-center">
   <div className="flex flex-col items-center gap-1 bg-prim p-4 rounded-lg">
-  <h2 className="text-3xl">Your rating</h2>
+  <h2 className="text-3xl text-sec">Your rating</h2>
   <div className="flex gap-1 items-center">
-  <Icon path={mdiStarOutline} size={1.5} className="text-sec"/>
-  <p className="text-2xl text-sec">Rate</p>
+  <Icon path={mdiStarOutline} size={1.5} className="text-acc"/>
+  <p className="text-2xl text-acc">Rate</p>
   </div>
   </div>
   <div>
@@ -223,27 +223,27 @@ const GameDetail = () => {
   <div className="relative mt-5">
     <ul className="flex gap-2">
    { res.themes.map((theme: any, index: any)=> (
-      <li className="text-sec relative bg-prim py-1 px-3 rounded-2xl border-[2px] border-sec" key={index}>{theme.name}</li>
+      <li className="text-sec relative bg-prim py-1 px-3 rounded-2xl border-[3px] border-sec" key={index}>{theme.name}</li>
     ))}
     </ul>
   </div>
 }
 <div className={`w-full  bg-sec relative mt-14 rounded-t-lg py-3 px-4 border-2 border-prim outline outline-[7px] outline-sec`}>
   
-   <div className="bg-prim w-3/4 rounded-r-3xl p-2"> 
+   <div className="bg-prim  max-w-[75%] rounded-r-3xl p-2 border-r-[6px] border-acc"> 
 <ul className="flex flex-wrap gap-2 items-center">
-  <p className="text-lg font-bold text-sec comic">Genre:</p>
+  <p className="text-lg font-bold text-acc comic">Genre:</p>
 {res && res.genres &&
   res.genres.map((slot: any, index)=>(
-<li className="text-[17px] chakra" key={index}>{slot.name},</li>
+<li className="text-[17px] chakra text-sec font-black" key={index}>{slot.name},</li>
   ))
   }
  </ul>
  <ul className="flex flex-wrap gap-2 items-center">
-  <p className="text-lg font-bold text-sec comic">Platforms:</p>
+  <p className="text-lg font-bold text-acc comic">Platforms:</p>
 {res && res.platforms &&
   res.platforms.map((slot: any, index)=>(
-<li className="text-[17px] chakra" key={index}>{slot.name},</li>
+<li className="text-[17px] chakra text-sec font-black" key={index}>{slot.name},</li>
   ))
   }
  </ul>
@@ -257,10 +257,10 @@ const GameDetail = () => {
     {res.summary ?(
       summ ?
       <p className="text-prim chakra text-xl py-10">{res.summary.substring(0,10000)}
-      <button onClick={()=>setSumm(!summ)} className="text-indigo-800 m-1">Less</button>
+      <button onClick={()=>setSumm(!summ)} className="text-acc m-1">Less</button>
       </p>:
       <p className="text-prim chakra text-xl py-10">{res.summary.substring(0,501)}
-      <button onClick={()=>setSumm(!summ)} className="text-indigo-800 text-ellipsis m-1">More</button>
+      <button onClick={()=>setSumm(!summ)} className="text-acc m-1">More</button>
       </p>
     ) :
     <p>-</p>
@@ -276,39 +276,39 @@ const GameDetail = () => {
     <div className="flex justify-evenly items-center">
 
 
-    <ol className="border-2 border-sec p-2 rounded-md h-[250px] sh w-56 list-disc ">
+    <ol className="border-2 border-sec p-2 rounded-md h-[250px] shadow-sm w-56 list-disc border-b-8 rounded-b-2xl">
     <h2 className="bangers text-2xl text-sec">Main developer</h2>
     <div className="w-[75%] h-[1px] bg-sec mb-3"></div>
     {res.dev ? 
     res.dev.map((slot: any, index: any)=> (
-      <li className="text-white indie text-xl ml-9" key={index}>{slot.company.name}</li>
+      <li className="text-sec indie text-xl ml-9 font-black" key={index}>{slot.company.name}</li>
     )):
     <p className="text-white indie text-xl font-black ml-7">-</p>}
   </ol>
-  <ol className="border-2 border-sec py-2 pl-3 rounded-md h-[250px] sh w-56 list-disc ">
+  <ol className="border-2 border-sec py-2 pl-3 rounded-md h-[250px]  w-56 list-disc border-b-8 rounded-b-2xl">
   <h2 className="text-2xl bangers text-sec  ">Main publisher</h2>
   <div className="w-[75%] h-[1px] bg-sec mb-3"></div>
     {res.publisher && res.publisher.length > 0 ? 
     res.publisher.map((slot: any, index)=> (
-      <li className="text-white indie text-xl font-black ml-7" key={index}>{slot.company.name}</li>
+      <li className="text-sec indie text-xl font-black ml-7" key={index}>{slot.company.name}</li>
     )):
     <p className="text-white indie text-xl font-black ml-7">-</p>}
   </ol>
-  <ol className="border-2 border-sec p-2 rounded-md  sh w-56 list-disc h-[250px]">
+  <ol className="border-2 border-sec p-2 rounded-md  w-56 list-disc h-[250px] border-b-8 rounded-b-2xl">
   <h2 className="text-2xl bangers text-sec">Game modes</h2>
   <div className="w-[75%] h-[1px] bg-sec mb-3"></div>
     {res.game_modes ? 
-    res.game_modes.map((slot: any)=> (
-      <li className="text-white indie text-xl font-black ml-9">{slot.name}</li>
+    res.game_modes.map((slot: any, index)=> (
+      <li className="text-sec indie text-xl font-black ml-9" key={index}>{slot.name}</li>
     )):
     <p className="text-white indie text-xl font-black ml-7">-</p>}
   </ol>
-  <ol className="border-2 border-sec p-2 rounded-md h-[250px] sh w-56 list-disc">
+  <ol className="border-2 border-sec p-2 rounded-md h-[250px] w-56 list-disc border-b-8 rounded-b-2xl">
   <h2 className="text-2xl bangers text-sec">player perspectives</h2>
   <div className="w-[75%] h-[1px] bg-sec mb-3"></div>
     {res.player_perspectives ? 
     res.player_perspectives.map((slot: any, index:any)=> (
-      <li className="text-white indie text-xl font-black ml-9" key={index}>{slot.name}</li>
+      <li className="text-sec indie text-xl font-black ml-9" key={index}>{slot.name}</li>
     )):
     <p className="text-white indie text-xl font-black ml-7">-</p>}
   </ol>
@@ -317,7 +317,7 @@ const GameDetail = () => {
         <div className="bg-sec flex min-w-[60%] h-26 self-baseline justify-evenly rounded-lg  ">
     <div className="py-5">
       <h2 className="text-prim text-3xl bangers">Franchises</h2> 
-      <div className="h-[1px] w-[75%] bg-prim"></div>
+      <div className="h-[2px] w-[60%] bg-acc"></div>
       {res.franchises ? 
     res.franchises.map((slot: any)=>(
       <p className="text-prim text-lg chakra">{slot.name}</p>
@@ -328,7 +328,7 @@ const GameDetail = () => {
     <div className="h-[200px] w-1 bg-prim "></div>
     <div className="py-5">
     <h2 className="text-prim text-3xl bangers">Series</h2>
-    <div className="h-[1px] w-[75%] bg-prim"></div>
+    <div className="h-[2px] w-[40%] bg-acc"></div>
       {res.collections ? 
     res.collections.map((slot: any)=>(
       <p className="text-prim text-lg chakra">{slot.name}</p>
@@ -339,7 +339,7 @@ const GameDetail = () => {
     </div>
       <div className="bg-sec rounded-lg p-2 w-full">
     <h2 className="text-prim text-3xl bangers">DLCs</h2>
-    <div className="h-[1px] w-[5%] bg-prim"></div>
+    <div className="h-[2px] w-[7%] bg-acc"></div>
       {res.expansions ? 
     res.expansions.map((slot: any)=>(
       <p className="text-prim text-lg chakra">{slot.name}</p>
@@ -353,7 +353,8 @@ const GameDetail = () => {
   
   <div className={`relative mt-10  ${chars ? 'text-white':'text-white'} `}>
     
-    <h1 className="text-prim text-4xl bangers mb-4 p-2">Story</h1>
+    <h1 className="text-prim text-4xl bangers  pl-2">Story</h1>
+    <div className="w-12 h-[2px] bg-acc mb-4 ml-2"></div>
     {res.storyline &&
     res.storyline.length < 1500 ?
   <p className="text-prim chakra text-xl ">{res.storyline}</p>:
@@ -362,10 +363,10 @@ const GameDetail = () => {
     {res.storyline ?(
       chars ?
       <p className="text-prim chakra text-xl o">{res.storyline.substring(0,10000)}
-      <button onClick={()=>setChars(!chars)} className="text-indigo-800 m-1">Less</button>
+      <button onClick={()=>setChars(!chars)} className="text-acc m-1">Less</button>
       </p>:
       <p className="text-prim chakra text-xl o">{res.storyline.substring(0,1000)}
-      <button onClick={()=>setChars(!chars)} className="text-indigo-800 text-ellipsis m-1">More</button>
+      <button onClick={()=>setChars(!chars)} className="text-acc  m-1">More</button>
       </p>
     ) :
     <p>-</p>
@@ -377,9 +378,10 @@ const GameDetail = () => {
   
   }
   </div>
-  <div className="flex box-border flex-col p-[10px] gap-11 my-20">
-    <h2 className="text-prim text-4xl bangers mt-3">Similar games</h2>
-    <div className=" w-full h-96 bg-prim border-2 border-sec outline outline-[10px] outline-prim pt-11">
+  <div className="flex flex-col p-[10px]  my-10">
+    <h2 className="text-prim text-4xl bangers mt-3 pl-2">Similar games</h2>
+    <div className="w-32 h-[2px] bg-acc mb-4 ml-2"></div>
+    <div className="my-12 ">
       
   <Cover tests = {res.similar_games}  />
     

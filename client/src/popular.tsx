@@ -21,7 +21,7 @@ const [res, setRes] = useState<any[]>([])
                   'Authorization': 'Bearer fos399vwik27rr0m3tprazhvafx4zj',
                 },
                 body: `fields game_id, popularity_type,value;
-                 limit 10;sort value desc;
+                 limit 15;sort value desc;
                  
                  `,
               }
@@ -42,11 +42,11 @@ const [res, setRes] = useState<any[]>([])
     return (
         <>
         <div className="px-64 py-12 flex flex-col gap-12">
-          <div className="flex justify-between">
-        <h1 className="text-sec text-4xl">Popular right now</h1>
-       <Link to="/top100"> <h2 className="text-sec self-end">See all</h2></Link>
+          <div className="">
+        <h1 className="text-sec text-3xl chakra pb-1 font-bold">POPULAR RIGHT NOW</h1>
+        <div className="w-24 h-[2px] bg-acc"></div>
           </div>
-        <div className=" w-full h-96 pt-11 bg-sec">
+        <div className="">
           
           <PopGames state={res} />
         

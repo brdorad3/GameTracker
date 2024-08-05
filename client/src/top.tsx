@@ -25,7 +25,10 @@ const cat = (item: any) => {
 
 const Top100 = () => {
 
-    const [res, setRes] = useState<any[]>([])
+    const [res, setRes] = useState<any[]>([]);
+    const [val, setVal] = useState('total_rating')
+    const [plat, setPlatform] = useState('')
+    const [toggle, setToggle] = useState(false)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -39,8 +42,8 @@ const Top100 = () => {
                   'Client-ID': '28k8glj9djgyr0opcwll92beduld5h',
                   'Authorization': 'Bearer fos399vwik27rr0m3tprazhvafx4zj',
                 },
-                body: `fields name,  total_rating, total_rating, cover.url, total_rating_count, first_release_date, category;
-                 where total_rating_count > 90;sort total_rating desc;limit 100;
+                body: `fields name, total_rating, cover.url, total_rating_count, first_release_date, category, platforms.name;
+                 where total_rating_count > 90 ;sort ${val} desc;limit 100;
                  
                  `,
               }
@@ -63,7 +66,20 @@ const Top100 = () => {
           }
         };
         fetchData();
-      }, []);
+      }, [val]);
+
+      const handleChange = (e:any) => {
+        e.preventDefault()
+        setVal(e.target.value)
+        console.log(val)
+      }
+      const handleSubmit = (e:any) => {
+        e.preventDefault()
+        setPlatform(e.target.value)
+        console.log(plat)
+        
+      }
+     
 
 return(
     <>
@@ -72,24 +88,37 @@ return(
         <div className=" h-40 border-black border-2 pl-5 pt-4">
             <h1 className="text-3xl pb-3">Top 100 games</h1>
             <div className="">
-                
-                <form action="#" className="flex gap-5">
-                    <div className="flex flex-col">
+                <div  className="flex gap-5 " >
+                  <form onSubmit={handleSubmit}>
+                    <div className="flex flex-col relative" >
+                      
                     <label className="p-1 text-lg" htmlFor="platform">Platform:</label>
-                    <input type="text" className="rounded-md h-9 w-80 p-1" placeholder="Xbox 360 " id="platform" />
+                    <input type="text" className="rounded-t-md h-9 w-80 p-1" placeholder="Xbox 360 "
+                     id="platform"
+                    onChange={(e) => setPlatform(e.target.value)}
+                    value={plat}
+                    />
+                   
                     </div>
+                    </form>
                     <div className="flex flex-col">
                     <label className="p-1 text-lg" htmlFor="year">Year:</label>
                     <input type="text" className="rounded-md h-9 w-80 p-1" placeholder="2015 " id="year" />
                     </div>
-                    
-                </form>
+                    <div className="flex items-center gap-2 self-end">
+                      <label htmlFor="sort">Sort by:</label>
+                    <select name="sort" id="sort" className="py-1 px-2 rounded-md " onChange={handleChange} >
+                      <option value="total_rating">Rating</option>
+                      <option value="total_rating_count">Total reviews</option>
+                    </select>
+                    </div>
+                </div>
             </div>
         </div>
         <div className="px-10 py-5 flex flex-col gap-5 ">
             {res &&
             res.map((slot:any, index) => (
-                <div className="flex justify-between border-b-2 border-prim py-5">
+                <div className="flex justify-between border-b-2 border-prim py-5 pl-5">
                     <div className="flex gap-5">
                 <img src={slot.coverUrl} alt="" />
                 <div className="flex flex-col">
@@ -101,14 +130,14 @@ return(
                         <p>{slot.rel}</p>
                         <p>	&#40;{slot.total_rating_count} total ratings	&#41;</p>
                     </div>
-                    <div>
+                    <div className="self-start  py-[2px] px-[5px] rounded-[4px] border-2 border-prim mt-2">
                         <p>{cat(slot.category)}</p>
                     </div>
                 </div>
                 </div>
-                <div className="flex items-center">
-                    <p>{(slot.total_rating/10).toFixed(1)}/10</p>
-                    <Icon path={mdiStar} size={0.8} className="text-prim" />
+                <div className="flex items-center mr-10">
+                    <p className="text-xl">{(slot.total_rating/10).toFixed(1)}/10</p>
+                    <Icon path={mdiStar} size={1.3} className="text-prim" />
                 </div>
                 </div>
             ))

@@ -34,7 +34,8 @@ const router = createBrowserRouter([
   {
     path: "/top100",
     element: <Top100/>
-  }
+  },
+  
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

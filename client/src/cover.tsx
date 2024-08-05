@@ -16,8 +16,8 @@ const settings = {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 4,
-    
+    slidesToShow: 6,
+    //centerMode: true,
     slidesToScroll: 1,
     
   };
@@ -29,21 +29,22 @@ console.log(forCover)
         <Slider  {...settings}>
             
         {forCover.map((game: any) => (
-            <Link to={`/detail/${game.id}`} state={game.id} key={game.id} className="bg-sec rounded-sm max-w-[190px]">
-            <div className="max-w-[190px]  bg-sec rounded-md" >
-            <img src={game.coverUrl} className="w-full h-[220px]" alt="" />
-            <p className="overflow-hidden text-nowrap text-ellipsis text-prim patrick text-2xl p-1">{game.name}</p>
+            <Link to={`/detail/${game.id}`} state={game.id} key={game.id} className="bg-prim rounded-sm max-w-[210px] ml-1">
+            <div className=" bg-prim rounded-md " >
+            <img src={game.coverUrl} className="w-full h-[250px] mg" alt="" />
+            <div className="py-2">
+            <p className="overflow-hidden text-nowrap text-ellipsis text-sec patrick text-2xl p-2">{game.name}</p>
             {game.total_rating?
-        <div className="py-[2px] px-3 text-prim float-end flex items-center bg-prim rounded-xl mb-1 mr-2 ">
+        <div className="py-[5px] px-3  float-end flex items-center bg-prim rounded-xl mb-2 mr-2 ">
            <p className="text-sec"> {(game.total_rating/10).toFixed(1)} </p>
            <Icon path={mdiStar} size={0.8} className="text-sec" />
             </div>:
-        <div className="py-[2px] px-3 text-prim float-end flex items-center bg-prim rounded-xl mb-1 mr-2">
+        <div className="py-[5px] px-3 float-end flex items-center bg-prim rounded-xl mb-2 mr-2">
         <p className="text-sec"> N/A </p>
         <Icon path={mdiStar} size={0.8} className="text-sec" />
          </div>  
         }
-            
+            </div>
         </div>
         </Link>
 

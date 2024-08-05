@@ -7,11 +7,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        "prim": "#180002",
-        "sec": "#f4c420"
+        "prim": "#e0e1dd",
+        "sec": "#2A2D34",
+        "acc": "#5C946E"
+
       }
     },
   },
   plugins: [],
 }
-
+// 474350 EA9010 / 2A2D34 5C946E

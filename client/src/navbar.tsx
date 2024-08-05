@@ -20,14 +20,14 @@ const Navbar: React.FC = () => {
     }
 
     return(
-        <div className="flex px-64 justify-between items-center w-screen h-[10%]">
+        <div className="flex px-64 justify-between items-center w-screen h-[10%] bg-sec">
             <div>
-                <h1 className="text-lg text-sec "><Link to="/">Robnite</Link></h1>
+                <h1 className="text-2xl text-prim chakra"><Link to="/">Robnite</Link></h1>
             </div>
             <div className="w-2/4">
                 <form onSubmit={handleSubmit} className="w-full relative">
                     <input type="text" 
-                    className="w-full h-10 rounded-3xl pl-5"
+                    className="w-full h-10 rounded-lg pl-5 bg-prim"
                     placeholder="Search..."
                     minLength={1}
                     onChange={(e)=> setValue(e.target.value)}
@@ -38,12 +38,15 @@ const Navbar: React.FC = () => {
                     </button>
                 </form>
             </div>
-            <div className="flex gap-5">
-                <Link to="/login"><h2 className="text-lg text-sec">Log in</h2></Link>
-                <Link to="/signup"><h2 className="text-lg text-sec">Sign up</h2></Link>
+            <div className="flex gap-5 items-center">
+                <Link to="/login"><h2 className="text-lg text-prim">Log in</h2></Link>
+                <Link to="/signup"><h2 className="text-lg text-prim">Sign up</h2></Link>
                 <div>
-            <h1 className="text-white">Welcome, {user?.username || 'User'}!</h1>
-            <button onClick={logout} className="text-white">Logout</button>
+            <h1 className="text-acc">Welcome, {user?.username || 'User'}!</h1>
+            {user &&
+            <button onClick={logout} className="text-acc">Logout</button>
+            }
+            
         </div>
             </div>
         </div>
