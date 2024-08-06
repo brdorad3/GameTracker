@@ -14,6 +14,7 @@ import { Error } from 'mongoose';
 import { body, validationResult } from "express-validator";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken";
+import routes from "./routes/index"
 
 const app = express();
 
@@ -50,16 +51,8 @@ app.use(session({
 
 app.use(passport.session());
 
+app.use("/", routes)
 
-
-app.get("/", (req, res)=>{
-  
-    res.send("ez")
-})
-app.post("/", (req,res)=>{
-    console.log(req.body)
-    res.send(req.body.a)
-})
 
 app.post('/signup',[
   body("username").isLength({min:4, max: 20}).escape().withMessage("Username must be specified")

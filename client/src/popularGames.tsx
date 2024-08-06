@@ -37,7 +37,7 @@ const PopGames = (props: any) => {
                         'Authorization': 'Bearer fos399vwik27rr0m3tprazhvafx4zj',
                       },
                       body: `fields name, total_rating, cover.url;
-                      where id = ${slot.game_id};
+                      where id = ${slot.game_id};limit 15;
                        
                        
                        `,
