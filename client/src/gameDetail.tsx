@@ -9,6 +9,7 @@ import Cover from "./cover"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import axios from "axios";
+import { useAuth } from "./authContext";
 
 
 
@@ -61,9 +62,12 @@ const GameDetail = () => {
     const [summ, setSumm] = useState(false)
     const [res, setRes] = useState<ress>()
     const [toggle, setToggle] = useState(false)
+    const { user } = useAuth()
     const [review, setReview] = useState({
-      status: '',
+      status: 'playing',
       score: 0,
+      game: '',
+      user: user,
     })
     
 
@@ -141,9 +145,9 @@ const GameDetail = () => {
               }));
             
             console.log(gamesWithCovers)
-            
+              setReview({...review, game: gamesWithCovers[0].name})
             setRes(gamesWithCovers[0]);
-            
+            user && console.log(user)
             }
           } catch (err) {
             console.error(err);
@@ -156,6 +160,7 @@ const GameDetail = () => {
 
       const handleSubmit = async(e: any) => {
         e.preventDefault();
+        user ? 
        
         await axios.post(import.meta.env.VITE_URL + "/review", {review}).then(function (response) {
           
@@ -165,7 +170,8 @@ const GameDetail = () => {
       
       .catch(function (e) {
       console.log(e)
-      });
+      }):
+      alert("Log in to rate games!")
       }
 
     return(
@@ -425,7 +431,7 @@ const GameDetail = () => {
       >
         <option value="playing" >Playing</option>
         <option value="completed">Completed</option>
-        <option value="planing">Plan to play</option>
+        <option value="plan">Plan to play</option>
         <option value="paused">Paused</option>
         <option value="dropped">Dropped</option>
       </select>

@@ -3,7 +3,18 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 
-const reviewSchema = new Schema({
+export interface Review  {
+    game: string;
+    rating: number;
+    status: string;
+    author?: mongoose.Types.ObjectId[];
+  }
+
+  export interface ReviewDocument extends Review, Document {}
+
+
+
+const reviewSchema = new Schema<ReviewDocument>({
     game:{
         type: String,
         required: true
@@ -16,8 +27,14 @@ const reviewSchema = new Schema({
         type: String,
         required: true
     },
+    author:{
+        type: Schema.Types.ObjectId,
+        ref: "User"
+    }
    
 
 })
 
-export default mongoose.model("Reviews", reviewSchema)
+
+const ReviewModel = mongoose.model<ReviewDocument>('Reviews', reviewSchema);
+export default ReviewModel;

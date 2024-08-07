@@ -6,7 +6,7 @@ export interface User  {
     username: string;
     password: string;
   //  id: string;
-    reviews?: mongoose.Types.ObjectId[];
+    reviews: mongoose.Types.ObjectId[];
   }
 
   export interface UserDocument extends User, Document {}
@@ -21,10 +21,10 @@ const userSchema = new mongoose.Schema<UserDocument>({
         type: String,
         required:true
     },
-    reviews:{
+    reviews: [{
         type: Schema.Types.ObjectId,
        ref: "Reviews" 
-    }
+    }]
 })
 
 
