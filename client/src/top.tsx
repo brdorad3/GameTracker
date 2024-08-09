@@ -85,7 +85,7 @@ return(
     <Navbar/>
     <div className="mx-64 bg-sec ">
         <div className=" h-40 border-black border-2 pl-5 pt-4">
-            <h1 className="text-3xl pb-3">Top 100 games</h1>
+            <h1 className="text-3xl pb-3 text-prim">Top 100 games</h1>
             <div className="">
                 <div  className="flex gap-5 " >
                   <form onSubmit={handleSubmit}>
@@ -122,8 +122,8 @@ return(
                 <img src={slot.coverUrl} alt="" />
                 <div className="flex flex-col">
                     <div className="flex pt-2">
-                    <p className=" text-lg">{index + 1}. </p>
-                    <Link to={`/detail/${slot.id}`} state={slot.id}><h3 className=" text-lg">{slot.name}</h3></Link>
+                    <p className=" text-lg text-prim">{index + 1}. </p>
+                    <Link to={`/detail/${slot.id}`} state={slot.id}><h3 className=" text-lg text-prim">{slot.name}</h3></Link>
                     </div>
                     <div className="flex gap-2">
                         <p>{slot.rel}</p>

@@ -40,9 +40,9 @@ const review_post = asyncHandler(async(req: Request, res: Response, next: NextFu
 
 const reviews_post= asyncHandler(async(req: Request, res: Response, next: NextFunction) => {
     
-    //console.log(req.body)
+    
    const user = await User.findById( req.body.user._id).populate("reviews")
-   console.log(user)
+
    res.status(200).json(user?.reviews)
 })
 

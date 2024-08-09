@@ -9,7 +9,7 @@ const Reviews = () => {
     const { user } = useAuth();
     const [data, setData] = useState<any[]>([]);
     const [res, setRes] = useState<any[]>([]);
-    const [loading, setLoading] = useState(true);
+    
 
     const fetchReviews = async () => {
         try {
@@ -25,7 +25,7 @@ const Reviews = () => {
 
     const fetchGames = async () => {
         try {
-            if (data.length === 0) return; // Skip if there's no data
+            if (data.length === 0) return; 
 
             const response = await Promise.all(
                 data.map((slot: any) => {
@@ -47,7 +47,7 @@ const Reviews = () => {
             );
 
             const data2 = await Promise.all(response.map((res) => res.json()));
-            const data3 = data2.map((item) => item[0] || {}); // Handle undefined or missing data
+            const data3 = data2.map((item) => item[0] || {}); 
             const gamesWithCovers = data3.map((slot: any) => ({
                 ...slot,
                 coverUrl: slot.cover
@@ -61,17 +61,22 @@ const Reviews = () => {
                 id: gamesWithCovers[index]?.id || "",
             }));
 
-            const six = new Array(6)
-
+            const six = []
+            
             for(let i = 0; i<6; i++){
                 six.push(all[i])
             }
-
-            setRes(six);
-            setLoading(false); // Set loading to false once data is fetched
+            if(all.length > 6){
+                setRes(six)
+            }
+            else{
+                setRes(all)
+            }
+           
+            
         } catch (e) {
             console.log(e);
-            setLoading(false);
+            
         }
     };
 
@@ -85,13 +90,23 @@ const Reviews = () => {
         fetchGames();
     }, [data]);
 
-    if (loading) {
-        return <p>Loading...</p>;
-    }
+    
 
     return (
         <div className="px-64 py-12 flex flex-col gap-12">
-            <h1 className="text-sec text-4xl">Your Reviews</h1>
+            <div className="flex justify-between">
+                <div>
+            <h1 className="text-sec text-3xl chakra pb-1 font-bold">YOUR REVIEWS</h1>
+            <div className="w-[40%] h-[2px] bg-acc"></div>
+            </div>
+            <div className="flex flex-col justify-end"> 
+            {res && res.length > 0 &&
+            <Link to="/myreviews" state={res}><p className="">See all</p> </Link>
+            }
+            
+            <div className="w-full h-[1px] bg-sec"></div>
+            </div>
+            </div>
             <div className="flex gap-[1.375rem] ">
                 {user ? (
                     res && res.length > 0 ? (
@@ -100,7 +115,7 @@ const Reviews = () => {
                                 to={`/detail/${game.id}`}
                                 state={game.id}
                                 key={game.id}
-                                className="bg-sec rounded-sm min-w-[210px]"
+                                className="bg-sec rounded-sm min-w-[210px] max-w-[210px]"
                             >
                                 <div className="bg-sec rounded-md">
                                     {game.cover && (
