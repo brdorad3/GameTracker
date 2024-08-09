@@ -32,7 +32,7 @@ const Search = () => {
           }
         );
         const data = await response.json();
-        //console.log(data)
+        
         
 
         const gamesWithCovers = data.map((game: any, index: any) => ({
@@ -43,7 +43,7 @@ const Search = () => {
           
           
         }));
-        console.log(gamesWithCovers)
+        
         setRes(gamesWithCovers);
         
       } catch (err) {

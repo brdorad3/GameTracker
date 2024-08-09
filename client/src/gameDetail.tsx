@@ -1,5 +1,5 @@
-import { Link, useLocation } from "react-router-dom"
-import { useEffect, useState, useRef } from "react";
+import {  useLocation } from "react-router-dom"
+import { useEffect, useState } from "react";
 import Navbar from "./navbar";
 import Icon from '@mdi/react';
 import { mdiStar } from '@mdi/js';
@@ -113,7 +113,7 @@ const GameDetail = () => {
                 return url.startsWith("ar");
               })
             
-            const gamesWithCovers = data.map((game: any, index: any) => ({
+            const gamesWithCovers = data.map((game: any) => ({
                 ...game,
                coverUrl: game.artworks ? game.artworks[0].url.replace('t_thumb', 't_1080p') : console.error("no link") ,
                filteredArtwork: filteredArtworks && filteredArtworks.length > 0 ? filteredArtworks[0].url.replace("t_thumb", "t_1080p") : [],
@@ -144,10 +144,10 @@ const GameDetail = () => {
                 
               }));
             
-            console.log(gamesWithCovers)
+           
               setReview({...review, game: gamesWithCovers[0].name})
             setRes(gamesWithCovers[0]);
-            user && console.log(user)
+            
             }
           } catch (err) {
             console.error(err);
@@ -164,7 +164,7 @@ const GameDetail = () => {
        
         await axios.post(import.meta.env.VITE_URL + "/review", {review}).then(function (response) {
           
-          console.log(response)
+          
          
         })
       
@@ -224,7 +224,7 @@ const GameDetail = () => {
 <div className="flex flex-col gap-7 items-center">
   <div className="flex flex-col items-center gap-1 bg-prim p-4 rounded-lg">
   <h2 className="text-3xl text-sec">Your rating</h2>
-  <div className="flex gap-1 items-center cursor-pointer" onClick={(e) => setToggle(!toggle)}>
+  <div className="flex gap-1 items-center cursor-pointer" onClick={() => setToggle(!toggle)}>
   <Icon path={mdiStarOutline} size={1.5} className="text-acc"/>
   <p className="text-2xl text-acc cursor-pointer">Rate</p>
   </div>
@@ -445,13 +445,14 @@ const GameDetail = () => {
       max={10}
       className="w-48 h-9 bg-prim pl-2"
       maxLength={2}
+      step = ".1"
       required
       onChange={(e) => setReview({...review, score: Number(e.target.value)}) }
        />
        </div>
        <button type="submit" className="bg-sec border-2 border-acc text-prim h-9 px-5 self-end chakra text-xl font-bold">Save</button>
     </form>
-    <p className="text-prim absolute top-2 right-4 acme text-xl cursor-pointer" onClick={(e) => setToggle(!toggle)} >X</p>
+    <p className="text-prim absolute top-2 right-4 acme text-xl cursor-pointer" onClick={() => setToggle(!toggle)} >X</p>
   </div>
 </div>
   

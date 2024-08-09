@@ -24,7 +24,7 @@ const review_post = asyncHandler(async(req: Request, res: Response, next: NextFu
         return;
     }
 
-    console.log(req.body)
+    
     const review = new Reviews({
         game: req.body.review.game,
         rating: req.body.review.score,
@@ -38,6 +38,15 @@ const review_post = asyncHandler(async(req: Request, res: Response, next: NextFu
     res.status(200).json(review)
 })
 
+const reviews_post= asyncHandler(async(req: Request, res: Response, next: NextFunction) => {
+    
+    //console.log(req.body)
+   const user = await User.findById( req.body.user._id).populate("reviews")
+   console.log(user)
+   res.status(200).json(user?.reviews)
+})
+
 export{
-    review_post
+    review_post,
+    reviews_post
 }

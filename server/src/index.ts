@@ -71,8 +71,7 @@ app.post('/signup',[
 }),
   async (req: Request, res: Response) => {
     
-    
-    
+  
 
     const errors = validationResult(req);
         if(!errors.isEmpty()){

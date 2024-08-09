@@ -23,6 +23,7 @@ const PopGames = (props: any) => {
   };
 
     useEffect(() => {
+      
         const fetchData = async () => {
           try {
           const responses = await Promise.all(
@@ -47,12 +48,13 @@ const PopGames = (props: any) => {
            )
 
            const data2 = await Promise.all(responses.map((response) => response.json()));
-           console.log(data2)
+          
            const data = data2.map((item) => item[0]);
+           
 
            const forCover = data.map((game: any) =>({
             ...game,
-            coverUrl: game.cover ? game.cover.url.replace('t_thumb', 't_cover_big') : '',
+            coverUrl: game.cover  ? game.cover.url.replace('t_thumb', 't_cover_big') : '',
             
     }))
 
@@ -63,7 +65,9 @@ const PopGames = (props: any) => {
             console.error(err);
           }
         };
-        fetchData();
+        if (props.state.length > 0) {
+          fetchData();
+       }
         
       }, [props.state]);
 
@@ -75,7 +79,10 @@ const PopGames = (props: any) => {
         {res.map((game: any) => (
             <Link to={`/detail/${game.id}`} state={game.id} key={game.id} className="bg-sec rounded-sm max-w-[210px]">
             <div className=" bg-sec rounded-md "  >
-            <img src={game.coverUrl} className="w-full h-[250px]" alt="" />
+              {game.coverUrl &&
+              <img src={game.coverUrl} className="w-full h-[250px]" alt="" />
+}
+            
             <div className="py-2">
             <p className="overflow-hidden text-nowrap text-ellipsis text-prim patrick text-2xl p-2">{game.name}</p>
             {game.total_rating?

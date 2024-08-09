@@ -58,7 +58,6 @@ const Top100 = () => {
               rel: new Date(game.first_release_date * 1000).getFullYear(),
             }));
   
-            console.log(gamesWithCovers)
             setRes(gamesWithCovers);
             
           } catch (err) {
@@ -71,12 +70,12 @@ const Top100 = () => {
       const handleChange = (e:any) => {
         e.preventDefault()
         setVal(e.target.value)
-        console.log(val)
+       
       }
       const handleSubmit = (e:any) => {
         e.preventDefault()
         setPlatform(e.target.value)
-        console.log(plat)
+       
         
       }
      

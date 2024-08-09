@@ -21,7 +21,7 @@ const settings = {
     slidesToScroll: 1,
     
   };
-console.log(forCover)
+
 
     return (
         <>

@@ -70,3 +70,9 @@
 .slick-next:before {
   color: #5C946E!important;
 }
+.slick-active > div{
+  width: 210px;
+}
+.slick-active, .slick-current{
+  width: 210px;
+}

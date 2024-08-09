@@ -21,7 +21,6 @@ const handleSubmit = async(e: React.FormEvent) => {
    await axios.post(import.meta.env.VITE_URL + "/login", { username, password })
    .then(function (response) {
     login(response.data.token);
-    console.log(response)
     setMessage([]);
     navigate("/")
   })
@@ -29,11 +28,8 @@ const handleSubmit = async(e: React.FormEvent) => {
 .catch(function (e) {
 const newMessages: string[] = [];
 console.log(e)
-   
-    console.log( e.response.data.message)
-        
-    setMessage(e.response.data.message);
-    console.log(message)
+setMessage(e.response.data.message);
+    
 });
    
 }
