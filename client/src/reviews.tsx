@@ -9,6 +9,7 @@ const Reviews = () => {
     const { user } = useAuth();
     const [data, setData] = useState<any[]>([]);
     const [res, setRes] = useState<any[]>([]);
+    const [seeAll, setSeeAll] = useState<any[]>([]);
     
 
     const fetchReviews = async () => {
@@ -73,7 +74,7 @@ const Reviews = () => {
                 setRes(all)
             }
            
-            
+            setSeeAll(all)
         } catch (e) {
             console.log(e);
             
@@ -101,7 +102,7 @@ const Reviews = () => {
             </div>
             <div className="flex flex-col justify-end"> 
             {res && res.length > 0 &&
-            <Link to="/myreviews" state={res}><p className="">See all</p> </Link>
+            <Link to="/myreviews" state={seeAll}><p className="">See all</p> </Link>
             }
             
             <div className="w-full h-[1px] bg-sec"></div>

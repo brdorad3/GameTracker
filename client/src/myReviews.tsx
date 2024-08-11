@@ -1,45 +1,106 @@
 import Navbar from "./navbar"
 import { useLocation } from "react-router-dom"
+import { useState, useEffect } from "react"
+
+
 
 const MyReviews = () => {
+
 const navigate = useLocation()
-  console.log(navigate.state)
-  const res = navigate.state
-    console.log(res)
+const [filters, setFilters] = useState('')
+const res = navigate.state
+const [test, setTest] = useState<any[]>([])
+
+
+useEffect(()=>{
+
+console.log(filters)
+console.log(res)
+const test = res.filter((slot: any) => {
+    if(slot.status == filters){
+        
+        return slot;
+    }
+    
+})
+res.sort((a: any,b: any) => b.rating - a.rating)
+
+setTest(test)
+
+},[filters])
+
+test && test.length > 0 && console.log(test)
+  
+    
     return(
         <>
         <Navbar></Navbar>
         <div className="w-screen h-[90%] flex">
-            <div className="w-[40%]  h-full flex items-center justify-center">
-                    <h1>Filters;</h1>
+            <div className="w-[40%]  h-full flex flex-col items-center justify-center">
+                    <h1 className="text-lg chakra">Filters;</h1>
+                    <div className="pt-5 pb-10">
+                            <ul className="flex flex-col gap-1">
+                                <li className="text-sec space hover:bg-acc" onClick={()=> setFilters('all')}>All</li>
+                                <li className="text-sec space hover:bg-acc" onClick={()=> setFilters('playing')}>Playing</li>
+                                <li className="text-sec space hover:bg-acc" onClick={()=> setFilters('completed')}>Completed</li>
+                                <li className="text-sec space hover:bg-acc" onClick={()=> setFilters('dropped')}>Dropped</li>
+                                <li className="text-sec space hover:bg-acc" onClick={()=> setFilters('paused')}>Paused</li>
+                                <li className="text-sec space hover:bg-acc" onClick={()=> setFilters('plan')}>Planning</li>
+                            </ul>
+                    </div>
+                    <h1 className="pb-3 text-lg">Sort;</h1>
+                   <form >
+                    <select name="" id="">
+                        <option value="rating">Rating</option>
+                        <option value="reviews">Number of ratings</option>
+                    </select>
+                   </form>
+
             </div>
             <div className="w-full  h-full flex items-end justify-center">
-        <div className="w-[90%] bg-acc h-[80%] flex justify-evenly">
+        <div className="w-[90%] bg-sec h-fit min-h-[80%] flex justify-evenly rounded-t-lg">
             <div className="grow-[2] flex flex-col">
                 <div className="flex justify-between px-8 py-7">
-                    <div className="w-[60%] flex justify-center ">Game</div>
-                    <div className="w-[20%]  flex justify-center">Status</div>
-                    <div className="w-[20%]  flex justify-center">Score</div>
+                    <div className="w-[60%] flex justify-center chakra font-bold text-acc">GAME</div>
+                    <div className="w-[20%]  flex justify-center chakra font-bold text-acc">STATUS</div>
+                    <div className="w-[20%]  flex justify-center chakra font-bold text-acc">SCORE</div>
                 </div>
                 
                 <div className="flex flex-col gap-5 ">
                 {
-                    res &&
+                    res && filters == 'all' ?
                     res.map((slot: any) => (
-                        <div className="flex justify-between px-8">
+                        
+                        <div className="flex justify-between px-8 py-[6px] hover:bg-acc ">
                             <div className="flex grow-[5] max-w-[60%] gap-3">
                         <img src={slot.cover} alt="" className="w-12 h-16" />
-                        <h1 className="pt-1">{slot.game}</h1>
+                        <h1 className="pt-1 chakra text-white">{slot.game}</h1>
                         </div>
-                        <div className="w-[20%] flex justify-center">
-                            <p>{slot.status}</p>
+                        <div className="w-[20%] flex justify-center items-center">
+                            <p className="text-prim chakra">{slot.status}</p>
+                           
                         </div>
-                        <div className="w-[20%] flex justify-center">
-                            <p>{slot.rating}</p>
+                        <div className="w-[20%] flex justify-center text-prim items-center">
+                            <p className="text-prim chakra font-bold">{slot.rating}</p>
                         </div>
                         </div>
-                    ))
-                }
+    )):
+    test.map((slot: any) => (
+                        
+        <div className="flex justify-between px-8 py-[6px] hover:bg-acc">
+            <div className="flex grow-[5] max-w-[60%] gap-3">
+        <img src={slot.cover} alt="" className="w-12 h-16" />
+        <h1 className="pt-1 chakra text-white">{slot.game}</h1>
+        </div>
+        <div className="w-[20%] flex justify-center items-center">
+            <p className="text-prim chakra">{slot.status}</p>
+           
+        </div>
+        <div className="w-[20%] flex justify-center items-center">
+            <p className="text-prim chakra font-bold">{slot.rating}</p>
+        </div>
+        </div>
+                ))}
                 </div>
                 <div className="relative w-full h-full">
                
