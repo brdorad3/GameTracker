@@ -19,6 +19,7 @@ const Reviews = () => {
                 { user }
             );
             setData(response.data);
+            console.log(data)
         } catch (e) {
             console.log(e);
         }
@@ -73,7 +74,7 @@ const Reviews = () => {
             else{
                 setRes(all)
             }
-           
+           console.log(all)
             setSeeAll(all)
         } catch (e) {
             console.log(e);

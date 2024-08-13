@@ -10,6 +10,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import axios from "axios";
 import { useAuth } from "./authContext";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -18,6 +19,7 @@ import { useAuth } from "./authContext";
 
 
 interface ress{
+  _id: string,
   name: string,
   artworks: [],
   coverUrl: string,
@@ -69,13 +71,20 @@ const GameDetail = () => {
       game: '',
       user: user,
     })
+    const [errMess, setErrMess] = useState('')
+    
+    
     
 
     useEffect(() => {
+    
+      
       const element = document.getElementById("ccc");
   element?.scrollIntoView();
-  },[location.state]);
   
+  
+  },[location.state]);
+ 
   
   
     useEffect(() => {
@@ -162,11 +171,10 @@ const GameDetail = () => {
         e.preventDefault();
         user ? 
        
-        await axios.post(import.meta.env.VITE_URL + "/review", {review}).then(function (response) {
-          
-          
-         
-        })
+       await axios.post(import.meta.env.VITE_URL + "/review", {review}).then((t) => {
+        console.log(t.data.message)
+        setErrMess(t.data.message)
+       })
       
       .catch(function (e) {
       console.log(e)
@@ -416,6 +424,11 @@ const GameDetail = () => {
  
 
 
+   }
+   { errMess &&
+   <div className="absolute top-[15%] right-10 bg-white p-3">
+   <p className="text-lg text-black">{errMess}</p>
+   </div>
    }
    <div className={` ${toggle ? "absolute": "hidden"} z-50 inset-0 top-[25%] left-[30%] w-[650px] h-[350px] bg-sec`}>
     <div className="w-fit">

@@ -1,15 +1,22 @@
 import Navbar from "./navbar"
-import { useLocation } from "react-router-dom"
+import { useLocation, Link } from "react-router-dom"
 import { useState, useEffect } from "react"
+import Icon from '@mdi/react';
+import { mdiTrashCanOutline } from '@mdi/js';
+import axios from "axios";
 
 
 
 const MyReviews = () => {
 
 const navigate = useLocation()
-const [filters, setFilters] = useState('')
-const res = navigate.state
+const [filters, setFilters] = useState('all')
+const [res, setRes] = useState(navigate.state)
+
+//const res = navigate.state
 const [test, setTest] = useState<any[]>([])
+const [hover, setHover] = useState(false)
+
 
 
 useEffect(()=>{
@@ -30,13 +37,28 @@ setTest(test)
 },[filters])
 
 test && test.length > 0 && console.log(test)
+
+useEffect(() => {
+console.log(hover)
+},[hover])
+
+const handleDelete = async (e: any) => {
+    console.log(e)
+    console.log(res)
+    setTest(test.filter((item: any) => item.id !== e.id));  
+    setRes(res.filter((item: any) => item.id !== e.id));    
+   await axios.post(import.meta.env.VITE_URL + "/review-delete", {e}).then((res)=>{
+    console.log(res)
+   })
+
+}
   
     
     return(
         <>
         <Navbar></Navbar>
-        <div className="w-screen h-[90%] flex">
-            <div className="w-[40%]  h-full flex flex-col items-center justify-center">
+        <div className="w-screen  flex">
+            <div className="w-[40%] flex flex-col items-center mt-[200px]">
                     <h1 className="text-lg chakra">Filters;</h1>
                     <div className="pt-5 pb-10">
                             <ul className="flex flex-col gap-1">
@@ -57,13 +79,14 @@ test && test.length > 0 && console.log(test)
                    </form>
 
             </div>
-            <div className="w-full  h-full flex items-end justify-center">
-        <div className="w-[90%] bg-sec h-fit min-h-[80%] flex justify-evenly rounded-t-lg">
+            <div className="w-full flex items-end justify-start">
+        <div className="w-[90%] bg-sec mt-[150px] min-h-[70%] flex justify-evenly rounded-lg pb-8">
             <div className="grow-[2] flex flex-col">
-                <div className="flex justify-between px-8 py-7">
+                <div className="flex justify-between pl-8 py-7">
                     <div className="w-[60%] flex justify-center chakra font-bold text-acc">GAME</div>
-                    <div className="w-[20%]  flex justify-center chakra font-bold text-acc">STATUS</div>
-                    <div className="w-[20%]  flex justify-center chakra font-bold text-acc">SCORE</div>
+                    <div className="w-[15%]  flex justify-center chakra font-bold text-acc">STATUS</div>
+                    <div className="w-[15%]  flex justify-center chakra font-bold text-acc">SCORE</div>
+                    <div className="w-[10%]"></div>
                 </div>
                 
                 <div className="flex flex-col gap-5 ">
@@ -71,42 +94,50 @@ test && test.length > 0 && console.log(test)
                     res && filters == 'all' ?
                     res.map((slot: any) => (
                         
-                        <div className="flex justify-between px-8 py-[6px] hover:bg-acc ">
-                            <div className="flex grow-[5] max-w-[60%] gap-3">
+                        <div className={`flex justify-between pl-8 py-[6px]  `} >
+                            <div className="flex grow-[5] max-w-[60%]">
+                                <Link to={`/detail/${slot.id}`} state={slot.id} className="flex gap-3">
                         <img src={slot.cover} alt="" className="w-12 h-16" />
                         <h1 className="pt-1 chakra text-white">{slot.game}</h1>
+                        </Link>
                         </div>
-                        <div className="w-[20%] flex justify-center items-center">
+                        <div className="w-[15%] flex justify-center items-center">
                             <p className="text-prim chakra">{slot.status}</p>
                            
                         </div>
-                        <div className="w-[20%] flex justify-center text-prim items-center">
+                        <div className="w-[15%] flex justify-center text-prim items-center">
                             <p className="text-prim chakra font-bold">{slot.rating}</p>
+                        </div>
+                        <div className="w-[10%] flex items-center cursor-pointer" onClick={() => handleDelete(slot)}>
+                        <Icon path={mdiTrashCanOutline} size={1} className="text-acc" />
                         </div>
                         </div>
     )):
     test.map((slot: any) => (
                         
-        <div className="flex justify-between px-8 py-[6px] hover:bg-acc">
-            <div className="flex grow-[5] max-w-[60%] gap-3">
+        <div className="flex justify-between pl-8 py-[6px] ">
+            <div className="flex grow-[5] max-w-[60%] ">
+                <Link to={`/detail/${slot.id}`} state={slot.id} className="flex gap-3">
         <img src={slot.cover} alt="" className="w-12 h-16" />
         <h1 className="pt-1 chakra text-white">{slot.game}</h1>
+        </Link>
         </div>
-        <div className="w-[20%] flex justify-center items-center">
+        <div className="w-[15%] flex justify-center items-center">
             <p className="text-prim chakra">{slot.status}</p>
            
         </div>
-        <div className="w-[20%] flex justify-center items-center">
+        <div className="w-[15%] flex justify-center items-center">
             <p className="text-prim chakra font-bold">{slot.rating}</p>
+        </div>
+        <div className="w-[10%] flex items-center cursor-pointer" onClick={() => handleDelete(slot)}>
+        <Icon path={mdiTrashCanOutline} size={1} className="text-acc" />
         </div>
         </div>
                 ))}
                 </div>
-                <div className="relative w-full h-full">
-               
+                
             </div>
-            </div>
-
+            
         </div>
             </div>
 
