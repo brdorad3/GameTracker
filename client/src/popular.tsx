@@ -27,7 +27,7 @@ const [res, setRes] = useState<any[]>([])
               }
             );
             const data = await response.json();
-            
+            console.log(data)
 
             
             setRes(data);

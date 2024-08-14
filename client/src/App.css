@@ -57,7 +57,9 @@
   }
   
   
-  
+  .slick-list > div {
+    margin: 0px 10px;
+  }
 
   .sh{
     box-shadow: 3px 1px 5px #5C946E;

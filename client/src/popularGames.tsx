@@ -22,55 +22,43 @@ const PopGames = (props: any) => {
     
   };
 
-    useEffect(() => {
-      
-        const fetchData = async () => {
-          try {
-          const responses = await Promise.all(
-            props.state.map((slot: any) => {
-                return fetch(
-                    "http://localhost:8080/https://api.igdb.com/v4/games",
-                    {
-                      method: 'POST',
-                      headers: {
-                        'Accept': 'application/json',
-                        'Client-ID': '28k8glj9djgyr0opcwll92beduld5h',
-                        'Authorization': 'Bearer fos399vwik27rr0m3tprazhvafx4zj',
-                      },
-                      body: `fields name, total_rating, cover.url;
-                      where id = ${slot.game_id};limit 15;
-                       
-                       
-                       `,
-                    }
-                  );
-            })
-           )
-
-           const data2 = await Promise.all(responses.map((response) => response.json()));
-          
-           const data = data2.map((item) => item[0]);
-           
-
-           const forCover = data.map((game: any) =>({
-            ...game,
-            coverUrl: game.cover  ? game.cover.url.replace('t_thumb', 't_cover_big') : '',
-            
-    }))
-
-           
-         setRes(forCover);
-            
-          } catch (err) {
-            console.error(err);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const gameIds = props.state.map((slot: any) => slot.game_id).join(',');
+        console.log(gameIds)
+        const response = await fetch(
+          "http://localhost:8080/https://api.igdb.com/v4/games",
+          {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Client-ID': '28k8glj9djgyr0opcwll92beduld5h',
+              'Authorization': 'Bearer fos399vwik27rr0m3tprazhvafx4zj',
+            },
+            body: `fields name, total_rating, cover.url;
+            where id = (${gameIds});
+            limit 15;`, 
           }
-        };
-        if (props.state.length > 0) {
-          fetchData();
-       }
-        
-      }, [props.state]);
-
+        );
+  
+        const data = await response.json();
+        const forCover = data.map((game: any) => ({
+          ...game,
+          coverUrl: game.cover ? game.cover.url.replace('t_thumb', 't_cover_big') : '',
+        }));
+  
+        setRes(forCover);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+  
+    if (props.state.length > 0) {
+      fetchData();
+    }
+  }, [props.state]);
+  
     return(
         <>
          {res ? 

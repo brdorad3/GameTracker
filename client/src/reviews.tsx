@@ -109,7 +109,7 @@ const Reviews = () => {
             <div className="w-full h-[1px] bg-sec"></div>
             </div>
             </div>
-            <div className="flex gap-[1.375rem] ">
+            <div className="flex justify-between">
                 {user ? (
                     res && res.length > 0 ? (
                         res.map((game: any) => (

@@ -169,6 +169,7 @@ const GameDetail = () => {
 
       const handleSubmit = async(e: any) => {
         e.preventDefault();
+        setToggle(!toggle);
         user ? 
        
        await axios.post(import.meta.env.VITE_URL + "/review", {review}).then((t) => {
@@ -431,9 +432,9 @@ const GameDetail = () => {
    </div>
    }
    <div className={` ${toggle ? "absolute": "hidden"} z-50 inset-0 top-[25%] left-[30%] w-[650px] h-[350px] bg-sec`}>
-    <div className="w-fit">
-    <p className="text-white w-fit text-xl space mt-12 ml-8">{res?.name}</p>
-    <div className="w-[65%] h-[1px] bg-acc ml-8"></div>
+    <div className=" border-b-2 border-acc flex mt-10 mx-5">
+    <p className="text-white text-2xl space mb-6 ml-2">{res?.name}</p>
+    
     </div>
     <form onSubmit={handleSubmit} className="ml-8  flex gap-10 mt-16 items-center">
       <div className="flex flex-col">
@@ -456,14 +457,16 @@ const GameDetail = () => {
       name="score"
       min={1}
       max={10}
-      className="w-48 h-9 bg-prim pl-2"
+      className="w-48 h-9 bg-prim pl-2 rounded-sm "
       maxLength={2}
       step = ".1"
       required
       onChange={(e) => setReview({...review, score: Number(e.target.value)}) }
        />
        </div>
-       <button type="submit" className="bg-sec border-2 border-acc text-prim h-9 px-5 self-end chakra text-xl font-bold">Save</button>
+       <button type="submit" className="border-2 border-prim text-acc  h-9 px-5 self-end chakra text-xl font-bold
+       
+       ">Save</button>
     </form>
     <p className="text-prim absolute top-2 right-4 acme text-xl cursor-pointer" onClick={() => setToggle(!toggle)} >X</p>
   </div>

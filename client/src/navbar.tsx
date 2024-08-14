@@ -39,13 +39,14 @@ const Navbar: React.FC = () => {
                 </form>
             </div>
             <div className="flex gap-5 items-center">
-                <Link to="/login"><h2 className="text-lg text-prim">Log in</h2></Link>
-                <Link to="/signup"><h2 className="text-lg text-prim">Sign up</h2></Link>
-                <div>
-            <h1 className="text-acc">Welcome, {user?.username || 'User'}!</h1>
-            {user &&
-            <button onClick={logout} className="text-acc">Logout</button>
+                <Link to="/login"><h2 className="text-lg text-prim chakra">Log in</h2></Link>
+                <Link to="/signup"><h2 className="text-lg text-prim chakra">Sign up</h2></Link>
+                {user &&
+            <button onClick={logout} className="text-acc text-lg chakra font-black">Logout</button>
             }
+                <div>
+            
+            
             
         </div>
             </div>

@@ -39,11 +39,11 @@ setMessage(e.response.data.message);
         <Navbar/>
         <div className="w-screen h-[90%] flex justify-center relative">
             <div className="absolute top-[25%] flex flex-col gap-10 items-center justify-center">
-            <h1 className="text-4xl text-sec">Log in</h1>
-            <form onSubmit={handleSubmit} className="flex flex-col gap-14">
-                <div className="flex flex-col gap-8">
+            <h1 className="text-4xl text-sec space font-black">LOGIN</h1>
+            <form onSubmit={handleSubmit} className="flex flex-col gap-12">
+                <div className="flex flex-col gap-6">
                 <input type="text"
-                className="w-80 h-14 rounded-[4px] pl-4 bg-sec placeholder-prim"
+                className="w-80 h-14 rounded-[4px] pl-4 bg-sec placeholder-prim text-prim " 
                 minLength={3}
                 maxLength={25}
                 required
@@ -52,7 +52,7 @@ setMessage(e.response.data.message);
                 placeholder="Username"
                 />
                 <input type="password"
-                className="w-80 h-14 rounded-[4px] pl-4 bg-sec placeholder-prim"
+                className="w-80 h-14 rounded-[4px] pl-4 bg-sec placeholder-prim text-prim"
                 minLength={8}
                 maxLength={25}
                 required
@@ -62,9 +62,9 @@ setMessage(e.response.data.message);
                 />
                 
                 </div>
-                <button type="submit" className="bg-sec text-prim px-6 py-3 rounded-[4px]">Submit</button>
+                <button type="submit" className="bg-acc text-sec border-2 border-sec px-6 py-3 rounded-[4px] text-lg font-bold chakra">LOGIN</button>
             </form>
-            <p className="text-white">Already have an account? <Link to="/signup" className="text-sec">Sign up</Link></p>
+            <p className="text-sec space">Don't have an account? <Link to="/signup" className="text-acc border-b-[1px] border-acc chakra">Sign up</Link></p>
             </div>
             {message &&
             <p className="text-white">{message}</p>

@@ -14,7 +14,7 @@ const Rated = () => {
             </div>
         <Link to="/top100" className="self-end"><h2 className="text-sec self-end">See all</h2></Link>
         </div>
-        <div className="w-full h-96">
+        <div className="">
         <TopRated/>
         </div>
         </div>
