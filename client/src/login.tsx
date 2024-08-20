@@ -37,8 +37,8 @@ setMessage(e.response.data.message);
     return (
         <>
         <Navbar/>
-        <div className="w-screen h-[90%] flex justify-center relative">
-            <div className="absolute top-[25%] flex flex-col gap-10 items-center justify-center">
+        <div className="w-screen h-[92%] flex justify-center relative">
+            <div className="absolute top-[25%] flex flex-col gap-10 items-center justify-center bg-white py-10 px-10 rounded-lg sh2">
             <h1 className="text-4xl text-sec space font-black">LOGIN</h1>
             <form onSubmit={handleSubmit} className="flex flex-col gap-12">
                 <div className="flex flex-col gap-6">

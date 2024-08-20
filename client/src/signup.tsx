@@ -36,7 +36,7 @@ const handleSubmit = async(e: React.FormEvent) => {
         <>
         <Navbar/>
         <div className="w-screen h-[90%] flex  justify-center">
-            <div className="absolute top-[25%] flex flex-col gap-10 items-center justify-center">
+            <div className="absolute top-[25%] flex flex-col gap-10 items-center justify-center bg-white p-10 sh2 rounded-lg">
             <h1 className="text-4xl text-sec space font-black">SIGNUP</h1>
             <form onSubmit={handleSubmit} className="flex flex-col gap-12">
                 <div className="flex flex-col gap-6">

@@ -12,12 +12,6 @@ import axios from "axios";
 import { useAuth } from "./authContext";
 import { useNavigate } from "react-router-dom";
 
-
-
-
-
-
-
 interface ress{
   _id: string,
   name: string,
@@ -72,6 +66,7 @@ const GameDetail = () => {
       user: user,
     })
     const [errMess, setErrMess] = useState('')
+    const [planningList, setPlanningList] = useState(false)
     
     
     
@@ -105,7 +100,7 @@ const GameDetail = () => {
                  aggregated_rating, aggregated_rating_count, rating, rating_count, themes.name,
                  storyline, summary, genres.name, platforms.name, category, status, involved_companies.*, involved_companies.company.name,
                  game_modes.name, player_perspectives.name, similar_games.name, similar_games.cover.url, similar_games.total_rating,
-                 franchises.name, expansions.name, collections.name
+                 franchises.name, expansions.name, collections.name, screenshots.*
                                
                  ;
                 where id = ${location.state};
@@ -124,7 +119,8 @@ const GameDetail = () => {
             
             const gamesWithCovers = data.map((game: any) => ({
                 ...game,
-               coverUrl: game.artworks ? game.artworks[0].url.replace('t_thumb', 't_1080p') : console.error("no link") ,
+                
+               coverUrl: game.artworks ? game.artworks[0].url.replace('t_thumb', 't_1080p') : `//images.igdb.com/igdb/image/upload/t_screenshot_huge/${game.screenshots[0].image_id}.jpg` ,
                filteredArtwork: filteredArtworks && filteredArtworks.length > 0 ? filteredArtworks[0].url.replace("t_thumb", "t_1080p") : [],
                 realCover: game.cover ? game.cover.url.replace('t_thumb', 't_cover_big') : '',
                 rel: new Date(game.first_release_date * 1000).getFullYear(),
@@ -148,6 +144,7 @@ const GameDetail = () => {
                 publisher: game.involved_companies && game.involved_companies.filter((slot:any)=>{
                   if(slot.publisher == true) return slot
                 }),
+                
 
               
                 
@@ -155,6 +152,7 @@ const GameDetail = () => {
             
            
               setReview({...review, game: gamesWithCovers[0].name})
+              console.log(gamesWithCovers[0])
             setRes(gamesWithCovers[0]);
             
             }
@@ -175,6 +173,9 @@ const GameDetail = () => {
        await axios.post(import.meta.env.VITE_URL + "/review", {review}).then((t) => {
         console.log(t.data.message)
         setErrMess(t.data.message)
+        setTimeout(()=>{
+          setErrMess('');
+        }, 3000)
        })
       
       .catch(function (e) {
@@ -183,21 +184,24 @@ const GameDetail = () => {
       alert("Log in to rate games!")
       }
 
+
+
+
     return(
       <div className="h-screen" id="ccc">
       <Navbar/>
         
    {res &&
-   <div className={`${toggle ? "brightness-50 overflow-hidden": "brightness-100"}  relative w-full h-[90%] px-64 py-6 text-white `}>
+   <div className={`${toggle ? "brightness-50 overflow-hidden": "brightness-100"}  relative w-full h-[92%] px-64 py-6 text-white `}>
     <div className="flex flex-col gap-4">
    <div
      className="absolute inset-0 bg-cover brightness-50"
      style={{ backgroundImage: `url(${res?.filteredArtwork && res.filteredArtwork.length > 0 ? res.filteredArtwork : res.coverUrl})` }}
    ></div>
-   <h1 className="relative z-10 text-white text-6xl">{res?.name}</h1>
+   <h1 className="relative z-10 text-white text-6xl comic">{res?.name}</h1>
    <div className="flex gap-4">
     <p className="text-white relative font-normal">{res.rel}</p>
-    {res.age && res.age.lenght > 0 &&
+    {res.age && res.age.length > 0 &&
     <p className="text-white relative">{t(res.age[0].rating)}</p>
   }
    </div>
@@ -210,7 +214,7 @@ const GameDetail = () => {
   <div className="relative min-w-[700px] h-[400px] bg-prim flex items-center justify-center brightness-200">This video is unavailable!</div>
   }
   
-  <div className="w-full h-[400px] relative bg-sec flex flex-col justify-around pb-10">
+  <div className="w-full h-[400px] relative bg-sec flex flex-col justify-around pb-10 ">
     <div className="flex justify-evenly ">
     <div className=" bg-prim p-3 rounded-xl">
       <div className="flex gap-2 items-center">
@@ -231,20 +235,27 @@ const GameDetail = () => {
     </div>
 </div>
 <div className="flex flex-col gap-7 items-center">
-  <div className="flex flex-col items-center gap-1 bg-prim p-4 rounded-lg">
-  <h2 className="text-3xl text-sec">Your rating</h2>
+  <div className="flex flex-col items-center gap-1  py-3 rounded-lg bg-acc px-5 ">
   <div className="flex gap-1 items-center cursor-pointer" onClick={() => setToggle(!toggle)}>
-  <Icon path={mdiStarOutline} size={1.5} className="text-acc"/>
-  <p className="text-2xl text-acc cursor-pointer">Rate</p>
+  <Icon path={mdiStarOutline} size={1.4} className="text-prim"/>
+  <p className="text-2xl text-white cursor-pointer">Rate</p>
   </div>
   </div>
-  <div>
+  <div className="relative">
   <div className="flex items-center gap-1 justify-around border-2 border-prim w-44 px-2 ">
     <p className="text-prim p-1 text-lg font-medium">Add to list</p>
-    <div className="bg-prim w-[1px] h-10 relative p-0"></div>
+    <div className="bg-prim w-[1px] h-10 relative p-0" ></div>
    
+   <div onClick={() => setPlanningList(!planningList)}>
     <Icon path={mdiChevronDown} size={1} className="text-prim" />
-    
+    </div>
+  
+
+  </div>
+  <div className={`${planningList ? 'absolute top-12 w-full h-10 bg-prim text-sec font-bold rounded-sm' : 'hidden'}`}>
+    <form onSubmit={handleSubmit}>
+    <button className="pl-3 pt-[7px]" type="submit" onClick={(e) => setReview({...review, status: 'plan'})}>Set as planning</button>
+    </form>
   </div>
 </div>
 </div>
@@ -305,7 +316,7 @@ const GameDetail = () => {
   }
   
 
-  <div className="bg-prim w-full  py-6 flex flex-col gap-8 px-10 ">
+  <div className="bg-prim w-full  py-6 flex flex-col gap-8 px-10 rounded-xl ">
     <div className="flex justify-evenly items-center">
 
 
@@ -387,7 +398,7 @@ const GameDetail = () => {
   <div className={`relative mt-10  ${chars ? 'text-white':'text-white'} `}>
     
     <h1 className="text-prim text-4xl bangers  pl-2">Story</h1>
-    <div className="w-12 h-[2px] bg-acc mb-4 ml-2"></div>
+    <div className="w-12 h-[2px] bg-acc mb-10 ml-2"></div>
     {res.storyline &&
     res.storyline.length < 1500 ?
   <p className="text-prim chakra text-xl ">{res.storyline}</p>:

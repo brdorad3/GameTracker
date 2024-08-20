@@ -61,8 +61,9 @@ const Reviews = () => {
                 ...slot,
                 cover: gamesWithCovers[index]?.coverUrl || "N/A",
                 id: gamesWithCovers[index]?.id || "",
+               
             }));
-
+            
             const six = []
             
             for(let i = 0; i<6; i++){
@@ -99,14 +100,15 @@ const Reviews = () => {
             <div className="flex justify-between">
                 <div>
             <h1 className="text-sec text-3xl chakra pb-1 font-bold">YOUR REVIEWS</h1>
-            <div className="w-[40%] h-[2px] bg-acc"></div>
+            <div className="w-24 h-[2px] bg-acc"></div>
             </div>
             <div className="flex flex-col justify-end"> 
             {res && res.length > 0 &&
-            <Link to="/myreviews" state={seeAll}><p className="">See all</p> </Link>
+            <Link to="/myreviews" state={seeAll} className="text-sec border-b-[1px] hover:border-sec chakra"> <p className="">See all</p> </Link>
+            
             }
             
-            <div className="w-full h-[1px] bg-sec"></div>
+            
             </div>
             </div>
             <div className="flex justify-between">
@@ -119,11 +121,11 @@ const Reviews = () => {
                                 key={game.id}
                                 className="bg-sec rounded-sm min-w-[210px] max-w-[210px]"
                             >
-                                <div className="bg-sec rounded-md">
+                                <div className="bg-sec rounded-sm">
                                     {game.cover && (
                                         <img
                                             src={game.cover}
-                                            className="w-full h-[250px]"
+                                            className="w-full h-[250px] rounded-sm"
                                             alt=""
                                         />
                                     )}
@@ -132,34 +134,37 @@ const Reviews = () => {
                                         <p className="overflow-hidden text-nowrap text-ellipsis text-prim patrick text-2xl p-2">
                                             {game.game}
                                         </p>
-                                        {game.rating ? (
-                                            <div className="py-[5px] px-3 mb-2 flex justify-between items-center bg-sec rounded-xl">
-                                                <p className="text-prim chakra">
-                                                    {game.status}
-                                                </p>
-                                                <div className="flex gap-1 items-center">
-                                                    <p className="text-prim">
-                                                        {game.rating}
-                                                    </p>
-                                                    <Icon
-                                                        path={mdiStar}
-                                                        size={0.8}
-                                                        className="text-prim"
-                                                    />
-                                                </div>
-                                            </div>
-                                        ) : (
-                                            <div className="py-[5px] px-3 bg-sec float-end flex items-center rounded-xl mb-2 mr-2">
-                                                <p className="text-prim">
-                                                    N/A
-                                                </p>
-                                                <Icon
-                                                    path={mdiStar}
-                                                    size={0.8}
-                                                    className="text-prim"
-                                                />
-                                            </div>
-                                        )}
+                                        {game.rating !== undefined && game.rating !== null ? (
+    <div className="py-[5px] px-3 mb-2 flex justify-between items-center bg-sec rounded-xl">
+        <p className="text-prim chakra">
+            {game.status}
+        </p>
+        <div className="flex gap-1 items-center">
+        <Icon
+                path={mdiStar}
+                size={0.8}
+                className="text-acc"
+            />
+            <p className="text-prim ">
+                {game.rating === 0 ? "N/A" : game.rating}
+            </p>
+           
+        </div>
+    </div>
+) : (
+    <div className="py-[5px] px-3 bg-sec float-end flex items-center rounded-xl mb-2 mr-2">
+         <Icon
+                path={mdiStar}
+                size={0.8}
+                className="text-acc"
+            />
+        <p className="text-prim">
+            N/A
+        </p>
+       
+    </div>
+)}
+
                                     </div>
                                 </div>
                             </Link>

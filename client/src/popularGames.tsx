@@ -66,21 +66,23 @@ const PopGames = (props: any) => {
             
         {res.map((game: any) => (
             <Link to={`/detail/${game.id}`} state={game.id} key={game.id} className="bg-sec rounded-sm max-w-[210px]">
-            <div className=" bg-sec rounded-md "  >
+            <div className=" bg-sec rounded-sm "  >
               {game.coverUrl &&
-              <img src={game.coverUrl} className="w-full h-[250px]" alt="" />
+              <img src={game.coverUrl} className="w-full h-[250px] rounded-lg" alt="" />
 }
             
             <div className="py-2">
             <p className="overflow-hidden text-nowrap text-ellipsis text-prim patrick text-2xl p-2">{game.name}</p>
             {game.total_rating?
-        <div className="py-[5px] px-3  float-end flex items-center bg-sec rounded-xl mb-2 mr-2 ">
-           <p className="text-prim"> {(game.total_rating/10).toFixed(1)} </p>
-           <Icon path={mdiStar} size={0.8} className="text-prim" />
+        <div className="py-[5px] px-3  float-end flex items-center gap-1 bg-sec rounded-xl mb-2 mr-2 ">
+           <Icon path={mdiStar} size={0.8} className="text-acc " />
+           <p className="text-prim "> {(game.total_rating/10).toFixed(1)} </p>
+          
             </div>:
-        <div className="py-[5px] px-3 bg-sec float-end flex items-center rounded-xl mb-2 mr-2">
+        <div className="py-[5px] px-3 bg-sec float-end flex gap-1 items-center rounded-xl mb-2 mr-2">
+        <Icon path={mdiStar} size={0.8} className="text-acc " />
         <p className="text-prim"> N/A </p>
-        <Icon path={mdiStar} size={0.8} className="text-prim" />
+       
          </div>  
         }
             </div>

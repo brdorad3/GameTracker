@@ -12,7 +12,12 @@ const Rated = () => {
         <h1 className="text-sec text-3xl font-bold chakra pb-1">BEST RATED GAMES</h1>
         <div className="w-24 h-[2px] bg-acc"></div>
             </div>
-        <Link to="/top100" className="self-end"><h2 className="text-sec self-end">See all</h2></Link>
+        <Link to="/top100" className="self-end">
+        <div className="mr-3">
+        <h2 className="text-sec self-end border-b-[1px] hover:border-sec chakra">See all</h2>
+       
+        </div>
+        </Link>
         </div>
         <div className="">
         <TopRated/>

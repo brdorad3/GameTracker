@@ -20,11 +20,11 @@ const Navbar: React.FC = () => {
     }
 
     return(
-        <div className="flex px-64 justify-between items-center w-screen h-[10%] bg-sec">
+        <div className="flex px-64 justify-between items-center w-screen h-[8%] bg-sec">
             <div>
                 <h1 className="text-2xl text-prim chakra"><Link to="/">Robnite</Link></h1>
             </div>
-            <div className="w-2/4">
+            <div className="w-[65%]">
                 <form onSubmit={handleSubmit} className="w-full relative">
                     <input type="text" 
                     className="w-full h-10 rounded-lg pl-5 bg-prim"
@@ -34,7 +34,7 @@ const Navbar: React.FC = () => {
                     value={value}
                     />
                     <button type="submit">
-                        <Icon path={mdiMagnify} size={1.3} className="text-prim absolute top-[5px] right-4" />
+                        <Icon path={mdiMagnify} size={1.3} className="text-sec absolute top-[5px] right-4" />
                     </button>
                 </form>
             </div>

@@ -3,6 +3,9 @@ import { useEffect, useState} from "react";
 import Icon from '@mdi/react';
 import { mdiStar } from '@mdi/js'
 import { Link } from "react-router-dom";
+import { mdiMagnify } from '@mdi/js';
+
+
 
 import { mdiMenuUp } from '@mdi/js';
 
@@ -32,6 +35,8 @@ const Top100 = () => {
     const [search, setSearch] = useState('');
     const [target, setTarget] = useState('')
     const [closeMenu, setCloseMenu] = useState(false)
+    const [year, setYear] = useState<any>()
+    const [yearSubmit, setYearSubmit] = useState(false)
 
 
     useEffect(()=>{
@@ -69,12 +74,19 @@ fetchData()
           try {
 
             let query = `fields name, total_rating, cover.url, total_rating_count, first_release_date, category, platforms.name;`;
-
+            
             if (target) {
-              query += `where total_rating_count > 80 & platforms.name = "${target}";`;
+              query += `where total_rating_count > 80 & platforms.name = "${target}"`;
             }else{
-              query += `where total_rating_count > 80;`
+              query += `where total_rating_count > 80`
             }
+            if (year) {
+              query += ` & first_release_date >= ${new Date(year, 0, 1).getTime() / 1000} & first_release_date < ${new Date(Number(year) + 1, 0, 1).getTime() / 1000};`;
+          }else{
+            query += ";"
+          }
+
+            
       
             query += ` sort ${val} desc; limit 100;`;
 
@@ -91,7 +103,7 @@ fetchData()
               }
             );
             const data = await response.json();
-           
+           console.log(data)
             
     
             const gamesWithCovers = data.map((game: any, index: any) => ({
@@ -107,7 +119,7 @@ fetchData()
           }
         };
         fetchData();
-      }, [val, target]);
+      }, [val, target, yearSubmit]);
 
       const handleChange = (e:any) => {
         e.preventDefault()
@@ -125,12 +137,11 @@ fetchData()
         setTarget('')
         setSearch('')
        
-       
       }
-     
-     
-      
-    console.log(target)
+      const handleYearSubmit = (e: any) => {+
+        e.preventDefault();
+        setYearSubmit(!yearSubmit)
+      }
 
 return(
     <>
@@ -170,10 +181,17 @@ return(
                     
                     
                     </form>
-                    <div className="flex flex-col">
+                    <form className="flex flex-col relative" onSubmit={(e) => handleYearSubmit(e)}>
                     <label className="p-1 text-lg text-prim space" htmlFor="year">Year:</label>
-                    <input type="text" className="rounded-md h-9 w-80 p-1" placeholder="2015 " id="year" />
-                    </div>
+                    <input type="text" className="rounded-md h-9 w-80 p-1 pl-2" placeholder="2015 " id="year"
+                    minLength={4}
+                    maxLength={4}
+                    onChange={(e) => setYear(e.target.value)}
+                    />
+                    <button className="absolute top-[42px] right-2" type="submit" >
+                    <Icon path={mdiMagnify} size={1} />
+                    </button>
+                    </form>
                     <div className="flex items-center gap-2 self-end">
                       <label htmlFor="sort" className="p-1 text-lg text-prim space">Sort by:</label>
                     <select name="sort" id="sort" className="py-1 px-2 rounded-md " onChange={handleChange} >
@@ -189,11 +207,12 @@ return(
             res.map((slot:any, index) => (
                 <div className="flex justify-between border-b-2 border-prim py-5 pl-5">
                     <div className="flex gap-5">
-                <img src={slot.coverUrl} alt="" />
+              <Link to={`/detail/${slot.id}`} state={slot.id}>  <img src={slot.coverUrl} alt="" /> </Link>
                 <div className="flex flex-col">
                     <div className="flex pt-2">
-                    <p className=" text-lg text-prim">{index + 1}. </p>
-                    <Link to={`/detail/${slot.id}`} state={slot.id}><h3 className=" text-lg text-white chakra">{slot.name}</h3></Link>
+                    <Link to={`/detail/${slot.id}`} state={slot.id} className="flex items-end gap-1">
+                      <p className=" text-lg text-prim chakra7">{index + 1}. </p>
+                    <h3 className=" text-lg text-white chakra">{slot.name}</h3></Link>
                     </div>
                     <div className="flex gap-2">
                         <p className="text-prim chakra">{slot.rel}</p>

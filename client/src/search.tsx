@@ -95,7 +95,8 @@ const Search = () => {
           </li>
         ))}
       </ul>:
-      <h1 className="text-white">Nuh uh</h1>
+      <div className="w-screen h-[92%] flex items-center justify-center"><h1 className="text-sec text-lg font-medium">No results</h1></div>
+      
 
 }
     </>

@@ -106,7 +106,10 @@ const handleDelete = async (e: any) => {
                            
                         </div>
                         <div className="w-[15%] flex justify-center text-prim items-center">
-                            <p className="text-prim chakra font-bold">{slot.rating}</p>
+                           {slot.rating != 0 ?
+                        slot.rating:
+                        <p>N/A</p>   
+                        }
                         </div>
                         <div className="w-[10%] flex items-center cursor-pointer" onClick={() => handleDelete(slot)}>
                         <Icon path={mdiTrashCanOutline} size={1} className="text-acc" />
