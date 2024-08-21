@@ -115,25 +115,33 @@ const Reviews = () => {
                 {user ? (
                     res && res.length > 0 ? (
                         res.map((game: any) => (
-                            <Link
+                            
+                                <div className="bg-sec rounded-b-md min-w-[210px] max-w-[210px] sh3">
+                                    <Link
                                 to={`/detail/${game.id}`}
                                 state={game.id}
                                 key={game.id}
-                                className="bg-sec rounded-sm min-w-[210px] max-w-[210px]"
+                                className=""
                             >
-                                <div className="bg-sec rounded-sm">
                                     {game.cover && (
                                         <img
                                             src={game.cover}
-                                            className="w-full h-[250px] rounded-sm"
+                                            className="w-full h-[250px]"
                                             alt=""
                                         />
                                     )}
-
+                                </Link>
                                     <div className="py-2">
+                                    <Link
+                                to={`/detail/${game.id}`}
+                                state={game.id}
+                                key={game.id}
+                                className=""
+                            >
                                         <p className="overflow-hidden text-nowrap text-ellipsis text-prim patrick text-2xl p-2">
                                             {game.game}
                                         </p>
+                                        </Link>
                                         {game.rating !== undefined && game.rating !== null ? (
     <div className="py-[5px] px-3 mb-2 flex justify-between items-center bg-sec rounded-xl">
         <p className="text-prim chakra">
@@ -167,7 +175,7 @@ const Reviews = () => {
 
                                     </div>
                                 </div>
-                            </Link>
+                            
                         ))
                     ) : (
                         <p>No reviews found.</p>
