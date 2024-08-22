@@ -33,7 +33,7 @@ const TopRated = () => {
                 'Authorization': 'Bearer fos399vwik27rr0m3tprazhvafx4zj',
               },
               body: `fields name,  total_rating, total_rating, cover.url, total_rating_count;
-               where total_rating_count > 70;sort total_rating desc;limit 10;
+               where total_rating_count > 70;sort total_rating desc;limit 6;
                
                `,
             }
@@ -62,13 +62,13 @@ const TopRated = () => {
     return(
         <>
          {res ? 
-        <Slider  {...settings}>
+        
             
-        {res.map((game: any) => (
+        res.map((game: any) => (
             
-            <div className=" bg-sec rounded-sm min-w-[210px] max-w-[210px]"  >
+            <div className=" bg-sec rounded-b-md min-w-[210px] max-w-[210px] sh3"  >
               <Link to={`/detail/${game.id}`} state={game.id} key={game.id} >
-            <img src={game.coverUrl} className="w-full h-[250px] rounded-sm" alt="" />
+            <img src={game.coverUrl} className="w-full h-[250px] " alt="" />
             </Link>
             <div className="py-2">
             <Link to={`/detail/${game.id}`} state={game.id} key={game.id} >
@@ -90,10 +90,10 @@ const TopRated = () => {
         </div>
         
 
-        ))}
+        ))
         
         
-        </Slider>:
+        :
         <p>Loading...</p>
         }
         

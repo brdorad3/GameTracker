@@ -104,7 +104,7 @@ const Reviews = () => {
             </div>
             <div className="flex flex-col justify-end"> 
             {res && res.length > 0 &&
-            <Link to="/myreviews" state={seeAll} className="text-sec border-b-[1px] hover:border-sec chakra"> <p className="">See all</p> </Link>
+            <Link to="/myreviews" state={seeAll} className="text-slate-600 ani chakra"> <p className="">See all</p> </Link>
             
             }
             

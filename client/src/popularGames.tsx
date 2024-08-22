@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
 import Icon from '@mdi/react';
-import { mdiStar } from '@mdi/js'
+import { mdiStar,  mdiChevronLeft, mdiChevronRight  } from '@mdi/js'
 
 
 const PopGames = (props: any) => {
@@ -38,7 +38,7 @@ const PopGames = (props: any) => {
             },
             body: `fields name, total_rating, cover.url;
             where id = (${gameIds});
-            limit 15;`, 
+            limit 6;`, 
           }
         );
   
@@ -62,11 +62,11 @@ const PopGames = (props: any) => {
     return(
         <>
          {res ? 
-        <Slider  {...settings}>
+       
             
-        {res.map((game: any) => (
+        res.map((game: any) => (
             
-            <div className=" bg-sec rounded-b-md min-w-[210px] max-w-[210px]"  >
+            <div className=" bg-sec rounded-b-md min-w-[210px] max-w-[210px] sh3 "  >
               <Link
                                 to={`/detail/${game.id}`}
                                 state={game.id}
@@ -98,10 +98,10 @@ const PopGames = (props: any) => {
         </div>
         
 
-        ))}
+        ))
         
         
-        </Slider>:
+      :
         <p>Loading...</p>
         }
         </>

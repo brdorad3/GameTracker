@@ -6,7 +6,7 @@ const Rated = () => {
 
     return (
         <>
-        <div className="px-64 py-12 flex flex-col gap-12">
+        <div className="px-60 py-12 flex flex-col gap-12">
             <div className="flex justify-between">
                 <div>
         <h1 className="text-sec text-3xl font-bold chakra pb-1">BEST RATED GAMES</h1>
@@ -14,12 +14,12 @@ const Rated = () => {
             </div>
         <Link to="/top100" className="self-end">
         <div className="mr-3">
-        <h2 className="text-sec self-end border-b-[1px] hover:border-sec chakra">See all</h2>
+        <h2 className="text-sec self-end ani chakra">See all</h2>
        
         </div>
         </Link>
         </div>
-        <div className="">
+        <div className=" flex justify-between px-2">
         <TopRated/>
         </div>
         </div>

@@ -3,8 +3,6 @@
 @tailwind utilities;
 
 #root{
-   /* #f4c420
-    #180002 */
     background-color: #e0e1dd;
     height: 100vh;
     overflow-x:hidden;
@@ -86,4 +84,12 @@
 
 .sh3{
   box-shadow: #2A2D34 0px 5px 15px;
+}
+.ani:hover{
+  animation: first 0.5s linear 0s infinite alternate;
+}
+@keyframes first{
+  50%{ color:#2A2D34}
+  100%{ color: #1f2125;}
+
 }
