@@ -28,7 +28,7 @@ const settings = {
         <Slider  {...settings}>
             
         {forCover.map((game: any) => (
-            <Link to={`/detail/${game.id}`} state={game.id} key={game.id} className="bg-prim rounded-sm max-w-[210px] ">
+            <Link to={`/detail/${game.id}`} state={game.id} key={game.id} className="bg-prim rounded-b-md max-w-[210px] sh3 hover:scale-[1.02] ">
             <div className=" bg-prim rounded-md " >
             <img src={game.coverUrl} className="w-full h-[250px] mg" alt="" />
             <div className="py-2">

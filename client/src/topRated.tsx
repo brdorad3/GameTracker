@@ -66,16 +66,16 @@ const TopRated = () => {
             
         res.map((game: any) => (
             
-            <div className=" bg-sec rounded-b-md min-w-[210px] max-w-[210px] sh3"  >
+            <div className=" bg-sec rounded-b-md min-w-[210px] max-w-[210px] sh3 hover:scale-[1.03]"  >
               <Link to={`/detail/${game.id}`} state={game.id} key={game.id} >
             <img src={game.coverUrl} className="w-full h-[250px] " alt="" />
             </Link>
             <div className="py-2">
             <Link to={`/detail/${game.id}`} state={game.id} key={game.id} >
-            <p className="overflow-hidden text-nowrap text-ellipsis text-prim patrick text-2xl p-1">{game.name}</p>
+            <p className="overflow-hidden text-nowrap text-ellipsis text-prim chakra text-xl p-2">{game.name}</p>
             </Link>
             {game.total_rating?
-        <div className="py-[5px] px-3 float-end flex gap-1 items-center bg-sec rounded-xl mb-2 mr-2 ">
+        <div className="py-[5px] px-3 float-end flex gap-1 items-center bg-sec rounded-xl mb-2 mr-2">
           <Icon path={mdiStar} size={0.8} className="text-acc" />
            <p className="text-prim "> {(game.total_rating/10).toFixed(1)} </p>
            

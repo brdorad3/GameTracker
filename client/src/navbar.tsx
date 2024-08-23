@@ -20,16 +20,17 @@ const Navbar: React.FC = () => {
     }
 
     return(
-        <div className="flex px-64 justify-between items-center w-screen h-[8%] bg-sec">
+        <div className="flex px-64 justify-between items-center w-screen h-[8%] bg-sec max-md:px-5 ">
             <div>
                 <h1 className="text-2xl text-prim chakra"><Link to="/">Robnite</Link></h1>
             </div>
             <div className="w-[65%]">
                 <form onSubmit={handleSubmit} className="w-full relative">
                     <input type="text" 
-                    className="w-full h-10 rounded-lg pl-5 bg-prim"
+                    className="w-full h-10 rounded-lg pl-5 bg-white pr-16"
                     placeholder="Search..."
                     minLength={1}
+                    maxLength={120}
                     onChange={(e)=> setValue(e.target.value)}
                     value={value}
                     />

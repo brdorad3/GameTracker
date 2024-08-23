@@ -8,6 +8,7 @@ import Search from "./search.tsx";
 import GameDetail from './gameDetail.tsx';
 import Top100 from './top.tsx';
 import MyReviews from './myReviews.tsx';
+import PopularList from './popularList.tsx';
 import { AuthProvider, useAuth } from './authContext';
 
 
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
   {
     path: "/myreviews",
     element: <MyReviews/>
+  },
+  {
+    path: "/popularList",
+    element: <PopularList/>
   },
   
 ]);

@@ -40,6 +40,7 @@ interface ress{
   franchises: [],
   collections: [],
   expansions: [],
+  category: string,
 }
 
 function t(test: any){
@@ -49,6 +50,24 @@ function t(test: any){
    else if(test == 8) return "E"
     else if(test == 11) return "AO"
 
+}
+const cat = (item: any) => {
+  if(item == 0) return "Main game";
+  else if(item == 1) return "DLC";
+  else if(item == 2) return "Expansion";
+  else if(item == 3) return "Bundle";
+  else if(item == 4) return "Standalone expansion";
+  else if(item == 5) return "Mod";
+  else if(item == 6) return "Episode";
+  else if(item == 7) return "Season";
+  else if(item == 8) return "Remake";
+  else if(item == 9) return "Remaster";
+  else if(item == 10) return "Expanded game";
+  else if(item == 11) return "port";
+  else if(item == 12) return "Fork";
+  else if(item == 13) return "Pack";
+  else if(item == 14) return "Update"
+  
 }
 
 const GameDetail = () => {
@@ -198,12 +217,20 @@ const GameDetail = () => {
      className="absolute inset-0 bg-cover brightness-50"
      style={{ backgroundImage: `url(${res?.filteredArtwork && res.filteredArtwork.length > 0 ? res.filteredArtwork : res.coverUrl})` }}
    ></div>
-   <h1 className="relative z-10 text-white text-6xl comic">{res?.name}</h1>
-   <div className="flex gap-4">
-    <p className="text-white relative font-normal">{res.rel}</p>
+   <h1 className="relative z-10 text-white text-6xl space">{res?.name}</h1>
+   <div className="flex gap-5">
+    <div className="flex gap-4 w-[270px]">
+    <p className="text-prim relative font-normal">{res.rel}</p>
     {res.age && res.age.length > 0 &&
-    <p className="text-white relative">{t(res.age[0].rating)}</p>
+    <p className="text-prim relative">{t(res.age[0].rating)}</p>
   }
+  </div>
+  <div className="w-[700px]">
+
+  </div>
+  <div>
+  <p className="text-prim relative acme">{cat(res.category)}</p>
+  </div>
    </div>
    <div className="flex gap-5 relative">
     <img src={res.realCover} alt="" className="w-[270px] h-[400px] relative" />
@@ -235,19 +262,14 @@ const GameDetail = () => {
     </div>
 </div>
 <div className="flex flex-col gap-7 items-center">
-  <div className="flex flex-col items-center gap-1  py-3 rounded-lg bg-acc px-5 ">
-  <div className="flex gap-1 items-center cursor-pointer" onClick={() => setToggle(!toggle)}>
-  <Icon path={mdiStarOutline} size={1.4} className="text-prim"/>
-  <p className="text-2xl text-white cursor-pointer">Rate</p>
-  </div>
-  </div>
+  
   <div className="relative">
-  <div className="flex items-center gap-1 justify-around border-2 border-prim w-44 px-2 ">
-    <p className="text-prim p-1 text-lg font-medium">Add to list</p>
-    <div className="bg-prim w-[1px] h-10 relative p-0" ></div>
+  <div className="flex items-center gap-1 justify-around border-2 border-prim w-44 px-2 " >
+    <p className="text-prim p-1 text-lg font-medium hover:cursor-pointer" onClick={() => setToggle(!toggle)}>Add to list</p>
+    <div className="bg-prim w-[1px] h-12 relative p-0" ></div>
    
    <div onClick={() => setPlanningList(!planningList)}>
-    <Icon path={mdiChevronDown} size={1} className="text-prim" />
+    <Icon path={mdiChevronDown} size={1} className="text-prim cursor-pointer" />
     </div>
   
 
@@ -274,7 +296,7 @@ const GameDetail = () => {
 }
 <div className={`w-full  bg-sec relative mt-14 rounded-t-lg py-3 px-4 border-2 border-acc outline outline-[7px] outline-sec`}>
   
-   <div className="bg-prim  max-w-[75%] rounded-r-3xl p-2 border-r-[6px] border-acc"> 
+   <div className="bg-prim  max-w-[75%] rounded-r-3xl p-2 mt-2 border-r-[6px] border-acc"> 
 <ul className="flex flex-wrap gap-2 items-center">
   <p className="text-lg font-bold text-acc comic">Genre:</p>
 {res && res.genres &&

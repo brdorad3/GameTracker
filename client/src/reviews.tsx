@@ -116,7 +116,7 @@ const Reviews = () => {
                     res && res.length > 0 ? (
                         res.map((game: any) => (
                             
-                                <div className="bg-sec rounded-b-md min-w-[210px] max-w-[210px] sh3">
+                                <div className="bg-sec rounded-b-md min-w-[210px] max-w-[210px] sh3 hover:scale-[1.03] ">
                                     <Link
                                 to={`/detail/${game.id}`}
                                 state={game.id}
@@ -138,7 +138,7 @@ const Reviews = () => {
                                 key={game.id}
                                 className=""
                             >
-                                        <p className="overflow-hidden text-nowrap text-ellipsis text-prim patrick text-2xl p-2">
+                                        <p className="overflow-hidden text-nowrap text-ellipsis text-prim chakra text-xl p-2">
                                             {game.game}
                                         </p>
                                         </Link>
@@ -147,7 +147,7 @@ const Reviews = () => {
         <p className="text-prim chakra">
             {game.status}
         </p>
-        <div className="flex gap-1 items-center">
+        <div className="flex gap-1 items-center mr-2">
         <Icon
                 path={mdiStar}
                 size={0.8}
