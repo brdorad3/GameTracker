@@ -325,7 +325,7 @@ const GameDetail = () => {
       <p className="text-prim chakra text-xl py-10">{res.summary.substring(0,10000)}
       <button onClick={()=>setSumm(!summ)} className="text-acc m-1">Less</button>
       </p>:
-      <p className="text-prim chakra text-xl py-10">{res.summary.substring(0,501)}
+      <p className="text-prim chakra text-xl py-10 ">{res.summary.substring(0,601)}
       <button onClick={()=>setSumm(!summ)} className="text-acc m-1">More</button>
       </p>
     ) :
@@ -464,7 +464,7 @@ const GameDetail = () => {
    <p className="text-lg text-black">{errMess}</p>
    </div>
    }
-   <div className={` ${toggle ? "absolute": "hidden"} z-50 inset-0 top-[25%] left-[30%] w-[650px] h-[350px] bg-sec`}>
+   <div className={` ${toggle ? "absolute": "hidden"} z-50 inset-0 top-[25%] left-[30%] w-[650px] h-[350px] bg-sec sh4 rounded-md`}>
     <div className=" border-b-2 border-acc flex mt-10 mx-5">
     <p className="text-white text-2xl space mb-6 ml-2">{res?.name}</p>
     

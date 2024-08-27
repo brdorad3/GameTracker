@@ -6,7 +6,7 @@ const Rated = () => {
 
     return (
         <>
-        <div className="px-60 py-12 flex flex-col gap-12">
+        <div className="px-60 py-12 flex flex-col gap-12 max-md:px-5">
             <div className="flex justify-between">
                 <div>
         <h1 className="text-sec text-3xl font-bold chakra pb-1">BEST RATED GAMES</h1>

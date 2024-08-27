@@ -2,11 +2,15 @@
 import { useEffect, useState } from "react";
 import PopGames from "./popularGames";
 import { Link } from "react-router-dom";
+import Icon from '@mdi/react';
+import { mdiChevronLeft, mdiChevronRight } from "@mdi/js";
 
 
 const Popular = () => {
 
 const [res, setRes] = useState<any[]>([])
+const [index, setIndex] = useState(0)
+const [show, setShow] = useState(false)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -27,7 +31,8 @@ const [res, setRes] = useState<any[]>([])
               }
             );
             const data = await response.json();
-            console.log(data)
+            
+            
 
             
             setRes(data);
@@ -39,9 +44,35 @@ const [res, setRes] = useState<any[]>([])
         fetchData();
       }, []);
 
+      useEffect(() => {
+        const timer = setTimeout(() => {
+          setShow(true);
+        }, 1300);
+        return () => clearTimeout(timer);
+      }, [])
+
+      const handleRight = () => {
+    
+        if (index >= 2) {
+          setIndex(0);
+        } else {
+          
+          setIndex(index + 1);
+        }
+      }
+      const handleLeft = () => {
+        
+        if (index <= 0) {
+          setIndex(2);
+        } else {
+          
+          setIndex(index - 1);
+        }
+      }
+
     return (
         <>
-        <div className="px-60 py-12 flex flex-col gap-12">
+        <div className="px-60 py-12 flex flex-col gap-12 max-md:px-5">
           <div className="flex justify-between">
             <div>
         <h1 className="text-sec text-3xl chakra pb-1 font-bold">POPULAR RIGHT NOW</h1>
@@ -53,10 +84,23 @@ const [res, setRes] = useState<any[]>([])
           </Link>
         </div>
           </div>
-        <div className="flex justify-between px-2">
+        <div className="flex justify-between px-2 max-md:flex-col max-md:gap-5 py-5 overflow-hidden relative">
           
-          <PopGames state={res} />
+          {show ?
+          <div className="p-[11px] bg-white absolute top-[40%] left-5 z-50 cursor-pointer rounded-full" onClick={() => handleLeft()}>
+          <Icon path={mdiChevronLeft} size={1.4} className="text-sec hover:text-slate-600"></Icon>
+        </div>:
+        null
+          }
+          
+          <PopGames state={{res, index}} />
         
+        {show ? 
+        <div className="p-[11px] bg-prim absolute top-[40%] right-5 z-50 rounded-full cursor-pointer" onClick={() => handleRight()}>
+        <Icon path={mdiChevronRight} size={1.4} className="text-sec hover:text-slate-600"></Icon>
+        </div>:
+        null
+        }
             
             </div>
         </div>

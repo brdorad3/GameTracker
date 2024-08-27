@@ -4,19 +4,19 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
 import Icon from '@mdi/react';
-import { mdiStar,  mdiChevronLeft, mdiChevronRight  } from '@mdi/js'
+import { mdiStar  } from '@mdi/js'
 
 
 const PopGames = (props: any) => {
 
-
+ 
    const [res, setRes] = useState<any[]>([])
-
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const gameIds = props.state.map((slot: any) => slot.game_id).join(',');
+       
+        const gameIds = props.state.res.map((slot: any) => slot.game_id).join(',');
         const response = await fetch(
           "http://localhost:8080/https://api.igdb.com/v4/games",
           {
@@ -28,33 +28,42 @@ const PopGames = (props: any) => {
             },
             body: `fields name, total_rating, cover.url;
             where id = (${gameIds});
-            limit 6;`, 
+            limit 18;`, 
           }
         );
   
         const data = await response.json();
+       
         const forCover = data.map((game: any) => ({
           ...game,
           coverUrl: game.cover ? game.cover.url.replace('t_thumb', 't_cover_big') : '',
         }));
-  
-        setRes(forCover);
+       
+        const first = []
+            for(let i = 0; i<forCover.length; i += 6){
+              const chunk = forCover.slice(i, i + 6);
+  first.push(chunk);
+            }
+            
+        setRes(first)
+        
       } catch (err) {
         console.error(err);
       }
     };
   
-    if (props.state.length > 0) {
+    if (props.state.res.length > 0) {
       fetchData();
     }
-  }, [props.state]);
+  }, [props.state.res, props.state.index]);
   
+res && console.log(res)
     return(
         <>
-         {res ? 
+         {res[props.state.index] ? 
        
             
-        res.map((game: any) => (
+        res[props.state.index].map((game: any) => (
             
             <div className=" bg-sec rounded-b-md min-w-[210px] max-w-[210px] sh3 hover:scale-[1.03]"  >
               <Link
@@ -85,6 +94,8 @@ const PopGames = (props: any) => {
          </div>  
         }
             </div>
+            
+           
         </div>
         
 
@@ -94,6 +105,7 @@ const PopGames = (props: any) => {
       :
         <p>Loading...</p>
         }
+       
         </>
     )
 }
