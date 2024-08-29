@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 #root{
     background-color: #e0e1dd;
     height: 100vh;
@@ -100,3 +101,4 @@
 .gr:hover{
   color: #56585c;
 }
+

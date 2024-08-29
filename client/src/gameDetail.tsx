@@ -3,14 +3,12 @@ import { useEffect, useState } from "react";
 import Navbar from "./navbar";
 import Icon from '@mdi/react';
 import { mdiStar } from '@mdi/js';
-import { mdiStarOutline } from '@mdi/js';
-import { mdiChevronDown } from '@mdi/js';
+import { mdiChevronDown, mdiChevronRight, mdiChevronLeft } from '@mdi/js';
 import Cover from "./cover"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import axios from "axios";
 import { useAuth } from "./authContext";
-import { useNavigate } from "react-router-dom";
 
 interface ress{
   _id: string,
@@ -86,8 +84,9 @@ const GameDetail = () => {
     })
     const [errMess, setErrMess] = useState('')
     const [planningList, setPlanningList] = useState(false)
-    
-    
+    const [index, setIndex] = useState(0)
+    const [show, setShow] = useState(false)
+    const [sim, setSim] = useState<any[]>([])
     
 
     useEffect(() => {
@@ -169,11 +168,11 @@ const GameDetail = () => {
                 
               }));
             
-           
+              
               setReview({...review, game: gamesWithCovers[0].name})
-              console.log(gamesWithCovers[0])
+              
             setRes(gamesWithCovers[0]);
-            
+            setSim(gamesWithCovers[0].similar_games)
             }
           } catch (err) {
             console.error(err);
@@ -201,6 +200,32 @@ const GameDetail = () => {
       console.log(e)
       }):
       alert("Log in to rate games!")
+      }
+
+      useEffect(() => {
+        const timer = setTimeout(() => {
+          setShow(true);
+        }, 1500);
+        return () => clearTimeout(timer);
+      }, [])
+
+      const handleRight = () => {
+    
+        if (index >= 1) {
+          setIndex(0);
+        } else {
+          
+          setIndex(index + 1);
+        }
+      }
+      const handleLeft = () => {
+        
+        if (index <= 0) {
+          setIndex(2);
+        } else {
+          
+          setIndex(index - 1);
+        }
       }
 
 
@@ -447,10 +472,24 @@ const GameDetail = () => {
   <div className="flex flex-col p-[10px]  my-10">
     <h2 className="text-prim text-4xl bangers mt-3 pl-2">Similar games</h2>
     <div className="w-32 h-[2px] bg-acc mb-4 ml-2"></div>
-    <div className="my-12 ">
+    <div className="my-12 flex relative justify-between">
+
+    {show ?
+          <div className="p-[11px] bg-white absolute top-[40%] left-5 z-50 cursor-pointer rounded-full" onClick={() => handleLeft()}>
+          <Icon path={mdiChevronLeft} size={1.4} className="text-sec hover:text-slate-600"></Icon>
+        </div>:
+        null
+          }
       
-  <Cover tests = {res.similar_games}  />
+  <Cover tests = {{sim, index}}  />
     
+  {show ? 
+        <div className="p-[11px] bg-white absolute top-[40%] right-5 z-50 rounded-full cursor-pointer" onClick={() => handleRight()}>
+        <Icon path={mdiChevronRight} size={1.4} className="text-sec hover:text-slate-600"></Icon>
+        </div>:
+        null
+        }
+
     </div>
   </div>
 </div>

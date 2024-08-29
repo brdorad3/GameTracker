@@ -5,19 +5,10 @@ import Icon from '@mdi/react';
 import { mdiStar } from '@mdi/js'
 
 
-const TopRated = () => {
+const TopRated = (props: any) => {
 
     const [res, setRes] = useState<any[]>([]);
-
-    const settings = {
-        dots: false,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 6,
-        
-        slidesToScroll: 1,
-        
-      };
+   
   
 
     useEffect(() => {
@@ -33,7 +24,7 @@ const TopRated = () => {
                 'Authorization': 'Bearer fos399vwik27rr0m3tprazhvafx4zj',
               },
               body: `fields name,  total_rating, total_rating, cover.url, total_rating_count;
-               where total_rating_count > 70;sort total_rating desc;limit 6;
+               where total_rating_count > 70;sort total_rating desc;limit 18;
                
                `,
             }
@@ -44,12 +35,18 @@ const TopRated = () => {
   
           const gamesWithCovers = data.map((game: any, index: any) => ({
             ...game,
-            coverUrl: game.cover ? game.cover.url.replace('t_thumb', 't_cover_small_2x') : '',
+            coverUrl: game.cover ? game.cover.url.replace('t_thumb', 't_cover_big') : '',
             
           }));
 
+          const first = []
+          for(let i = 0; i < gamesWithCovers.length; i += 6){
+            const chunk = gamesWithCovers.slice(i, i + 6);
+first.push(chunk);
+          }
+
           
-          setRes(gamesWithCovers);
+          setRes(first);
           
         } catch (err) {
           console.error(err);
@@ -58,13 +55,17 @@ const TopRated = () => {
       fetchData();
     }, []);
 
+   
+
+ 
+
 
     return(
         <>
-         {res ? 
+         {res[props.state] ? 
         
             
-        res.map((game: any) => (
+        res[props.state].map((game: any) => (
             
             <div className=" bg-sec rounded-b-md min-w-[210px] max-w-[210px] sh3 hover:scale-[1.03]"  >
               <Link to={`/detail/${game.id}`} state={game.id} key={game.id} >

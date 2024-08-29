@@ -5,12 +5,14 @@ import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
 import Icon from '@mdi/react';
 import { mdiStar  } from '@mdi/js'
+import 'animate.css';
 
 
 const PopGames = (props: any) => {
 
  
    const [res, setRes] = useState<any[]>([])
+   const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,7 +57,7 @@ const PopGames = (props: any) => {
     if (props.state.res.length > 0) {
       fetchData();
     }
-  }, [props.state.res, props.state.index]);
+  }, [props.state.res]);
   
 res && console.log(res)
     return(
@@ -65,7 +67,7 @@ res && console.log(res)
             
         res[props.state.index].map((game: any) => (
             
-            <div className=" bg-sec rounded-b-md min-w-[210px] max-w-[210px] sh3 hover:scale-[1.03]"  >
+            <div className={` bg-sec rounded-b-md min-w-[210px] max-w-[210px] sh3 hover:scale-[1.03]`}  >
               <Link
                                 to={`/detail/${game.id}`}
                                 state={game.id}

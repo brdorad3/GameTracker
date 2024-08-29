@@ -12,6 +12,7 @@ const [res, setRes] = useState<any[]>([])
 const [index, setIndex] = useState(0)
 const [show, setShow] = useState(false)
 
+
     useEffect(() => {
         const fetchData = async () => {
           try {
@@ -47,13 +48,14 @@ const [show, setShow] = useState(false)
       useEffect(() => {
         const timer = setTimeout(() => {
           setShow(true);
-        }, 1300);
+        }, 1500);
         return () => clearTimeout(timer);
       }, [])
 
       const handleRight = () => {
-    
+        
         if (index >= 2) {
+          
           setIndex(0);
         } else {
           
@@ -84,10 +86,14 @@ const [show, setShow] = useState(false)
           </Link>
         </div>
           </div>
-        <div className="flex justify-between px-2 max-md:flex-col max-md:gap-5 py-5 overflow-hidden relative">
+        <div className="flex justify-between px-4 max-md:flex-col max-md:gap-5 py-5 overflow-hidden relative"
+      
+          
+        >
           
           {show ?
-          <div className="p-[11px] bg-white absolute top-[40%] left-5 z-50 cursor-pointer rounded-full" onClick={() => handleLeft()}>
+          <div className="p-[11px] bg-white absolute top-[40%] left-5 z-50 cursor-pointer rounded-full act" onClick={() => handleLeft()}
+          >
           <Icon path={mdiChevronLeft} size={1.4} className="text-sec hover:text-slate-600"></Icon>
         </div>:
         null
@@ -96,7 +102,7 @@ const [show, setShow] = useState(false)
           <PopGames state={{res, index}} />
         
         {show ? 
-        <div className="p-[11px] bg-prim absolute top-[40%] right-5 z-50 rounded-full cursor-pointer" onClick={() => handleRight()}>
+        <div className="p-[11px] bg-white absolute top-[40%] right-5 z-50 rounded-full cursor-pointer" onClick={() => handleRight()}>
         <Icon path={mdiChevronRight} size={1.4} className="text-sec hover:text-slate-600"></Icon>
         </div>:
         null
