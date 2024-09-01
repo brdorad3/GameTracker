@@ -12,6 +12,7 @@
   "dependencies": {
     "@mdi/js": "^7.4.47",
     "@mdi/react": "^1.6.1",
+    "@trendyol-js/react-carousel": "^3.0.2",
     "@types/apicalypse": "^0.1.5",
     "@types/jwt-decode": "^3.1.0",
     "animate.css": "^4.1.1",
@@ -23,7 +24,8 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.24.1",
     "react-slick": "^0.30.2",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "swiper": "^11.1.11"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",

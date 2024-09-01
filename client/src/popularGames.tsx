@@ -1,18 +1,16 @@
 import { useEffect, useState } from "react";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+
 import { Link } from "react-router-dom";
 import Icon from '@mdi/react';
 import { mdiStar  } from '@mdi/js'
 import 'animate.css';
-
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 const PopGames = (props: any) => {
 
  
    const [res, setRes] = useState<any[]>([])
-   const [isAnimating, setIsAnimating] = useState(false);
+ 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,7 +28,7 @@ const PopGames = (props: any) => {
             },
             body: `fields name, total_rating, cover.url;
             where id = (${gameIds});
-            limit 18;`, 
+            limit 5;`, 
           }
         );
   
@@ -42,12 +40,20 @@ const PopGames = (props: any) => {
         }));
        
         const first = []
-            for(let i = 0; i<forCover.length; i += 6){
-              const chunk = forCover.slice(i, i + 6);
-  first.push(chunk);
-            }
+        if(window.screen.width < 500){
+          for(let i = 0; i<forCover.length; i += 2){
+            const chunk = forCover.slice(i, i + 2);
+first.push(chunk);
+          }
+        }else{
+          for(let i = 0; i<forCover.length; i += 6){
+            const chunk = forCover.slice(i, i + 6);
+first.push(chunk);
+          }
+        }
+           
             
-        setRes(first)
+        setRes(forCover)
         
       } catch (err) {
         console.error(err);
@@ -60,14 +66,16 @@ const PopGames = (props: any) => {
   }, [props.state.res]);
   
 res && console.log(res)
+
     return(
         <>
-         {res[props.state.index] ? 
+        
+         {res ? 
        
             
-        res[props.state.index].map((game: any) => (
-            
-            <div className={` bg-sec rounded-b-md min-w-[210px] max-w-[210px] sh3 hover:scale-[1.03]`}  >
+        res.map((game: any) => (
+          <SwiperSlide key={game.id}>
+            <div className=" bg-sec rounded-b-md min-w-[210px] max-w-[210px] sh10 hover:scale-[1.03] max-md:min-w-[40%] max-md:max-w-[40%]"  >
               <Link
                                 to={`/detail/${game.id}`}
                                 state={game.id}
@@ -75,21 +83,21 @@ res && console.log(res)
                                 className=""
                             >
               {game.coverUrl &&
-              <img src={game.coverUrl} className="w-full h-[250px] " alt="" />
+              <img src={game.coverUrl} className="w-full h-[250px] max-md:min-h-[180px] max-md:max-h-[180px]" alt="" />
 }
 </Link>
             
-            <div className="py-2">
+            <div className="py-2 max-md:py-1">
             <Link to={`/detail/${game.id}`}  state={game.id} key={game.id}>
-            <p className="overflow-hidden text-nowrap text-ellipsis text-prim chakra text-xl p-2">{game.name}</p>
+            <p className="overflow-hidden text-nowrap text-ellipsis text-prim chakra text-xl p-2 itemfont">{game.name}</p>
             </Link>
             {game.total_rating?
-        <div className="py-[5px] px-3  float-end flex items-center gap-1 bg-sec rounded-xl mb-2 mr-2 ">
+        <div className="py-[5px] px-3  float-end flex items-center gap-1 bg-sec rounded-xl mb-2 mr-2 itemrating ">
            <Icon path={mdiStar} size={0.8} className="text-acc " />
            <p className="text-prim "> {(game.total_rating/10).toFixed(1)} </p>
           
             </div>:
-        <div className="py-[5px] px-3 bg-sec float-end flex gap-1 items-center rounded-xl mb-2 mr-2">
+        <div className="py-[5px] px-3 bg-sec float-end flex gap-1 items-center rounded-xl mb-2 mr-2 itemrating">
         <Icon path={mdiStar} size={0.8} className="text-acc " />
         <p className="text-prim"> N/A </p>
        
@@ -100,14 +108,14 @@ res && console.log(res)
            
         </div>
         
-
+        </SwiperSlide>
         ))
         
         
       :
         <p>Loading...</p>
         }
-       
+      
         </>
     )
 }

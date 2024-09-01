@@ -10,6 +10,7 @@ import Top100 from './top.tsx';
 import MyReviews from './myReviews.tsx';
 import PopularList from './popularList.tsx';
 import { AuthProvider, useAuth } from './authContext';
+import SWiper from './swipertest.tsx';
 
 
 const router = createBrowserRouter([
@@ -45,7 +46,10 @@ const router = createBrowserRouter([
     path: "/popularList",
     element: <PopularList/>
   },
-  
+  {
+    path: "/sw",
+    element: <SWiper/>
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

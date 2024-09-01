@@ -26,7 +26,7 @@ const Search = () => {
               'Authorization': 'Bearer fos399vwik27rr0m3tprazhvafx4zj',
             },
             body: `search "${location.state.value}"; fields name, cover.url, first_release_date, platforms.name, total_rating, total_rating_count;
-             limit 8;
+             limit 20;
              
              `,
           }
@@ -61,9 +61,9 @@ const Search = () => {
         res.length > 0 ?
       
       <ul className="flex flex-col gap-10 px-64 py-10">
-        {res.map((game, index) => (
+        {res.map((game: any, index: any) => (
           <li key={index} className="flex gap-5 bg-sec  rounded-xl">
-            {game.cover && game.coverUrl ? (
+            {game.coverUrl ? (
              <Link to={`/detail/${game.id}`} state={game.id} > <img src={game.coverUrl} alt={game.name} className="w-[110px] h-[140px] bg-sec rounded-l-xl" /></Link>
             ) : (
               <div className="w-[110px] h-[140px] bg-sec rounded-xl flex justify-center items-center">

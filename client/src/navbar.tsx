@@ -32,7 +32,7 @@ const Navbar: React.FC = () => {
                 'Authorization': 'Bearer fos399vwik27rr0m3tprazhvafx4zj',
               },
               body: `search "${value}"; fields name, cover.url, first_release_date, platforms.name, total_rating, total_rating_count, themes;
-               limit 20;where themes != (42);
+               limit 5;where themes != (42);
                
                `,
             }
@@ -79,7 +79,7 @@ const Navbar: React.FC = () => {
 
 
     return(
-        <div className="flex px-64 justify-between items-center w-screen h-[8%] bg-sec max-md:px-5 ">
+        <div className="flex px-64 justify-between items-center w-screen h-[8%] bg-sec max-md:px-2 ">
             <div>
                 <h1 className="text-2xl text-prim chakra"><Link to="/">Robnite</Link></h1>
             </div>
@@ -105,7 +105,7 @@ const Navbar: React.FC = () => {
                  className={`${showMenu ? "flex flex-col gap-3": "hidden"} w-full justify-center absolute h-fit min-h-16 bg-white top-12 rounded-md z-50 py-3 px-5`}>
                    {res && res.length > 0 ?
                    res.map((slot:any) => (
-                    <div className="flex gap-5 items-center hover:bg-acc">
+                    <div className="flex gap-5 items-center hover:bg-slate-100">
                         {slot.coverUrl  ?
                          <img src={slot.coverUrl} alt="" className="w-12 h-16" />:
                          <Icon path={mdiImageBroken} size={1.3} className="" />
@@ -123,8 +123,8 @@ const Navbar: React.FC = () => {
                 </div>
             </div>
             <div className="flex gap-5 items-center">
-                <Link to="/login"><h2 className="text-lg text-prim chakra">Log in</h2></Link>
-                <Link to="/signup"><h2 className="text-lg text-prim chakra">Sign up</h2></Link>
+                <Link to="/login"><h2 className="text-lg text-prim chakra nav">Log in</h2></Link>
+                <Link to="/signup"><h2 className="text-lg text-prim chakra nav">Sign up</h2></Link>
                 {user &&
             <button onClick={logout} className="text-acc text-lg chakra font-black">Logout</button>
             }

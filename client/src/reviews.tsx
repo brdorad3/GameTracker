@@ -96,15 +96,15 @@ const Reviews = () => {
     
 
     return (
-        <div className="px-64 py-12 flex flex-col gap-12 max-md:px-5">
+        <div className="px-64 py-12 flex flex-col gap-12 max-md:px-2">
             <div className="flex justify-between">
                 <div>
-            <h1 className="text-sec text-3xl chakra pb-1 font-bold">YOUR REVIEWS</h1>
+            <h1 className="text-sec text-3xl chakra pb-1 font-bold h1">YOUR REVIEWS</h1>
             <div className="w-24 h-[2px] bg-acc"></div>
             </div>
             <div className="flex flex-col justify-end"> 
             {res && res.length > 0 &&
-            <Link to="/myreviews" state={seeAll} className="text-slate-600 ani chakra"> <p className="">See all</p> </Link>
+            <Link to="/myreviews" state={seeAll} className="text-slate-600 ani chakra seeall"> <p className="">See all</p> </Link>
             
             }
             

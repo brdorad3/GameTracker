@@ -1,9 +1,25 @@
 
+
 import { useEffect, useState } from "react";
 import PopGames from "./popularGames";
 import { Link } from "react-router-dom";
 import Icon from '@mdi/react';
 import { mdiChevronLeft, mdiChevronRight } from "@mdi/js";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { mdiStar } from "@mdi/js";
+import { useSwiper } from 'swiper/react';
+
+
+
+import { Pagination, Navigation } from 'swiper/modules';
+
+import "swiper/css"
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+
+
+
 
 
 const Popular = () => {
@@ -11,7 +27,8 @@ const Popular = () => {
 const [res, setRes] = useState<any[]>([])
 const [index, setIndex] = useState(0)
 const [show, setShow] = useState(false)
-
+const [game, setGame] = useState<any[]>([])
+const swiper = useSwiper();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -46,70 +63,135 @@ const [show, setShow] = useState(false)
       }, []);
 
       useEffect(() => {
-        const timer = setTimeout(() => {
-          setShow(true);
-        }, 1500);
-        return () => clearTimeout(timer);
-      }, [])
-
-      const handleRight = () => {
-        
-        if (index >= 2) {
-          
-          setIndex(0);
-        } else {
-          
-          setIndex(index + 1);
+        const fetchData = async () => {
+          try {
+           
+            const gameIds = res.map((slot: any) => slot.game_id).join(',');
+            const response = await fetch(
+              "http://localhost:8080/https://api.igdb.com/v4/games",
+              {
+                method: 'POST',
+                headers: {
+                  'Accept': 'application/json',
+                  'Client-ID': '28k8glj9djgyr0opcwll92beduld5h',
+                  'Authorization': 'Bearer fos399vwik27rr0m3tprazhvafx4zj',
+                },
+                body: `fields name, total_rating, cover.url;
+                where id = (${gameIds});
+                limit 15;`, 
+              }
+            );
+      
+            const data = await response.json();
+           
+            const forCover = data.map((game: any) => ({
+              ...game,
+              coverUrl: game.cover ? game.cover.url.replace('t_thumb', 't_cover_big') : '',
+            }));
+           
+            const first = []
+            
+            
+              for(let i = 0; i<15; i++){
+                const chunk = forCover[i];
+    first.push(chunk);
+              }
+            
+               
+                
+            setGame(first)
+            
+          } catch (err) {
+            console.error(err);
+          }
+        };
+      
+        if (res.length > 0) {
+          fetchData();
         }
-      }
-      const handleLeft = () => {
-        
-        if (index <= 0) {
-          setIndex(2);
-        } else {
-          
-          setIndex(index - 1);
-        }
-      }
+      }, [res]);
+   
 
     return (
         <>
-        <div className="px-60 py-12 flex flex-col gap-12 max-md:px-5">
+        <div className="px-56 py-12 flex flex-col gap-12 max-xl:px-5 max-sm:px-2">
           <div className="flex justify-between">
             <div>
-        <h1 className="text-sec text-3xl chakra pb-1 font-bold">POPULAR RIGHT NOW</h1>
+        <h1 className="text-sec text-3xl chakra pb-1 font-bold h1">POPULAR RIGHT NOW</h1>
         <div className="w-24 h-[2px] bg-acc"></div>
         </div>
         <div className="self-end">
           <Link to="/popularList" state={res}>
-          <p className="ani text-sec chakra">See all</p>
+          <p className="ani text-sec chakra seeall">See all</p>
           </Link>
         </div>
           </div>
-        <div className="flex justify-between px-4 max-md:flex-col max-md:gap-5 py-5 overflow-hidden relative"
-      
           
-        >
-          
-          {show ?
-          <div className="p-[11px] bg-white absolute top-[40%] left-5 z-50 cursor-pointer rounded-full act" onClick={() => handleLeft()}
-          >
-          <Icon path={mdiChevronLeft} size={1.4} className="text-sec hover:text-slate-600"></Icon>
-        </div>:
-        null
-          }
-          
-          <PopGames state={{res, index}} />
         
-        {show ? 
-        <div className="p-[11px] bg-white absolute top-[40%] right-5 z-50 rounded-full cursor-pointer" onClick={() => handleRight()}>
-        <Icon path={mdiChevronRight} size={1.4} className="text-sec hover:text-slate-600"></Icon>
-        </div>:
-        null
-        }
+          
+       
+          <div className="relative">
+          <Swiper
+        slidesPerView={6}
+        spaceBetween={20}
+        modules={[Navigation]}
+        navigation={true} 
+       
+        
+        
+      >
+          {game ? 
+       
+            
+       game.map((game: any) => (
+         <SwiperSlide key={game.id}>
+           <div className=" bg-sec rounded-b-md min-w-[210px] max-w-[210px] sh10 hover:scale-[1.03] max-md:min-w-[40%] max-md:max-w-[40%] z-0"  >
+             <Link
+                               to={`/detail/${game.id}`}
+                               state={game.id}
+                               key={game.id}
+                               className=""
+                           >
+             {game.coverUrl &&
+             <img src={game.coverUrl} className="w-full h-[250px] max-md:min-h-[180px] max-md:max-h-[180px]" alt="" />
+}
+</Link>
+           
+           <div className="h-full w-full bg-sec ">
+           <Link to={`/detail/${game.id}`}  state={game.id} key={game.id}>
+           <p className="overflow-hidden text-nowrap text-ellipsis text-prim chakra text-xl p-2 itemfont">{game.name}</p>
+           </Link>
+           {game.total_rating?
+       <div className="   flex items-center gap-1 bg-sec ">
+          <Icon path={mdiStar} size={0.8} className="text-acc " />
+          <p className="text-prim "> {(game.total_rating/10).toFixed(1)} </p>
+         
+           </div>:
+       <div className="py-[5px] px-3 bg-sec float-end flex gap-1 items-center rounded-xl mb-2 mr-2 itemrating">
+       <Icon path={mdiStar} size={0.8} className="text-acc " />
+       <p className="text-prim"> N/A </p>
+      
+        </div>  
+       
+       }
+          </div> 
+           
+          
+       </div>
+       
+       </SwiperSlide>
+       ))
+       
+       
+     :
+       <p>Loading...</p>
+       }
+          </Swiper>
+        </div>
             
             </div>
-        </div>
+            
+        
         </>
     )
 }
