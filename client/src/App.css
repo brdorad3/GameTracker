@@ -141,5 +141,16 @@
 .swiper-wrapper{
   
   align-items: center !important;
-  padding: 15px !important;
+  padding: 10px 10px 15px 10px !important;
+}
+.swiper-slide{
+  border-radius: 50px !important;
+  border-collapse: separate !important; 
+
+}
+.swiper-button-next{
+  right: var(--swiper-navigation-sides-offset, 30px) !important;
+}
+.swiper-button-prev{
+  left: var(--swiper-navigation-sides-offset, 25px) !important;
 }

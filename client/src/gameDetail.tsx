@@ -3,15 +3,17 @@ import { useEffect, useState } from "react";
 import Navbar from "./navbar";
 import Icon from '@mdi/react';
 import { mdiStar } from '@mdi/js';
-import { mdiChevronDown, mdiChevronRight, mdiChevronLeft } from '@mdi/js';
+import { mdiChevronDown, mdiChevronRight, mdiChevronLeft, mdiHandExtended, mdiController,mdiCheck } from '@mdi/js';
 import Cover from "./cover"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import axios from "axios";
 import { useAuth } from "./authContext";
+import PopGames from "./popularGames";
 
 interface ress{
   _id: string,
+  id: number,
   name: string,
   artworks: [],
   coverUrl: string,
@@ -70,6 +72,8 @@ const cat = (item: any) => {
 
 const GameDetail = () => {
 
+//856218
+
     const location = useLocation();
     const [chars, setChars] = useState(false)
     const [summ, setSumm] = useState(false)
@@ -87,6 +91,7 @@ const GameDetail = () => {
     const [index, setIndex] = useState(0)
     const [show, setShow] = useState(false)
     const [sim, setSim] = useState<any[]>([])
+    const [gamePop, setGamePop] = useState<any[]>([])
     
 
     useEffect(() => {
@@ -170,7 +175,8 @@ const GameDetail = () => {
             
               
               setReview({...review, game: gamesWithCovers[0].name})
-              
+           
+              console.log(gamesWithCovers[0])
             setRes(gamesWithCovers[0]);
             setSim(gamesWithCovers[0].similar_games)
             }
@@ -181,6 +187,40 @@ const GameDetail = () => {
         
         fetchData();
         
+      }, [location.state]);
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const response = await fetch(
+              "http://localhost:8080/https://api.igdb.com/v4/popularity_primitives",
+              {
+                method: 'POST',
+                headers: {
+                  'Accept': 'application/json',
+                  'Client-ID': '28k8glj9djgyr0opcwll92beduld5h',
+                  'Authorization': 'Bearer fos399vwik27rr0m3tprazhvafx4zj',
+                },
+                body: `fields *;
+                
+                where game_id = (${res?.id});
+                 
+                 `,
+              }
+            );
+            const data = await response.json();
+            
+           console.log(data)
+           setGamePop(data)
+
+            
+            //698801
+            
+          } catch (err) {
+            console.error(err);
+          }
+        };
+        fetchData();
       }, [location.state]);
 
       const handleSubmit = async(e: any) => {
@@ -229,7 +269,7 @@ const GameDetail = () => {
       }
 
 
-
+ 
 
     return(
       <div className="h-screen" id="ccc">
@@ -306,7 +346,28 @@ const GameDetail = () => {
   </div>
 </div>
 </div>
+<div className="flex justify-around">
+  { /*
+  <div className="flex flex-col">
+    <Icon path={mdiHandExtended} size={2}></Icon>
+    <p>Want</p>
+    <p>{Math.round(gamePop[0].value * 856218)}</p>
+  </div>
+  <div className="flex flex-col">
+  <Icon path={mdiController} size={2}></Icon>
+  <p>Playing</p>
+  <p>{Math.round(gamePop[2].value * 856218)}</p>
+  </div>
+  <div className="flex flex-col">
+  <Icon path={mdiCheck} size={2}></Icon>
+  <p>Played</p>
 
+  <p>{Math.round(gamePop[1].value * 856218)}</p>
+  
+  </div>
+  */
+}
+</div>
   </div>
    </div>
   </div>

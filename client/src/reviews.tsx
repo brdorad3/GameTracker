@@ -3,7 +3,18 @@ import { useState, useEffect } from "react";
 import { useAuth } from "./authContext";
 import { Link } from "react-router-dom";
 import Icon from "@mdi/react";
+import { Swiper, SwiperSlide } from 'swiper/react';
 import { mdiStar } from "@mdi/js";
+import { useSwiper } from 'swiper/react';
+
+
+
+import {  Navigation } from 'swiper/modules';
+
+import "swiper/css"
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
 const Reviews = () => {
     const { user } = useAuth();
@@ -66,15 +77,11 @@ const Reviews = () => {
             
             const six = []
             
-            for(let i = 0; i<6; i++){
-                six.push(all[i])
+            for(let i = 0; i<all.length; i++){
+                let chunk = all[i]
+                six.push(chunk)
             }
-            if(all.length > 6){
-                setRes(six)
-            }
-            else{
-                setRes(all)
-            }
+            setRes(six)
            console.log(all)
             setSeeAll(all)
         } catch (e) {
@@ -111,78 +118,186 @@ const Reviews = () => {
             
             </div>
             </div>
-            <div className="flex justify-between">
-                {user ? (
-                    res && res.length > 0 ? (
-                        res.map((game: any) => (
-                            
-                                <div className="bg-sec rounded-b-md min-w-[210px] max-w-[210px] sh3 hover:scale-[1.03] ">
-                                    <Link
-                                to={`/detail/${game.id}`}
-                                state={game.id}
-                                key={game.id}
-                                className=""
-                            >
-                                    {game.cover && (
-                                        <img
-                                            src={game.cover}
-                                            className="w-full h-[250px]"
-                                            alt=""
-                                        />
-                                    )}
-                                </Link>
-                                    <div className="py-2">
-                                    <Link
-                                to={`/detail/${game.id}`}
-                                state={game.id}
-                                key={game.id}
-                                className=""
-                            >
-                                        <p className="overflow-hidden text-nowrap text-ellipsis text-prim chakra text-xl p-2">
-                                            {game.game}
-                                        </p>
+            <div className="flex gap-6"> {
+                res.length > 6 ?
+                <Swiper
+        
+        
+                modules={[Navigation]}
+                navigation={true} 
+                breakpoints={{
+                  0: {
+                    slidesPerView: 1,
+                  },
+                  400:{
+                    slidesPerView:2,
+                  },
+                  639: {
+                    slidesPerView: 3,
+                  },
+                  865:{
+                    slidesPerView:4
+                  },
+                  1000:{
+                    slidesPerView:5
+                  },
+                  1500:{
+                    slidesPerView:6
+                  },
+                 
+                }}
+              
+                
+                
+              >
+                        {user ? (
+                            res && res.length > 0 ? (
+                                res.map((game: any) => (
+                                    <SwiperSlide key={game.id}>
+                                        <div className="bg-sec rounded-b-md min-w-[210px] max-w-[210px] sh10 hover:scale-[1.03] ">
+                                            <Link
+                                        to={`/detail/${game.id}`}
+                                        state={game.id}
+                                        key={game.id}
+                                        className=""
+                                    >
+                                            {game.cover && (
+                                                <img
+                                                    src={game.cover}
+                                                    className="w-full h-[250px]"
+                                                    alt=""
+                                                />
+                                            )}
                                         </Link>
-                                        {game.rating !== undefined && game.rating !== null ? (
-    <div className="py-[5px] px-3 mb-2 flex justify-between items-center bg-sec rounded-xl">
-        <p className="text-prim chakra">
-            {game.status}
-        </p>
-        <div className="flex gap-1 items-center mr-2">
-        <Icon
-                path={mdiStar}
-                size={0.8}
-                className="text-acc"
-            />
-            <p className="text-prim ">
-                {game.rating === 0 ? "N/A" : game.rating}
-            </p>
-           
-        </div>
-    </div>
-) : (
-    <div className="py-[5px] px-3 bg-sec float-end flex items-center rounded-xl mb-2 mr-2">
-         <Icon
-                path={mdiStar}
-                size={0.8}
-                className="text-acc"
-            />
-        <p className="text-prim">
-            N/A
-        </p>
-       
-    </div>
-)}
-
-                                    </div>
-                                </div>
+                                            <div className="py-2">
+                                            <Link
+                                        to={`/detail/${game.id}`}
+                                        state={game.id}
+                                        key={game.id}
+                                        className=""
+                                    >
+                                                <p className="overflow-hidden text-nowrap text-ellipsis text-prim chakra text-xl p-2">
+                                                    {game.game}
+                                                </p>
+                                                </Link>
+                                                {game.rating !== undefined && game.rating !== null ? (
+            <div className="py-[5px] px-3 mb-2 flex justify-between items-center bg-sec rounded-xl">
+                <p className="text-prim chakra">
+                    {game.status}
+                </p>
+                <div className="flex gap-1 items-center mr-2">
+                <Icon
+                        path={mdiStar}
+                        size={0.8}
+                        className="text-acc"
+                    />
+                    <p className="text-prim ">
+                        {game.rating === 0 ? "N/A" : game.rating}
+                    </p>
+                   
+                </div>
+            </div>
+        ) : (
+            <div className="py-[5px] px-3 bg-sec float-end flex items-center rounded-xl mb-2 mr-2">
+                 <Icon
+                        path={mdiStar}
+                        size={0.8}
+                        className="text-acc"
+                    />
+                <p className="text-prim">
+                    N/A
+                </p>
+               
+            </div>
+        )}
+        
+                                            </div>
+                                        </div>
+                                </SwiperSlide>
+                                ))
+                            ) : (
+                                <p>No reviews found.</p>
+                            )
+                        ) : (
+                            <p>No user logged in.</p>
+                        )}
+                        </Swiper>:
+                         
+                       
+                                 user ? (
+                                     res && res.length > 0 ? (
+                                         res.map((game: any) => (
+                                             
+                                                 <div className="bg-sec rounded-b-md min-w-[210px] max-w-[210px] sh10 hover:scale-[1.03] ">
+                                                     <Link
+                                                 to={`/detail/${game.id}`}
+                                                 state={game.id}
+                                                 key={game.id}
+                                                 className=""
+                                             >
+                                                     {game.cover && (
+                                                         <img
+                                                             src={game.cover}
+                                                             className="w-full h-[250px]"
+                                                             alt=""
+                                                         />
+                                                     )}
+                                                 </Link>
+                                                     <div className="py-2">
+                                                     <Link
+                                                 to={`/detail/${game.id}`}
+                                                 state={game.id}
+                                                 key={game.id}
+                                                 className=""
+                                             >
+                                                         <p className="overflow-hidden text-nowrap text-ellipsis text-prim chakra text-xl p-2">
+                                                             {game.game}
+                                                         </p>
+                                                         </Link>
+                                                         {game.rating !== undefined && game.rating !== null ? (
+                     <div className="py-[5px] px-3 mb-2 flex justify-between items-center bg-sec rounded-xl">
+                         <p className="text-prim chakra">
+                             {game.status}
+                         </p>
+                         <div className="flex gap-1 items-center mr-2">
+                         <Icon
+                                 path={mdiStar}
+                                 size={0.8}
+                                 className="text-acc"
+                             />
+                             <p className="text-prim ">
+                                 {game.rating === 0 ? "N/A" : game.rating}
+                             </p>
                             
-                        ))
-                    ) : (
-                        <p>No reviews found.</p>
-                    )
-                ) : (
-                    <p>No user logged in.</p>
-                )}
+                         </div>
+                     </div>
+                 ) : (
+                     <div className="py-[5px] px-3 bg-sec float-end flex items-center rounded-xl mb-2 mr-2">
+                          <Icon
+                                 path={mdiStar}
+                                 size={0.8}
+                                 className="text-acc"
+                             />
+                         <p className="text-prim">
+                             N/A
+                         </p>
+                        
+                     </div>
+                 )}
+                 
+                                                     </div>
+                                                 </div>
+                                        
+                                         ))
+                                     ) : (
+                                         <p>No reviews found.</p>
+                                     )
+                                 ) : (
+                                     <p>No user logged in.</p>
+                                 )}
+                                 
+                
+           
             </div>
         </div>
     );

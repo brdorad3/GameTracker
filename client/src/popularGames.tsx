@@ -75,7 +75,7 @@ res && console.log(res)
             
         res.map((game: any) => (
           <SwiperSlide key={game.id}>
-            <div className=" bg-sec rounded-b-md min-w-[210px] max-w-[210px] sh10 hover:scale-[1.03] max-md:min-w-[40%] max-md:max-w-[40%]"  >
+            <div className=" bg-sec min-w-[210px] max-w-[210px] sh10 hover:scale-[1.03] max-md:min-w-[40%] max-md:max-w-[40%]"  >
               <Link
                                 to={`/detail/${game.id}`}
                                 state={game.id}
@@ -87,7 +87,7 @@ res && console.log(res)
 }
 </Link>
             
-            <div className="py-2 max-md:py-1">
+            <div className="">
             <Link to={`/detail/${game.id}`}  state={game.id} key={game.id}>
             <p className="overflow-hidden text-nowrap text-ellipsis text-prim chakra text-xl p-2 itemfont">{game.name}</p>
             </Link>
