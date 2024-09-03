@@ -13,7 +13,7 @@ import PopGames from "./popularGames";
 
 interface ress{
   _id: string,
-  id: number,
+  id: any,
   name: string,
   artworks: [],
   coverUrl: string,
@@ -203,7 +203,7 @@ const GameDetail = () => {
                 },
                 body: `fields *;
                 
-                where game_id = (${res?.id});
+                where game_id = ${res?.id};
                  
                  `,
               }
@@ -214,14 +214,15 @@ const GameDetail = () => {
            setGamePop(data)
 
             
-            //698801
+            //698801 64000
+            // 309002
             
           } catch (err) {
             console.error(err);
           }
         };
         fetchData();
-      }, [location.state]);
+      }, [res]);
 
       const handleSubmit = async(e: any) => {
         e.preventDefault();
@@ -269,7 +270,7 @@ const GameDetail = () => {
       }
 
 
- 
+
 
     return(
       <div className="h-screen" id="ccc">
@@ -306,9 +307,9 @@ const GameDetail = () => {
   <div className="relative min-w-[700px] h-[400px] bg-prim flex items-center justify-center brightness-200">This video is unavailable!</div>
   }
   
-  <div className="w-full h-[400px] relative bg-sec flex flex-col justify-around pb-10 ">
+  <div className="w-full h-[400px] relative bg-sec flex flex-col justify-around py-2  ">
     <div className="flex justify-evenly ">
-    <div className=" bg-prim p-3 rounded-xl">
+    <div className=" bg-prim p-3 rounded-xl sh11">
       <div className="flex gap-2 items-center">
 
     <Icon path={mdiStar} size={2} className="text-acc"/>
@@ -318,7 +319,7 @@ const GameDetail = () => {
       <p className=" text-sec chakra" >{res.rating_count} user ratings</p>
       </div>
     
-    <div className="bg-prim p-3 rounded-xl">
+    <div className="bg-prim p-3 rounded-xl sh11">
       <div className="flex items-center gap-1">
     <Icon path={mdiStar} size={2} className="text-acc"/>
       <p className="text-4xl text-sec chakra">{(res.aggregated_rating/10).toFixed(1)}</p>
@@ -346,28 +347,44 @@ const GameDetail = () => {
   </div>
 </div>
 </div>
-<div className="flex justify-around">
-  { /*
-  <div className="flex flex-col">
-    <Icon path={mdiHandExtended} size={2}></Icon>
-    <p>Want</p>
-    <p>{Math.round(gamePop[0].value * 856218)}</p>
-  </div>
-  <div className="flex flex-col">
-  <Icon path={mdiController} size={2}></Icon>
-  <p>Playing</p>
-  <p>{Math.round(gamePop[2].value * 856218)}</p>
-  </div>
-  <div className="flex flex-col">
-  <Icon path={mdiCheck} size={2}></Icon>
-  <p>Played</p>
 
-  <p>{Math.round(gamePop[1].value * 856218)}</p>
+  {
+    gamePop && gamePop.length > 0 &&
+<div className="flex justify-evenly bg-prim mx-3 rounded-md  py-2 sh11">
+    <div className="flex flex-col items-center">
+    <Icon path={mdiHandExtended} size={2} className="text-black"></Icon>
+    <p className="text-sec space">Want</p>
+    <p>{gamePop.filter((slot: any) => slot.popularity_type === 2) .map((slot: any, index: number) => (
+      <span key={index} className="text-sec">{(slot.value * 309002).toFixed(0)} </span> 
+    ))} </p>
+  </div> 
+  <div className="w-[1px] h-full bg-black"></div>
+   <div className="flex flex-col items-center">
+    <Icon path={mdiController} size={2} className="text-black"></Icon>
+    <p className="text-sec space">Playing</p>
+    <p>{gamePop.filter((slot: any) => slot.popularity_type === 3) .map((slot: any, index: number) => (
+      
+      <span className="text-sec" key={index}>{(slot.value * 64000).toFixed(0)} </span> 
+    ))} </p>
+  </div>
+  <div className="w-[1px] h-full bg-black"></div>
+   <div className="flex flex-col items-center">
+    <Icon path={mdiCheck} size={2} className="text-black"></Icon>
+    <p className="text-sec space">Played</p>
+    <p>{gamePop.filter((slot: any) => slot.popularity_type === 4) .map((slot: any, index: number) => (
+    
+      <span className="text-sec" key={index}>{(slot.value * 856218).toFixed(0)} </span> 
+    ))} </p>
+  </div>
+  
   
   </div>
-  */
-}
-</div>
+  
+  }
+
+  
+
+
   </div>
    </div>
   </div>

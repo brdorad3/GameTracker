@@ -44,7 +44,7 @@ const swiper = useSwiper();
                   'Authorization': 'Bearer fos399vwik27rr0m3tprazhvafx4zj',
                 },
                 body: `fields game_id, popularity_type,value;
-                where popularity_type = 4;
+                where popularity_type = 1;
                  sort value desc;limit 100;
                  
                  `,

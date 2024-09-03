@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 const Cover = (props: any) =>{
 
     const [res, setRes] = useState<any[]>([])
-    console.log(props)
+    
     
     useEffect(() => {
 

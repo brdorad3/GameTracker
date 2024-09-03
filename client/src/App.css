@@ -154,3 +154,6 @@
 .swiper-button-prev{
   left: var(--swiper-navigation-sides-offset, 25px) !important;
 }
+.sh11{
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
