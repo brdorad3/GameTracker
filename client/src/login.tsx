@@ -26,7 +26,6 @@ const handleSubmit = async(e: React.FormEvent) => {
   })
 
 .catch(function (e) {
-const newMessages: string[] = [];
 console.log(e)
 setMessage(e.response.data.message);
     

@@ -205,9 +205,9 @@ return(
         <div className="px-10 py-5 flex flex-col ">
             {res &&
             res.map((slot:any, index) => (
-                <div className="flex justify-between border-b-2 border-sec py-4 pl-5">
+                <div className="flex justify-between border-b-[1px] border-sec py-4 pl-5">
                     <div className="flex gap-5">
-              <Link to={`/detail/${slot.id}`} state={slot.id}>  <img src={slot.coverUrl} alt="" /> </Link>
+              <Link to={`/detail/${slot.id}`} state={slot.id}>  <img src={slot.coverUrl} alt=""  /> </Link>
                 <div className="flex flex-col">
                     <div className="flex pt-2">
                     <Link to={`/detail/${slot.id}`} state={slot.id} className="flex items-end gap-1 text-sec gr">

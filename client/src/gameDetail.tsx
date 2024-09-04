@@ -9,7 +9,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import axios from "axios";
 import { useAuth } from "./authContext";
-import PopGames from "./popularGames";
+
 
 interface ress{
   _id: string,
@@ -342,7 +342,7 @@ const GameDetail = () => {
   </div>
   <div className={`${planningList ? 'absolute top-12 w-full h-10 bg-prim text-sec font-bold rounded-sm' : 'hidden'}`}>
     <form onSubmit={handleSubmit}>
-    <button className="pl-3 pt-[7px]" type="submit" onClick={(e) => setReview({...review, status: 'plan'})}>Set as planning</button>
+    <button className="pl-3 pt-[7px]" type="submit" onClick={() => setReview({...review, status: 'plan'})}>Set as planning</button>
     </form>
   </div>
 </div>

@@ -37,7 +37,7 @@ const Search = () => {
 
         const gamesWithCovers = data.map((game: any, index: any) => ({
           ...game,
-          coverUrl: game.cover ? game.cover.url.replace('t_thumb', 't_cover_small_2x') : '',
+          coverUrl: game.cover ? game.cover.url.replace('t_thumb', 't_cover_small') : '',
           rel: new Date(game.first_release_date * 1000).getFullYear(),
          
           
@@ -60,21 +60,21 @@ const Search = () => {
       {
         res.length > 0 ?
       
-      <ul className="flex flex-col gap-10 px-64 py-10">
+      <ul className="flex flex-col gap-5 px-64 py-10">
         {res.map((game: any, index: any) => (
-          <li key={index} className="flex gap-5 bg-sec  rounded-xl">
+          <li key={index} className="flex gap-5  border-b-[1px] border-sec pb-5">
             {game.coverUrl ? (
-             <Link to={`/detail/${game.id}`} state={game.id} > <img src={game.coverUrl} alt={game.name} className="w-[110px] h-[140px] bg-sec rounded-l-xl" /></Link>
+             <Link to={`/detail/${game.id}`} state={game.id} > <img src={game.coverUrl} alt={game.name} className="w-[80px] h-[106px]" /></Link>
             ) : (
-              <div className="w-[110px] h-[140px] bg-sec rounded-xl flex justify-center items-center">
-                <Icon path={mdiImageBroken} size={2} className="text-prim"/>
+              <div className="w-[110px] h-[140px]  rounded-xl flex justify-center items-center">
+                <Icon path={mdiImageBroken} size={2} className="text-sec"/>
               </div>
               
             )}
             <div>
             <div className="flex gap-2 pt-3">
-           <Link to={`/detail/${game.id}`} state={game.id}> <p className="text-white text-xl font-medium ">{game.name}</p> </Link>
-            <p className="text-prim text-xl">&#40; {game.rel} &#41;</p>
+           <Link to={`/detail/${game.id}`} state={game.id}> <p className="text-sec text-xl font-medium ">{game.name}</p> </Link>
+            <p className="text-sec text-xl">&#40; {game.rel} &#41;</p>
             </div>
             <div>
             <ul className="flex gap-1">
@@ -86,8 +86,8 @@ const Search = () => {
             </div>
             <div>
               {game.total_rating ? 
-            <p className="text-prim">{Math.floor(game.total_rating)}/100 &#40;{game.total_rating_count}&#41; </p>:
-            <p className="text-prim">No ratings yet</p>  
+            <p className="text-sec">{Math.floor(game.total_rating)}/100 &#40;{game.total_rating_count}&#41; </p>:
+            <p className="text-sec">No ratings yet</p>  
             }
               
             </div>
