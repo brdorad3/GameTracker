@@ -450,36 +450,36 @@ const GameDetail = () => {
     <div className="w-[75%] h-[1px] bg-sec mb-3"></div>
     {res.dev ? 
     res.dev.map((slot: any, index: any)=> (
-      <li className="text-sec indie text-xl ml-9 font-black" key={index}>{slot.company.name}</li>
+      <li className="text-sec indie text-xl ml-6 font-black" key={index}>{slot.company.name}</li>
     )):
-    <p className="text-white indie text-xl font-black ml-7">-</p>}
+    <p className="text-white indie text-xl font-black ml-6">-</p>}
   </ol>
   <ol className="border-2 border-sec py-2 pl-3 rounded-md h-[250px]  w-56 list-disc border-b-8 rounded-b-2xl">
   <h2 className="text-2xl bangers text-sec  ">Main publisher</h2>
   <div className="w-[75%] h-[1px] bg-sec mb-3"></div>
     {res.publisher && res.publisher.length > 0 ? 
     res.publisher.map((slot: any, index)=> (
-      <li className="text-sec indie text-xl font-black ml-7" key={index}>{slot.company.name}</li>
+      <li className="text-sec indie text-xl font-black ml-6" key={index}>{slot.company.name}</li>
     )):
-    <p className="text-white indie text-xl font-black ml-7">-</p>}
+    <p className="text-white indie text-xl font-black ml-6">-</p>}
   </ol>
   <ol className="border-2 border-sec p-2 rounded-md  w-56 list-disc h-[250px] border-b-8 rounded-b-2xl">
   <h2 className="text-2xl bangers text-sec">Game modes</h2>
   <div className="w-[75%] h-[1px] bg-sec mb-3"></div>
     {res.game_modes ? 
     res.game_modes.map((slot: any, index)=> (
-      <li className="text-sec indie text-xl font-black ml-9" key={index}>{slot.name}</li>
+      <li className="text-sec indie text-xl font-black ml-6  " key={index}>{slot.name}</li>
     )):
-    <p className="text-white indie text-xl font-black ml-7">-</p>}
+    <p className="text-white indie text-xl font-black ml-6">-</p>}
   </ol>
   <ol className="border-2 border-sec p-2 rounded-md h-[250px] w-56 list-disc border-b-8 rounded-b-2xl">
   <h2 className="text-2xl bangers text-sec">player perspectives</h2>
   <div className="w-[75%] h-[1px] bg-sec mb-3"></div>
     {res.player_perspectives ? 
     res.player_perspectives.map((slot: any, index:any)=> (
-      <li className="text-sec indie text-xl font-black ml-9" key={index}>{slot.name}</li>
+      <li className="text-sec indie text-xl font-black ml-6 " key={index}>{slot.name}</li>
     )):
-    <p className="text-white indie text-xl font-black ml-7">-</p>}
+    <p className="text-white indie text-xl font-black ml-6">-</p>}
   </ol>
   </div>
     <div className="w-full px-5 flex gap-3">
