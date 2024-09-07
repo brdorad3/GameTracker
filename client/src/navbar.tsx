@@ -112,7 +112,7 @@ const Navbar: React.FC = () => {
                          }
                          <Link to={`/detail/${slot.id}`} state={slot.id}>
                     <div className="flex gap-1">
-                   <p className="">{slot.name}</p>
+                   <p className="hover:underline">{slot.name}</p>
                    <p>&#x28;{slot.rel}&#x29;</p>
                    </div>
                    </Link>

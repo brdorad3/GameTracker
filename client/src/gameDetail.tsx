@@ -278,14 +278,14 @@ const GameDetail = () => {
         
    {res &&
    <div className={`${toggle ? "brightness-50 overflow-hidden": "brightness-100"}  relative w-full h-[92%] px-64 py-6 text-white `}>
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-2">
    <div
      className="absolute inset-0 bg-cover brightness-50"
      style={{ backgroundImage: `url(${res?.filteredArtwork && res.filteredArtwork.length > 0 ? res.filteredArtwork : res.coverUrl})` }}
    ></div>
    <h1 className="relative z-10 text-white text-6xl space">{res?.name}</h1>
    <div className="flex gap-5">
-    <div className="flex gap-4 w-[270px]">
+    <div className="flex gap-4 w-[270px] pb-2">
     <p className="text-prim relative font-normal">{res.rel}</p>
     {res.age && res.age.length > 0 &&
     <p className="text-prim relative">{t(res.age[0].rating)}</p>
@@ -441,11 +441,11 @@ const GameDetail = () => {
   }
   
 
-  <div className="bg-prim w-full  py-6 flex flex-col gap-8 px-10 rounded-xl ">
-    <div className="flex justify-evenly items-center">
+  <div className="bg-prim w-full  py-6 flex flex-col gap-8 px-10 rounded-md ">
+    <div className="flex justify-evenly items-center border-b border-sec pb-8">
 
 
-    <ol className="border-2 border-sec p-2 rounded-md h-[250px] shadow-sm w-56 list-disc border-b-8 rounded-b-2xl">
+    <ol className="border-2 border-sec p-2 rounded-md h-[250px] shadow-sm w-56 list-disc border-b-8 rounded-b-2xl sh11">
     <h2 className="bangers text-2xl text-sec">Main developer</h2>
     <div className="w-[75%] h-[1px] bg-sec mb-3"></div>
     {res.dev ? 
@@ -482,38 +482,38 @@ const GameDetail = () => {
     <p className="text-white indie text-xl font-black ml-6">-</p>}
   </ol>
   </div>
-    <div className="w-full px-5 flex gap-3">
-        <div className="bg-sec flex min-w-[60%] h-26 self-baseline justify-evenly rounded-lg  ">
-    <div className="py-5">
-      <h2 className="text-prim text-3xl bangers">Franchises</h2> 
-      <div className="h-[2px] w-[60%] bg-acc"></div>
+    <div className="w-full px-20 flex gap-10">
+        <div className="flex min-w-[50%] min-h-32 gap-3 rounded-lg justify-between">
+    <div className="py-5 bg-white w-1/2 rounded-sm sh10 pl-5 ">
+      <h2 className="text-sec text-3xl bangers ">Franchises</h2> 
+      <div className="h-[2px] w-[60%] bg-acc mb-3"></div>
       {res.franchises ? 
     res.franchises.map((slot: any)=>(
-      <p className="text-prim text-lg chakra">{slot.name}</p>
+      <p className="text-sec text-lg chakra">{slot.name}</p>
     ))  :
-    <p className="text-lg text-prim">-</p>
+    <p className="text-lg text-sec">-</p>
     }
     </div>
-    <div className="h-[200px] w-1 bg-prim "></div>
-    <div className="py-5">
-    <h2 className="text-prim text-3xl bangers">Series</h2>
-    <div className="h-[2px] w-[40%] bg-acc"></div>
+    
+    <div className="py-5 bg-white w-1/2 pl-5 sh10 min-h-32">
+    <h2 className="text-sec text-3xl bangers">Series</h2>
+    <div className="h-[2px] w-[40%] bg-acc mb-3"></div>
       {res.collections ? 
     res.collections.map((slot: any)=>(
-      <p className="text-prim text-lg chakra">{slot.name}</p>
+      <p className="text-sec text-lg chakra">{slot.name}</p>
     ))  :
-    <p className="text-lg text-prim">-</p>
+    <p className="text-lg text-sec">-</p>
     }
     </div>
     </div>
-      <div className="bg-sec rounded-lg p-2 w-full">
-    <h2 className="text-prim text-3xl bangers">DLCs</h2>
-    <div className="h-[2px] w-[7%] bg-acc"></div>
+      <div className="bg-white rounded-sm p-2 sh10 w-full pl-5">
+    <h2 className="text-sec text-3xl bangers">DLCs</h2>
+    <div className="h-[2px] w-[7%] bg-acc mb-3"></div>
       {res.expansions ? 
     res.expansions.map((slot: any)=>(
-      <p className="text-prim text-lg chakra">{slot.name}</p>
+      <p className="text-sec text-lg chakra">{slot.name}</p>
     ))  :
-    <p className="text-xl text-prim">-</p>
+    <p className="text-xl text-sec">No DLC available</p>
     }
     </div>
   </div>
