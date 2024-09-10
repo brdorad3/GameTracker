@@ -288,14 +288,14 @@ const GameDetail = () => {
     <div className="flex gap-4 w-[270px] pb-2">
     <p className="text-prim relative font-normal">{res.rel}</p>
     {res.age && res.age.length > 0 &&
-    <p className="text-prim relative">{t(res.age[0].rating)}</p>
+    <p className="text-white relative">{t(res.age[0].rating)}</p>
   }
   </div>
   <div className="w-[700px]">
 
   </div>
   <div>
-  <p className="text-prim relative acme">{cat(res.category)}</p>
+  <p className="text-white relative acme">{cat(res.category)}</p>
   </div>
    </div>
    <div className="flex gap-5 relative">
@@ -307,9 +307,9 @@ const GameDetail = () => {
   <div className="relative min-w-[700px] h-[400px] bg-prim flex items-center justify-center brightness-200">This video is unavailable!</div>
   }
   
-  <div className="w-full h-[400px] relative bg-sec flex flex-col justify-around py-2  ">
+  <div className="w-full h-[400px] relative bg-prim flex flex-col justify-around py-2  ">
     <div className="flex justify-evenly ">
-    <div className=" bg-prim p-3 rounded-xl sh11">
+    <div className=" bg-white p-3 rounded-xl sh10">
       <div className="flex gap-2 items-center">
 
     <Icon path={mdiStar} size={2} className="text-acc"/>
@@ -319,7 +319,7 @@ const GameDetail = () => {
       <p className=" text-sec chakra" >{res.rating_count} user ratings</p>
       </div>
     
-    <div className="bg-prim p-3 rounded-xl sh11">
+    <div className="bg-white p-3 rounded-xl sh10">
       <div className="flex items-center gap-1">
     <Icon path={mdiStar} size={2} className="text-acc"/>
       <p className="text-4xl text-sec chakra">{(res.aggregated_rating/10).toFixed(1)}</p>
@@ -330,12 +330,12 @@ const GameDetail = () => {
 <div className="flex flex-col gap-7 items-center">
   
   <div className="relative">
-  <div className="flex items-center gap-1 justify-around border-2 border-prim w-44 px-2 " >
-    <p className="text-prim p-1 text-lg font-medium hover:cursor-pointer" onClick={() => setToggle(!toggle)}>Add to list</p>
-    <div className="bg-prim w-[1px] h-12 relative p-0" ></div>
+  <div className="flex items-center gap-1 justify-around border-2 border-sec w-44 px-2 " >
+    <p className="text-sec p-1 text-lg font-medium hover:cursor-pointer" onClick={() => setToggle(!toggle)}>Add to list</p>
+    <div className="bg-sec w-[1px] h-12 relative p-0" ></div>
    
    <div onClick={() => setPlanningList(!planningList)}>
-    <Icon path={mdiChevronDown} size={1} className="text-prim cursor-pointer" />
+    <Icon path={mdiChevronDown} size={1} className="text-sec cursor-pointer" />
     </div>
   
 
@@ -350,7 +350,7 @@ const GameDetail = () => {
 
   {
     gamePop && gamePop.length > 0 &&
-<div className="flex justify-evenly bg-prim mx-3 rounded-md  py-2 sh11">
+<div className="flex justify-evenly bg-white mx-3 rounded-md  py-2 sh10">
     <div className="flex flex-col items-center">
     <Icon path={mdiHandExtended} size={2} className="text-black"></Icon>
     <p className="text-sec space">Want</p>
@@ -397,13 +397,15 @@ const GameDetail = () => {
     </ul>
   </div>
 }
-<div className={`w-full  bg-sec relative mt-14 rounded-t-lg py-3 px-4 border-2 border-acc outline outline-[7px] outline-sec`}>
+<div className={`w-full  bg-prim relative mt-14 rounded-t-lg py-3 px-4 border-2 border-sec`}>
+
+
   
-   <div className="bg-prim  max-w-[75%] rounded-r-3xl p-2 mt-2 border-r-[6px] border-acc"> 
+   <div className="bg-white max-w-[75%] rounded-r-3xl p-2 mt-2 border-r-[6px] border-acc sh10"> 
 <ul className="flex flex-wrap gap-2 items-center">
   <p className="text-lg font-bold text-acc comic">Genre:</p>
 {res && res.genres &&
-  res.genres.map((slot: any, index)=>(
+  res.genres.map((slot: any,  index)=>(
 <li className="text-[17px] chakra text-sec font-black" key={index}>{slot.name},</li>
   ))
   }
@@ -420,15 +422,15 @@ const GameDetail = () => {
   
   {res.summary && 
     res.summary.length < 500 ?
-  <p className="text-prim chakra text-xl py-10">{res.summary}</p>:
+  <p className="text-sec chakra text-xl my-10 bg-white p-3 sh10 rounded-md">{res.summary}</p>:
   <div >
 
     {res.summary ?(
       summ ?
-      <p className="text-prim chakra text-xl py-10">{res.summary.substring(0,10000)}
+      <p className="text-sec chakra text-xl py-10">{res.summary.substring(0,10000)}
       <button onClick={()=>setSumm(!summ)} className="text-acc m-1">Less</button>
       </p>:
-      <p className="text-prim chakra text-xl py-10 ">{res.summary.substring(0,601)}
+      <p className="text-sec chakra text-xl py-10 ">{res.summary.substring(0,601)}
       <button onClick={()=>setSumm(!summ)} className="text-acc m-1">More</button>
       </p>
     ) :
@@ -445,7 +447,7 @@ const GameDetail = () => {
     <div className="flex justify-evenly items-center border-b border-sec pb-8">
 
 
-    <ol className="border-2 border-sec p-2 rounded-md h-[250px] shadow-sm w-56 list-disc border-b-8 rounded-b-2xl sh11">
+    <ol className="bg-white border-2 border-sec p-2 rounded-md h-[250px] shadow-sm w-56 list-disc border-b-8 rounded-b-2xl sh11">
     <h2 className="bangers text-2xl text-sec">Main developer</h2>
     <div className="w-[75%] h-[1px] bg-sec mb-3"></div>
     {res.dev ? 
@@ -454,7 +456,7 @@ const GameDetail = () => {
     )):
     <p className="text-white indie text-xl font-black ml-6">-</p>}
   </ol>
-  <ol className="border-2 border-sec py-2 pl-3 rounded-md h-[250px]  w-56 list-disc border-b-8 rounded-b-2xl">
+  <ol className="bg-white border-2 border-sec py-2 pl-3 rounded-md h-[250px]  w-56 list-disc border-b-8 rounded-b-2xl">
   <h2 className="text-2xl bangers text-sec  ">Main publisher</h2>
   <div className="w-[75%] h-[1px] bg-sec mb-3"></div>
     {res.publisher && res.publisher.length > 0 ? 
@@ -463,7 +465,7 @@ const GameDetail = () => {
     )):
     <p className="text-white indie text-xl font-black ml-6">-</p>}
   </ol>
-  <ol className="border-2 border-sec p-2 rounded-md  w-56 list-disc h-[250px] border-b-8 rounded-b-2xl">
+  <ol className="bg-white border-2 border-sec p-2 rounded-md  w-56 list-disc h-[250px] border-b-8 rounded-b-2xl">
   <h2 className="text-2xl bangers text-sec">Game modes</h2>
   <div className="w-[75%] h-[1px] bg-sec mb-3"></div>
     {res.game_modes ? 
@@ -472,7 +474,7 @@ const GameDetail = () => {
     )):
     <p className="text-white indie text-xl font-black ml-6">-</p>}
   </ol>
-  <ol className="border-2 border-sec p-2 rounded-md h-[250px] w-56 list-disc border-b-8 rounded-b-2xl">
+  <ol className="bg-white border-2 border-sec p-2 rounded-md h-[250px] w-56 list-disc border-b-8 rounded-b-2xl">
   <h2 className="text-2xl bangers text-sec">player perspectives</h2>
   <div className="w-[75%] h-[1px] bg-sec mb-3"></div>
     {res.player_perspectives ? 
@@ -520,21 +522,21 @@ const GameDetail = () => {
    
   </div>
   
-  <div className={`relative mt-10  ${chars ? 'text-white':'text-white'} `}>
+  <div className={`relative mt-10 bg-white px-3 py-5 sh10 rounded-md  ${chars ? 'text-sec':'text-sec'} `}>
     
-    <h1 className="text-prim text-4xl bangers  pl-2">Story</h1>
+    <h1 className="text-sec text-4xl bangers  pl-2">Story</h1>
     <div className="w-12 h-[2px] bg-acc mb-10 ml-2"></div>
     {res.storyline &&
     res.storyline.length < 1500 ?
-  <p className="text-prim chakra text-xl ">{res.storyline}</p>:
+  <p className="text-sec chakra text-xl ">{res.storyline}</p>:
   <div >
 
     {res.storyline ?(
       chars ?
-      <p className="text-prim chakra text-xl o">{res.storyline.substring(0,10000)}
+      <p className="text-sec chakra text-xl o">{res.storyline.substring(0,10000)}
       <button onClick={()=>setChars(!chars)} className="text-acc m-1">Less</button>
       </p>:
-      <p className="text-prim chakra text-xl o">{res.storyline.substring(0,1000)}
+      <p className="text-sec chakra text-xl o">{res.storyline.substring(0,1000)}
       <button onClick={()=>setChars(!chars)} className="text-acc  m-1">More</button>
       </p>
     ) :
@@ -548,7 +550,7 @@ const GameDetail = () => {
   }
   </div>
   <div className="flex flex-col p-[10px]  my-10">
-    <h2 className="text-prim text-4xl bangers mt-3 pl-2">Similar games</h2>
+    <h2 className="text-sec text-4xl bangers mt-3 pl-2">Similar games</h2>
     <div className="w-32 h-[2px] bg-acc mb-4 ml-2"></div>
     <div className="my-12 flex relative justify-between">
 
