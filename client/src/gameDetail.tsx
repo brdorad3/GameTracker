@@ -9,6 +9,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import axios from "axios";
 import { useAuth } from "./authContext";
+import "./gameDetailCSS.css"
 
 
 interface ress{
@@ -277,7 +278,7 @@ const GameDetail = () => {
       <Navbar/>
         
    {res &&
-   <div className={`${toggle ? "brightness-50 overflow-hidden": "brightness-100"}  relative w-full h-[92%] px-64 py-6 text-white `}>
+   <div className={`${toggle ? "brightness-50 overflow-hidden": "brightness-100"}  relative w-full h-[92%] px-64 py-6 text-white`}>
     <div className="flex flex-col gap-2">
    <div
      className="absolute inset-0 bg-cover brightness-50"
@@ -397,7 +398,7 @@ const GameDetail = () => {
     </ul>
   </div>
 }
-<div className={`w-full  bg-prim relative mt-14 rounded-t-lg py-3 px-4 border-2 border-sec`}>
+<div className={`w-full  bg-prim relative mt-14 rounded-t-lg py-3 px-4 sh10 border-l-2 border-t border-r-2 border-sec`}>
 
 
   

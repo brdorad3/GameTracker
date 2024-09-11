@@ -103,7 +103,7 @@ const Reviews = () => {
     
 
     return (
-        <div className="px-64 py-12 flex flex-col gap-12 max-md:px-2">
+        <div className="px-64 py-12 flex flex-col gap-12 max-md:px-2 bg-prim">
             <div className="flex justify-between">
                 <div>
             <h1 className="text-sec text-3xl chakra pb-1 font-bold h1">YOUR REVIEWS</h1>

@@ -146,7 +146,8 @@ fetchData()
 return(
     <>
     <Navbar/>
-    <div className="mx-64  mt-10 ">
+    <div className="bg-prim">
+    <div className="mx-64 bg-prim">
         <div className="pl-[60px] py-8 border-b-2 border-sec">
             <h1 className="text-3xl pb-3 text-sec chakra font-bold">Top 100 games</h1>
             <div className="">
@@ -232,6 +233,7 @@ return(
             ))
             }
         </div>
+    </div>
     </div>
     </>
 )

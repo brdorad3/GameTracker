@@ -101,7 +101,7 @@ const swiper = useSwiper();
               }
             
                
-                
+                console.log(first)
             setGame(first)
             
           } catch (err) {
@@ -117,7 +117,7 @@ const swiper = useSwiper();
 
     return (
         <>
-        <div className="px-60 py-12 flex flex-col gap-12 max-xl:px-5 max-sm:px-2">
+        <div className="px-60 py-12 flex flex-col gap-12 max-xl:px-5 max-sm:px-2 bg-prim">
           <div className="flex justify-between">
             <div>
         <h1 className="text-sec text-3xl chakra pb-1 font-bold h1">POPULAR RIGHT NOW</h1>
@@ -168,6 +168,7 @@ const swiper = useSwiper();
        
             
        game.map((game: any) => (
+        game &&
          <SwiperSlide key={game.id}>
            <div className=" bg-sec rounded-b-md min-w-[210px] max-w-[210px] sh10 hover:scale-[1.03] max-md:min-w-[40%] max-md:max-w-[40%] z-0"  >
              <Link
@@ -204,6 +205,7 @@ const swiper = useSwiper();
        </div>
        
        </SwiperSlide>
+        
        ))
        
        

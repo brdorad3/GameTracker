@@ -1,4 +1,3 @@
-import { useAuth } from "./authContext";
 import Navbar from "./navbar";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -35,7 +34,7 @@ const Search = () => {
         
         
 
-        const gamesWithCovers = data.map((game: any, index: any) => ({
+        const gamesWithCovers = data.map((game: any) => ({
           ...game,
           coverUrl: game.cover ? game.cover.url.replace('t_thumb', 't_cover_small') : '',
           rel: new Date(game.first_release_date * 1000).getFullYear(),
@@ -62,9 +61,9 @@ const Search = () => {
       
       <ul className="flex flex-col gap-5 px-64 py-10">
         {res.map((game: any, index: any) => (
-          <li key={index} className="flex gap-5  border-b-[1px] border-sec pb-5 pl-10">
+          <li key={index} className="flex gap-5 py-3 rounded-md sh10 mb-5 pl-10 bg-white">
             {game.coverUrl ? (
-             <Link to={`/detail/${game.id}`} state={game.id} > <img src={game.coverUrl} alt={game.name} className="w-[80px] h-[106px]" /></Link>
+             <Link to={`/detail/${game.id}`} state={game.id} > <img src={game.coverUrl} alt={game.name} className="w-[80px] h-[106px] " /></Link>
             ) : (
               <div className="w-[110px] h-[140px]  rounded-xl flex justify-center items-center">
                 <Icon path={mdiImageBroken} size={2} className="text-sec"/>

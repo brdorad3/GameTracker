@@ -32,7 +32,7 @@ const Navbar: React.FC = () => {
                 'Authorization': 'Bearer fos399vwik27rr0m3tprazhvafx4zj',
               },
               body: `search "${value}"; fields name, cover.url, first_release_date, platforms.name, total_rating, total_rating_count, themes;
-               limit 5;where themes != (42);
+               limit 5;where themes != (42) & total_rating_count > 0;
                
                `,
             }
