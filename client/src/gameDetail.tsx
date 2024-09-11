@@ -118,7 +118,7 @@ const GameDetail = () => {
                 headers: {
                   'Accept': 'application/json',
                   'Client-ID': '28k8glj9djgyr0opcwll92beduld5h',
-                  'Authorization': 'Bearer fos399vwik27rr0m3tprazhvafx4zj',
+                  'Authorization': 'Bearer ag34gl29glo4dukxxlx33gmei0j626',
                 },
                 body: `fields name, artworks.url, cover.url, first_release_date, age_ratings.*, videos.*,
                  aggregated_rating, aggregated_rating_count, rating, rating_count, themes.name,
@@ -200,7 +200,7 @@ const GameDetail = () => {
                 headers: {
                   'Accept': 'application/json',
                   'Client-ID': '28k8glj9djgyr0opcwll92beduld5h',
-                  'Authorization': 'Bearer fos399vwik27rr0m3tprazhvafx4zj',
+                  'Authorization': 'Bearer ag34gl29glo4dukxxlx33gmei0j626',
                 },
                 body: `fields *;
                 
@@ -331,8 +331,8 @@ const GameDetail = () => {
 <div className="flex flex-col gap-7 items-center">
   
   <div className="relative">
-  <div className="flex items-center gap-1 justify-around border-2 border-sec w-44 px-2 " >
-    <p className="text-sec p-1 text-lg font-medium hover:cursor-pointer" onClick={() => setToggle(!toggle)}>Add to list</p>
+  <div className="flex items-center rounded-3xl gap-1 justify-around border-2 bg-acc border-sec w-44 px-3 " >
+    <p className="text-sec p-1 text-lg font-bold hover:cursor-pointer" onClick={() => setToggle(!toggle)}>Add to list</p>
     <div className="bg-sec w-[1px] h-12 relative p-0" ></div>
    
    <div onClick={() => setPlanningList(!planningList)}>
@@ -341,9 +341,9 @@ const GameDetail = () => {
   
 
   </div>
-  <div className={`${planningList ? 'absolute top-12 w-full h-10 bg-prim text-sec font-bold rounded-sm' : 'hidden'}`}>
+  <div className={`${planningList ? 'absolute top-15 rounded-lg w-full h-8 bg-white text-sec font-bold ' : 'hidden'}`}>
     <form onSubmit={handleSubmit}>
-    <button className="pl-3 pt-[7px]" type="submit" onClick={() => setReview({...review, status: 'plan'})}>Set as planning</button>
+    <button className="pl-3 pt-1" type="submit" onClick={() => setReview({...review, status: 'plan'})}>Set as planning</button>
     </form>
   </div>
 </div>

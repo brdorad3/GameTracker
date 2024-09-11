@@ -35,19 +35,19 @@ setRes(first)
         
             
         res[props.tests.index].map((game: any) => (
-            <Link to={`/detail/${game.id}`} state={game.id} key={game.id} className="bg-prim rounded-b-md min-w-[210px] max-w-[210px] sh4 hover:scale-[1.02] ">
+            <Link to={`/detail/${game.id}`} state={game.id} key={game.id} className="bg-sec rounded-b-md min-w-[210px] max-w-[210px] sh4 hover:scale-[1.02] ">
             <div className=" rounded-md " >
             <img src={game.coverUrl} className="w-full h-[250px] mg" alt="" />
             <div className="py-2">
-            <p className="overflow-hidden text-nowrap text-ellipsis text-sec chakra text-xl p-2 font-medium">{game.name}</p>
+            <p className="overflow-hidden text-nowrap text-ellipsis text-prim chakra text-xl p-2 font-medium">{game.name}</p>
             {game.total_rating?
-        <div className="py-[5px] px-3  float-end flex items-center gap-1 bg-prim rounded-xl mb-2 mr-2 ">
-                      <Icon path={mdiStar} size={0.8} className="text-sec" />
-           <p className="text-sec"> {(game.total_rating/10).toFixed(1)} </p>
+        <div className="py-[5px] px-3  float-end flex items-center gap-1 bg-sec rounded-xl mb-2 mr-2 ">
+                      <Icon path={mdiStar} size={0.8} className="text-acc" />
+           <p className="text-prim"> {(game.total_rating/10).toFixed(1)} </p>
             </div>:
-        <div className="py-[5px] px-3 float-end flex items-center bg-prim gap-1 rounded-xl mb-2 mr-2">
-        <Icon path={mdiStar} size={0.8} className="text-sec" />
-        <p className="text-sec"> N/A </p>
+        <div className="py-[5px] px-3 float-end flex items-center bg-sec gap-1 rounded-xl mb-2 mr-2">
+        <Icon path={mdiStar} size={0.8} className="text-acc" />
+        <p className="text-prim"> N/A </p>
         
          </div>  
         }

@@ -1,18 +1,9 @@
-
-
 import { useEffect, useState } from "react";
-import PopGames from "./popularGames";
 import { Link } from "react-router-dom";
 import Icon from '@mdi/react';
-import { mdiChevronLeft, mdiChevronRight } from "@mdi/js";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { mdiStar } from "@mdi/js";
-import { useSwiper } from 'swiper/react';
-
-
-
 import {  Navigation } from 'swiper/modules';
-
 import "swiper/css"
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -25,10 +16,8 @@ import 'swiper/css/navigation';
 const Popular = () => {
 
 const [res, setRes] = useState<any[]>([])
-const [index, setIndex] = useState(0)
-const [show, setShow] = useState(false)
 const [game, setGame] = useState<any[]>([])
-const swiper = useSwiper();
+
 
 
     useEffect(() => {
@@ -41,7 +30,7 @@ const swiper = useSwiper();
                 headers: {
                   'Accept': 'application/json',
                   'Client-ID': '28k8glj9djgyr0opcwll92beduld5h',
-                  'Authorization': 'Bearer fos399vwik27rr0m3tprazhvafx4zj',
+                  'Authorization': 'Bearer ag34gl29glo4dukxxlx33gmei0j626',
                 },
                 body: `fields game_id, popularity_type,value;
                 where popularity_type = 1;
@@ -76,7 +65,7 @@ const swiper = useSwiper();
                 headers: {
                   'Accept': 'application/json',
                   'Client-ID': '28k8glj9djgyr0opcwll92beduld5h',
-                  'Authorization': 'Bearer fos399vwik27rr0m3tprazhvafx4zj',
+                  'Authorization': 'Bearer ag34gl29glo4dukxxlx33gmei0j626',
                 },
                 body: `fields name, total_rating, cover.url;
                 where id = (${gameIds});

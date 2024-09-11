@@ -5,12 +5,7 @@ import { Link } from "react-router-dom";
 import Icon from "@mdi/react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { mdiStar } from "@mdi/js";
-import { useSwiper } from 'swiper/react';
-
-
-
 import {  Navigation } from 'swiper/modules';
-
 import "swiper/css"
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -50,7 +45,7 @@ const Reviews = () => {
                                 Accept: "application/json",
                                 "Client-ID": "28k8glj9djgyr0opcwll92beduld5h",
                                 Authorization:
-                                    "Bearer fos399vwik27rr0m3tprazhvafx4zj",
+                                    "Bearer ag34gl29glo4dukxxlx33gmei0j626",
                             },
                             body: `fields name, cover.url ;
                                    where name = "${slot.game}";`,

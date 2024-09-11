@@ -22,7 +22,7 @@ const Search = () => {
             headers: {
               'Accept': 'application/json',
               'Client-ID': '28k8glj9djgyr0opcwll92beduld5h',
-              'Authorization': 'Bearer fos399vwik27rr0m3tprazhvafx4zj',
+              'Authorization': 'Bearer ag34gl29glo4dukxxlx33gmei0j626',
             },
             body: `search "${location.state.value}"; fields name, cover.url, first_release_date, platforms.name, total_rating, total_rating_count;
              where total_rating_count > 0;limit 20;

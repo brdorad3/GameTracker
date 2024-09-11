@@ -49,7 +49,7 @@ const fetchData = async () => {
         headers: {
           'Accept': 'application/json',
           'Client-ID': '28k8glj9djgyr0opcwll92beduld5h',
-          'Authorization': 'Bearer fos399vwik27rr0m3tprazhvafx4zj',
+          'Authorization': 'Bearer ag34gl29glo4dukxxlx33gmei0j626',
         },
         body: `fields name;
         search "${search}";
@@ -97,7 +97,7 @@ fetchData()
                 headers: {
                   'Accept': 'application/json',
                   'Client-ID': '28k8glj9djgyr0opcwll92beduld5h',
-                  'Authorization': 'Bearer fos399vwik27rr0m3tprazhvafx4zj',
+                  'Authorization': 'Bearer ag34gl29glo4dukxxlx33gmei0j626',
                 },
                 body: query,
               }
@@ -106,7 +106,7 @@ fetchData()
            console.log(data)
             
     
-            const gamesWithCovers = data.map((game: any, index: any) => ({
+            const gamesWithCovers = data.map((game: any) => ({
               ...game,
               coverUrl: game.cover ? game.cover.url.replace('t_thumb', 't_cover_small') : '',
               rel: new Date(game.first_release_date * 1000).getFullYear(),
@@ -147,7 +147,7 @@ return(
     <>
     <Navbar/>
     <div className="bg-prim">
-    <div className="mx-64 bg-prim">
+    <div className="mx-64 bg-white rounded-md sh10 mt-5">
         <div className="pl-[60px] py-8 border-b-2 border-sec">
             <h1 className="text-3xl pb-3 text-sec chakra font-bold">Top 100 games</h1>
             <div className="">
@@ -156,7 +156,7 @@ return(
                     <div className="flex flex-col relative" >
                       
                     <label className="p-1 text-lg text-sec space" htmlFor="platform">Platform:</label>
-                    <input type="text" className="rounded-md h-9 w-80 p-1 pl-2 bg-acc placeholder-sec border-2 border-sec" placeholder="Xbox 360 "
+                    <input type="text" className="rounded-md h-9 w-80 p-1 pl-2 bg-prim sh11 placeholder-slate-600 border-2 border-sec" placeholder="Xbox 360 "
                      id="platform"
                      maxLength={25}
                     onChange={(e) => handleInputChange(e)}
@@ -184,7 +184,7 @@ return(
                     </form>
                     <form className="flex flex-col relative" onSubmit={(e) => handleYearSubmit(e)}>
                     <label className="p-1 text-lg text-sec space" htmlFor="year">Year:</label>
-                    <input type="text" className="rounded-md  h-9 w-80 p-1 pl-2 bg-acc border-2 border-sec placeholder-sec" placeholder="2015 " id="year"
+                    <input type="text" className="rounded-md  h-9 w-80 p-1 pl-2 bg-prim border-2 border-sec sh11 placeholder-slate-600" placeholder="2015 " id="year"
                     minLength={4}
                     maxLength={4}
                     onChange={(e) => setYear(e.target.value)}
@@ -195,7 +195,7 @@ return(
                     </form>
                     <div className="flex items-center gap-2 self-end">
                       <label htmlFor="sort" className="p-1 text-lg text-sec space">Sort by:</label>
-                    <select name="sort" id="sort" className="py-1 px-2 rounded-md bg-acc border-2 border-sec " onChange={handleChange} >
+                    <select name="sort" id="sort" className="py-1 px-2 rounded-md bg-prim sh11 border-2 border-sec " onChange={handleChange} >
                       <option value="total_rating" className="bg-prim">Rating</option>
                       <option value="total_rating_count" className="bg-prim">Total reviews</option>
                     </select>
@@ -208,7 +208,7 @@ return(
             res.map((slot:any, index) => (
                 <div className="flex justify-between border-b-[1px] border-sec py-4 pl-5">
                     <div className="flex gap-5">
-              <Link to={`/detail/${slot.id}`} state={slot.id}>  <img src={slot.coverUrl} alt=""  /> </Link>
+              <Link to={`/detail/${slot.id}`} state={slot.id}>  <img src={slot.coverUrl} alt="" className="border border-sec" /> </Link>
                 <div className="flex flex-col">
                     <div className="flex pt-2">
                     <Link to={`/detail/${slot.id}`} state={slot.id} className="flex items-end gap-1 text-sec gr">

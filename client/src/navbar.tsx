@@ -29,7 +29,7 @@ const Navbar: React.FC = () => {
               headers: {
                 'Accept': 'application/json',
                 'Client-ID': '28k8glj9djgyr0opcwll92beduld5h',
-                'Authorization': 'Bearer fos399vwik27rr0m3tprazhvafx4zj',
+                'Authorization': 'Bearer ag34gl29glo4dukxxlx33gmei0j626',
               },
               body: `search "${value}"; fields name, cover.url, first_release_date, platforms.name, total_rating, total_rating_count, themes;
                limit 5;where themes != (42) & total_rating_count > 0;
@@ -86,7 +86,7 @@ const Navbar: React.FC = () => {
             <div className="w-[65%] relative">
                 <form onSubmit={handleSubmit} className="w-full relative">
                     <input type="text" 
-                    className="w-full h-10 rounded-md pl-5 bg-white pr-16"
+                    className="w-full h-10 rounded-md pl-5 bg-white pr-16 sh11"
                     placeholder="Search..."
                     minLength={1}
                     maxLength={120}
@@ -123,8 +123,8 @@ const Navbar: React.FC = () => {
                 </div>
             </div>
             <div className="flex gap-5 items-center">
-                <Link to="/login"><h2 className="text-lg text-prim chakra nav">Log in</h2></Link>
-                <Link to="/signup"><h2 className="text-lg text-prim chakra nav">Sign up</h2></Link>
+                <Link to="/login"><h2 className="text-lg text-prim chakra nav hover:underline hover:underline-offset-2">Log in</h2></Link>
+                <Link to="/signup"><h2 className="text-lg text-prim chakra nav hover:underline hover:underline-offset-2">Sign up</h2></Link>
                 {user &&
             <button onClick={logout} className="text-acc text-lg chakra font-black">Logout</button>
             }
