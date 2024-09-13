@@ -163,7 +163,7 @@ return(
                     value={search}
                     />
                     <div className="absolute top-[41px] right-7 cursor-pointer" onClick={() => handleMenuClose()} >
-                      <p className="comic">x</p>
+                      <p className="space">x</p>
                     </div>
                     <div className="absolute top-[42px] right-1  cursor-pointer" onClick={()=>setCloseMenu(true)}>
                     <Icon path={mdiMenuUp} size={1} className="text-sec" />
@@ -206,7 +206,7 @@ return(
         <div className="px-10 py-5 flex flex-col ">
             {res &&
             res.map((slot:any, index) => (
-                <div className="flex justify-between border-b-[1px] border-sec py-4 pl-5">
+                <div className="flex justify-between border-b-[1px] border-sec py-4 pl-5" key={index}>
                     <div className="flex gap-5">
               <Link to={`/detail/${slot.id}`} state={slot.id}>  <img src={slot.coverUrl} alt="" className="border border-sec" /> </Link>
                 <div className="flex flex-col">

@@ -11,53 +11,21 @@
 *{
     box-sizing: border-box;
 }
-.comic{
-    font-family: 'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', sans-serif;
-}
-
-
   .chakra {
     font-family: "Chakra Petch", sans-serif;
     font-style: normal;
   }
-  .patrick {
-    font-family: "Patrick Hand", cursive;
-    
-    font-style: normal;
-  }
-  .indie {
-    font-family: "Indie Flower", cursive;
-    
-    font-style: normal;
-  }
-  .acme {
-    font-family: "Acme", sans-serif;
-    
-    font-style: normal;
-  }
-  
+   
   .bangers {
     font-family: "Bangers", system-ui;
     
     font-style: normal;
   }
-
-  .marker {
-    font-family: "Permanent Marker", cursive;
-    
-    font-style: normal;
-  }
-
   .space {
     font-family: "Space Grotesk", sans-serif;
     font-optical-sizing: auto;
     
     font-style: normal;
-  }
-  
-  
-  .slick-list > div {
-    margin: 0px 10px;
   }
 
   .sh{
@@ -67,18 +35,7 @@
     
     color: #f4c420;
   }
-  .slick-prev:before,
-.slick-next:before {
-  color: #5C946E!important;
-}
-.slick-active > div{
-  width: 210px;
   
-
-}
-.slick-active, .slick-current{
-  width: 210px;
-}
 .sh2{
   
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;}

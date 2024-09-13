@@ -48,6 +48,7 @@ setMessage(e.response.data.message);
                 required
                 value={username}
                 onChange={(e)=> setUsername(e.target.value)}
+                id="name"
                 placeholder="Username"
                 />
                 <input type="password"
@@ -57,6 +58,7 @@ setMessage(e.response.data.message);
                 required
                 value={password}
                 onChange={(e)=> setPassword(e.target.value)}
+                id="password"
                 placeholder="Password"
                 />
                 {message &&

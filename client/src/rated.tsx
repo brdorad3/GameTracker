@@ -1,8 +1,6 @@
-import TopRated from "./topRated"
 import { Link } from "react-router-dom"
 import { useState, useEffect } from "react";
 import Icon from "@mdi/react";
-import { mdiChevronRight, mdiChevronLeft } from "@mdi/js";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { mdiStar } from "@mdi/js";
 
@@ -45,7 +43,7 @@ const Rated = () => {
         
         
 
-        const gamesWithCovers = data.map((game: any, index: any) => ({
+        const gamesWithCovers = data.map((game: any) => ({
           ...game,
           coverUrl: game.cover ? game.cover.url.replace('t_thumb', 't_cover_big') : '',
           
@@ -68,7 +66,7 @@ const Rated = () => {
 
     return (
         <>
-        <div className="px-60 py-12 flex flex-col gap-12 max-md:px-2 bg-prim">
+        <div className="px-60 pt-12 pb-28 flex flex-col gap-12 max-md:px-2 bg-prim">
             <div className="flex justify-between">
                 <div>
         <h1 className="text-sec text-3xl font-bold chakra pb-1 h1">BEST RATED GAMES</h1>

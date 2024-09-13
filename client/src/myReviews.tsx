@@ -15,7 +15,7 @@ const [res, setRes] = useState(navigate.state)
 
 //const res = navigate.state
 const [test, setTest] = useState<any[]>([])
-const [hover, setHover] = useState(false)
+
 
 
 
@@ -38,9 +38,6 @@ setTest(test)
 
 test && test.length > 0 && console.log(test)
 
-useEffect(() => {
-console.log(hover)
-},[hover])
 
 const handleDelete = async (e: any) => {
     console.log(e)
@@ -72,7 +69,7 @@ const handleDelete = async (e: any) => {
                     </div>
                     <h1 className="pb-3 text-lg">Sort;</h1>
                    <form >
-                    <select name="" id="">
+                    <select name="rate" id="rate">
                         <option value="rating">Rating</option>
                         <option value="reviews">Number of ratings</option>
                     </select>

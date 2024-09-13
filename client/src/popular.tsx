@@ -13,6 +13,7 @@ import 'swiper/css/navigation';
 
 
 
+
 const Popular = () => {
 
 const [res, setRes] = useState<any[]>([])
@@ -33,17 +34,14 @@ const [game, setGame] = useState<any[]>([])
                   'Authorization': 'Bearer ag34gl29glo4dukxxlx33gmei0j626',
                 },
                 body: `fields game_id, popularity_type,value;
-                where popularity_type = 1;
-                 sort value desc;limit 100;
+               where popularity_type = 1;sort value desc;
+                 limit 50;
                  
                  `,
               }
             );
-            const data = await response.json();
+            const data = await response.json();            
             console.log(data)
-            
-
-            
             setRes(data);
             
           } catch (err) {
@@ -80,18 +78,9 @@ const [game, setGame] = useState<any[]>([])
               coverUrl: game.cover ? game.cover.url.replace('t_thumb', 't_cover_big') : '',
             }));
            
-            const first = []
             
             
-            
-              for(let i = 0; i<15; i++){
-                const chunk = forCover[i];
-    first.push(chunk);
-              }
-            
-               
-                console.log(first)
-            setGame(first)
+            setGame(forCover)
             
           } catch (err) {
             console.error(err);
@@ -106,7 +95,7 @@ const [game, setGame] = useState<any[]>([])
 
     return (
         <>
-        <div className="px-60 py-12 flex flex-col gap-12 max-xl:px-5 max-sm:px-2 bg-prim">
+        <div className="px-60 py-12 flex flex-col gap-12 max-xl:px-5 max-sm:px-2 bg-prim h-[557px]">
           <div className="flex justify-between">
             <div>
         <h1 className="text-sec text-3xl chakra pb-1 font-bold h1">POPULAR RIGHT NOW</h1>
@@ -119,10 +108,7 @@ const [game, setGame] = useState<any[]>([])
         </div>
           </div>
           
-        
-          
-       
-          <div className="relative">
+         <div className="relative">
           <Swiper
         
         
@@ -167,7 +153,7 @@ const [game, setGame] = useState<any[]>([])
                                className=""
                            >
              {game.coverUrl &&
-             <img src={game.coverUrl} className="w-full h-[250px] max-md:min-h-[180px] max-md:max-h-[180px]" alt="" />
+             <img rel="preload" src={game.coverUrl} className="w-full h-[250px] max-md:min-h-[180px] max-md:max-h-[180px]" alt="" />
 }
 </Link>
            
@@ -199,7 +185,7 @@ const [game, setGame] = useState<any[]>([])
        
        
      :
-       <p>Loading...</p>
+       <p className="text-sec">Loading...</p>
        }
           </Swiper>
         </div>

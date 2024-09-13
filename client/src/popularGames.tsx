@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Icon from '@mdi/react';
 import { mdiStar  } from '@mdi/js'
 import 'animate.css';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { SwiperSlide } from 'swiper/react';
 
 const PopGames = (props: any) => {
 

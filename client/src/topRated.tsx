@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Slider from "react-slick";
 import { Link } from "react-router-dom";
 import Icon from '@mdi/react';
 import { mdiStar } from '@mdi/js'
@@ -33,7 +32,7 @@ const TopRated = (props: any) => {
           
           
   
-          const gamesWithCovers = data.map((game: any, index: any) => ({
+          const gamesWithCovers = data.map((game: any) => ({
             ...game,
             coverUrl: game.cover ? game.cover.url.replace('t_thumb', 't_cover_big') : '',
             
@@ -54,11 +53,6 @@ first.push(chunk);
       };
       fetchData();
     }, []);
-
-   
-
- 
-
 
     return(
         <>

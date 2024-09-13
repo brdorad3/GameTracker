@@ -9,7 +9,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import axios from "axios";
 import { useAuth } from "./authContext";
-import "./gameDetailCSS.css"
 
 
 interface ress{
@@ -73,7 +72,6 @@ const cat = (item: any) => {
 
 const GameDetail = () => {
 
-//856218
 
     const location = useLocation();
     const [chars, setChars] = useState(false)
@@ -211,12 +209,9 @@ const GameDetail = () => {
             );
             const data = await response.json();
             
-           console.log(data)
+           
            setGamePop(data)
 
-            
-            //698801 64000
-            // 309002
             
           } catch (err) {
             console.error(err);
@@ -296,7 +291,7 @@ const GameDetail = () => {
 
   </div>
   <div>
-  <p className="text-white relative acme">{cat(res.category)}</p>
+  <p className="text-white relative space">{cat(res.category)}</p>
   </div>
    </div>
    <div className="flex gap-5 relative">
@@ -331,8 +326,8 @@ const GameDetail = () => {
 <div className="flex flex-col gap-7 items-center">
   
   <div className="relative">
-  <div className="flex items-center rounded-3xl gap-1 justify-around border-2 bg-acc border-sec w-44 px-3 " >
-    <p className="text-sec p-1 text-lg font-bold hover:cursor-pointer" onClick={() => setToggle(!toggle)}>Add to list</p>
+  <div className="flex items-center rounded-3xl gap-1 sh11 justify-around border-2 bg-acc border-sec w-44 px-3 " >
+    <p className="text-sec p-1 text-lg space font-bold hover:cursor-pointer" onClick={() => setToggle(!toggle)}>Add to list</p>
     <div className="bg-sec w-[1px] h-12 relative p-0" ></div>
    
    <div onClick={() => setPlanningList(!planningList)}>
@@ -343,7 +338,7 @@ const GameDetail = () => {
   </div>
   <div className={`${planningList ? 'absolute top-15 rounded-lg w-full h-8 bg-white text-sec font-bold ' : 'hidden'}`}>
     <form onSubmit={handleSubmit}>
-    <button className="pl-3 pt-1" type="submit" onClick={() => setReview({...review, status: 'plan'})}>Set as planning</button>
+    <button className="pl-3 pt-1" type="submit" name="plan" onClick={() => setReview({...review, status: 'plan'})}>Set as planning</button>
     </form>
   </div>
 </div>
@@ -402,9 +397,9 @@ const GameDetail = () => {
 
 
   
-   <div className="bg-white max-w-[75%] rounded-r-3xl p-2 mt-2 border-r-[6px] border-acc sh10"> 
+   <div className="bg-white max-w-[75%] rounded-r-3xl p-2 mt-2 border-[3px] border-acc sh10"> 
 <ul className="flex flex-wrap gap-2 items-center">
-  <p className="text-lg font-bold text-acc comic">Genre:</p>
+  <p className="text-lg font-bold text-acc chakra">Genre:</p>
 {res && res.genres &&
   res.genres.map((slot: any,  index)=>(
 <li className="text-[17px] chakra text-sec font-black" key={index}>{slot.name},</li>
@@ -412,7 +407,7 @@ const GameDetail = () => {
   }
  </ul>
  <ul className="flex flex-wrap gap-2 items-center">
-  <p className="text-lg font-bold text-acc comic">Platforms:</p>
+  <p className="text-lg font-bold text-acc chakra">Platforms:</p>
 {res && res.platforms &&
   res.platforms.map((slot: any, index)=>(
 <li className="text-[17px] chakra text-sec font-black" key={index}>{slot.name},</li>
@@ -492,18 +487,18 @@ const GameDetail = () => {
       <div className="h-[2px] w-[60%] bg-acc mb-3"></div>
       {res.franchises ? 
     res.franchises.map((slot: any)=>(
-      <p className="text-sec text-lg chakra">{slot.name}</p>
+      <p className="text-sec text-lg chakra" key={slot.id}>{slot.name}</p>
     ))  :
     <p className="text-lg text-sec">-</p>
     }
     </div>
     
-    <div className="py-5 bg-white w-1/2 pl-5 sh10 min-h-32">
+    <div className="py-5 bg-white w-1/2 pl-5 sh10 min-h-32 rounded-sm">
     <h2 className="text-sec text-3xl bangers">Series</h2>
     <div className="h-[2px] w-[40%] bg-acc mb-3"></div>
       {res.collections ? 
     res.collections.map((slot: any)=>(
-      <p className="text-sec text-lg chakra">{slot.name}</p>
+      <p className="text-sec text-lg chakra" key={slot.id}>{slot.name}</p>
     ))  :
     <p className="text-lg text-sec">-</p>
     }
@@ -514,7 +509,7 @@ const GameDetail = () => {
     <div className="h-[2px] w-[7%] bg-acc mb-3"></div>
       {res.expansions ? 
     res.expansions.map((slot: any)=>(
-      <p className="text-sec text-lg chakra">{slot.name}</p>
+      <p className="text-sec text-lg chakra" key={slot.id}>{slot.name}</p>
     ))  :
     <p className="text-xl text-sec">No DLC available</p>
     }
@@ -617,11 +612,11 @@ const GameDetail = () => {
       onChange={(e) => setReview({...review, score: Number(e.target.value)}) }
        />
        </div>
-       <button type="submit" className="border-2 border-prim text-acc  h-9 px-5 self-end chakra text-xl font-bold
+       <button type="submit" name="save" className="border-2 border-prim text-acc  h-9 px-5 self-end chakra text-xl font-bold
        
        ">Save</button>
     </form>
-    <p className="text-prim absolute top-2 right-4 acme text-xl cursor-pointer" onClick={() => setToggle(!toggle)} >X</p>
+    <p className="text-prim absolute top-2 right-4 space text-xl cursor-pointer" onClick={() => setToggle(!toggle)} >X</p>
   </div>
 </div>
   

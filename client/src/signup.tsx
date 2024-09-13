@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import Navbar from "./navbar"
-import { ChangeEventHandler, ReactEventHandler, useState } from "react"
+import { useState } from "react"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 
@@ -46,6 +46,7 @@ const handleSubmit = async(e: React.FormEvent) => {
                 maxLength={25}
                 required
                 value={username}
+                id="user"
                 onChange={(e)=> setUsername(e.target.value)}
                 placeholder="Username"
                 />
@@ -57,6 +58,7 @@ const handleSubmit = async(e: React.FormEvent) => {
                 onChange={(e)=> setPassword(e.target.value)}
                 required
                 placeholder="Password"
+                id="password"
                 />
                  <input type="password"
                  className="w-80 h-14 rounded-[4px] pl-4 bg-sec placeholder-prim text-prim"

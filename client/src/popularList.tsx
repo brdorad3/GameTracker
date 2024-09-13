@@ -68,7 +68,7 @@ const PopularList = () => {
   
   <div className="py-2">
   <Link to={`/detail/${game.id}`}  state={game.id} key={game.id}>
-  <p className="overflow-hidden text-nowrap text-ellipsis text-prim patrick text-2xl p-2">{game.name}</p>
+  <p className="overflow-hidden text-nowrap text-ellipsis text-prim chakra text-xl p-2">{game.name}</p>
   </Link>
   {game.total_rating?
 <div className="py-[5px] px-3  float-end flex items-center gap-1 bg-sec rounded-xl mb-2 mr-2 ">

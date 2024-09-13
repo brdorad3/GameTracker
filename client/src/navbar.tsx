@@ -17,7 +17,7 @@ const Navbar: React.FC = () => {
     const [showMenu, setShowMenu] = useState(false)
 
     const [res, setRes] = useState<any[]>([]);
-    const [search, setSearch] = useState<any[]>([])
+   
 
     useEffect(() => {
       const fetchData = async () => {
@@ -41,7 +41,7 @@ const Navbar: React.FC = () => {
           
           
   
-          const gamesWithCovers = data.map((game: any, index: any) => ({
+          const gamesWithCovers = data.map((game: any) => ({
             ...game,
             coverUrl: game.cover ? game.cover.url.replace('t_thumb', 't_cover_small') : '',
             rel: new Date(game.first_release_date * 1000).getFullYear(),
@@ -60,8 +60,6 @@ const Navbar: React.FC = () => {
           }
           console.log(fiv)
           setRes(fiv);
-          console.log(res)
-          setSearch(gamesWithCovers)
         } catch (err) {
           console.error(err);
         }
@@ -91,13 +89,13 @@ const Navbar: React.FC = () => {
                     minLength={1}
                     maxLength={120}
                     onChange={(e)=> setValue(e.target.value)}
-                    
+                    id="search"
                     value={value}
                     onFocus={() => setShowMenu(true)}
                     onBlur={() => setShowMenu(false)}
                     
                     />
-                    <button type="submit">
+                    <button type="submit" id="btn">
                         <Icon path={mdiMagnify} size={1.3} className="text-sec absolute top-[5px] right-4" />
                     </button>
                 </form>
