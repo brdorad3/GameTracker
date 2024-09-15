@@ -7,13 +7,13 @@ import { mdiStar } from "@mdi/js";
 
 
 
-import {  Navigation } from 'swiper/modules';
+import {  Navigation, FreeMode } from 'swiper/modules';
 
 import "swiper/css"
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-
+import 'swiper/css/free-mode';
 
 const Rated = () => {
 
@@ -66,7 +66,7 @@ const Rated = () => {
 
     return (
         <>
-        <div className="px-60 pt-12 pb-28 flex flex-col gap-12 max-md:px-2 bg-prim">
+        <div className="px-60 pt-12 pb-28 flex flex-col gap-12 max-sm:px-2 max-2xl:px-5 bg-prim">
             <div className="flex justify-between">
                 <div>
         <h1 className="text-sec text-3xl font-bold chakra pb-1 h1">BEST RATED GAMES</h1>
@@ -83,28 +83,30 @@ const Rated = () => {
         <Swiper
         
         
-        modules={[Navigation]}
+        modules={[Navigation, FreeMode]}
         navigation={true} 
+        
         breakpoints={{
-          0: {
-            slidesPerView: 1,
-          },
-          400:{
+          365:{
             slidesPerView:2,
+            spaceBetween:20
           },
-          639: {
+          675: {
             slidesPerView: 3,
+            spaceBetween:10
           },
-          865:{
-            slidesPerView:4
+          880:{
+            slidesPerView:4,
+            spaceBetween:10
           },
-          1000:{
-            slidesPerView:5
+          1130:{
+            slidesPerView:5,
+            spaceBetween:10
           },
-          1500:{
-            slidesPerView:6
+          1400:{
+            slidesPerView:6,
+            spaceBetween:10
           },
-         
         }}
       
         
@@ -115,7 +117,8 @@ const Rated = () => {
             
         res.map((game: any) => (
           <SwiperSlide key={game.id}>
-            <div className=" bg-sec rounded-b-md min-w-[210px] max-w-[210px] sh10 hover:scale-[1.03]"  >
+            <div className=" bg-sec rounded-b-md min-w-[210px] max-w-[210px] sh10 hover:scale-[1.03] card
+            "  >
               <Link to={`/detail/${game.id}`} state={game.id} key={game.id} >
             <img src={game.coverUrl} className="w-full h-[250px] " alt="" />
             </Link>
@@ -124,7 +127,7 @@ const Rated = () => {
             <p className="overflow-hidden text-nowrap text-ellipsis text-prim chakra text-xl px-2 py-4">{game.name}</p>
             </Link>
             {game.total_rating?
-        <div className="flex items-center gap-1 bg-sec rounded-b-md pb-3 justify-end pr-4">
+        <div className="flex items-center gap-1 bg-sec rounded-b-md pb-3 justify-end pr-4 ">
           <Icon path={mdiStar} size={0.8} className="text-acc" />
            <p className="text-prim "> {(game.total_rating/10).toFixed(1)} </p>
            

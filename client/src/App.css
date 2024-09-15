@@ -58,25 +58,7 @@
 .gr:hover{
   color: #56585c;
 }
-@media screen and (max-width: 400px){
-  .h1{
-    font-size: 23px;
-  }
-  .seeall{
-    font-size: 14px
-  }
-  .nav{
-    font-size: 12px;
-  }
-  .itemfont{
-    font-size: 15px;
-    padding: 1px 6px;
-  }
-  .itemrating{
-    padding: 2px 0px;
-  }
-  
-}
+
 .swiper-button-next::after, .swiper-button-prev::after{
   z-index: 100;
   color: black;
@@ -90,7 +72,6 @@
   border-radius: 50px;
   padding: 30px !important;
 }
-
 
 .sh10{
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
@@ -116,4 +97,20 @@
 }
 .sh11{
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+@media screen and (max-width:500px){
+  .h1{
+    font-size: 25px;
+  }
+  .seeall{
+    font-size: 15px;
+  }
+  
+}
+@media screen and (max-width:450px){
+  
+  .card{
+    max-width: 180px;
+    min-width: 180px;
+  }
 }

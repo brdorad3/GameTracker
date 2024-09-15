@@ -98,7 +98,7 @@ const Reviews = () => {
     
 
     return (
-        <div className="px-64 py-12 flex flex-col gap-12 max-md:px-2 bg-prim">
+        <div className="px-64 py-12 flex flex-col gap-12 max-sm:px-2 max-2xl:px-5 bg-prim">
             <div className="flex justify-between">
                 <div>
             <h1 className="text-sec text-3xl chakra pb-1 font-bold h1">YOUR REVIEWS</h1>
@@ -121,24 +121,26 @@ const Reviews = () => {
                 modules={[Navigation]}
                 navigation={true} 
                 breakpoints={{
-                  0: {
-                    slidesPerView: 1,
-                  },
-                  400:{
-                    slidesPerView:2,
-                  },
-                  639: {
-                    slidesPerView: 3,
-                  },
-                  865:{
-                    slidesPerView:4
-                  },
-                  1000:{
-                    slidesPerView:5
-                  },
-                  1500:{
-                    slidesPerView:6
-                  },
+                    365:{
+                        slidesPerView:2,
+                        spaceBetween:20
+                      },
+                      675: {
+                        slidesPerView: 3,
+                        spaceBetween:10
+                      },
+                      880:{
+                        slidesPerView:4,
+                        spaceBetween:10
+                      },
+                      1130:{
+                        slidesPerView:5,
+                        spaceBetween:10
+                      },
+                      1400:{
+                        slidesPerView:6,
+                        spaceBetween:10
+                      },
                  
                 }}
               
@@ -149,7 +151,7 @@ const Reviews = () => {
                             res && res.length > 0 ? (
                                 res.map((game: any) => (
                                     <SwiperSlide key={game.id}>
-                                        <div className="bg-sec rounded-b-md min-w-[210px] max-w-[210px] sh10 hover:scale-[1.03] ">
+                                        <div className="bg-sec rounded-b-md min-w-[210px] max-w-[210px] sh10 hover:scale-[1.03] card">
                                             <Link
                                         to={`/detail/${game.id}`}
                                         state={game.id}
@@ -223,7 +225,7 @@ const Reviews = () => {
                                      res && res.length > 0 ? (
                                          res.map((game: any) => (
                                              
-                                                 <div className="bg-sec rounded-b-md min-w-[210px] max-w-[210px] sh10 hover:scale-[1.03] ">
+                                                 <div className="bg-sec rounded-b-md min-w-[210px] max-w-[210px] sh10 hover:scale-[1.03] card ">
                                                      <Link
                                                  to={`/detail/${game.id}`}
                                                  state={game.id}
