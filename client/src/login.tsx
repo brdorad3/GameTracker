@@ -62,7 +62,7 @@ setMessage(e.response.data.message);
                 placeholder="Password"
                 />
                 {message &&
-            <p className="text-red-500 font-bold py-1 px-[13px absolute bottom-[66px]">{message}</p>
+            <p className="text-red-500 font-bold py-1  absolute bottom-[66px]">{message}</p>
         }
                 
                 </div>

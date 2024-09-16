@@ -27,7 +27,7 @@ const review_post = asyncHandler(async(req: Request, res: Response, next: NextFu
             
         
         )
-        console.log(req.body)
+        
         const reviewInUser = user.reviews.find((review: any) => review.game.toString() === gameId.toString());
         if (reviewInUser) {
             reviewInUser.status = req.body.review.status;

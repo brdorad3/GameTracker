@@ -103,7 +103,7 @@ fetchData()
               }
             );
             const data = await response.json();
-           console.log(data)
+           
             
     
             const gamesWithCovers = data.map((game: any) => ({

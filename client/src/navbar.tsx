@@ -58,7 +58,7 @@ const Navbar: React.FC = () => {
             }
             fiv.push(chunk)
           }
-          console.log(fiv)
+          
           setRes(fiv);
         } catch (err) {
           console.error(err);

@@ -175,7 +175,7 @@ const GameDetail = () => {
               
               setReview({...review, game: gamesWithCovers[0].name})
            
-              console.log(gamesWithCovers[0])
+              
             setRes(gamesWithCovers[0]);
             setSim(gamesWithCovers[0].similar_games)
             }

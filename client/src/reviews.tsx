@@ -25,7 +25,7 @@ const Reviews = () => {
                 { user }
             );
             setData(response.data);
-            console.log(data)
+            
         } catch (e) {
             console.log(e);
         }
@@ -77,7 +77,7 @@ const Reviews = () => {
                 six.push(chunk)
             }
             setRes(six)
-           console.log(all)
+          
             setSeeAll(all)
         } catch (e) {
             console.log(e);
@@ -113,8 +113,8 @@ const Reviews = () => {
             
             </div>
             </div>
-            <div className="flex gap-6"> {
-                res.length > 6 ?
+            <div className=""> {
+                
                 <Swiper
         
         
@@ -218,80 +218,11 @@ const Reviews = () => {
                         ) : (
                             <p>No user logged in.</p>
                         )}
-                        </Swiper>:
+                        </Swiper>
+
                          
                        
-                                 user ? (
-                                     res && res.length > 0 ? (
-                                         res.map((game: any) => (
-                                             
-                                                 <div className="bg-sec rounded-b-md min-w-[210px] max-w-[210px] sh10 hover:scale-[1.03] card ">
-                                                     <Link
-                                                 to={`/detail/${game.id}`}
-                                                 state={game.id}
-                                                 key={game.id}
-                                                 className=""
-                                             >
-                                                     {game.cover && (
-                                                         <img
-                                                             src={game.cover}
-                                                             className="w-full h-[250px]"
-                                                             alt=""
-                                                         />
-                                                     )}
-                                                 </Link>
-                                                     <div className="py-2">
-                                                     <Link
-                                                 to={`/detail/${game.id}`}
-                                                 state={game.id}
-                                                 key={game.id}
-                                                 className=""
-                                             >
-                                                         <p className="overflow-hidden text-nowrap text-ellipsis text-prim chakra text-xl p-2">
-                                                             {game.game}
-                                                         </p>
-                                                         </Link>
-                                                         {game.rating !== undefined && game.rating !== null ? (
-                     <div className="py-[5px] px-3 mb-2 flex justify-between items-center bg-sec rounded-xl">
-                         <p className="text-prim chakra">
-                             {game.status}
-                         </p>
-                         <div className="flex gap-1 items-center mr-2">
-                         <Icon
-                                 path={mdiStar}
-                                 size={0.8}
-                                 className="text-acc"
-                             />
-                             <p className="text-prim ">
-                                 {game.rating === 0 ? "N/A" : game.rating}
-                             </p>
-                            
-                         </div>
-                     </div>
-                 ) : (
-                     <div className="py-[5px] px-3 bg-sec float-end flex items-center rounded-xl mb-2 mr-2">
-                          <Icon
-                                 path={mdiStar}
-                                 size={0.8}
-                                 className="text-acc"
-                             />
-                         <p className="text-prim">
-                             N/A
-                         </p>
-                        
-                     </div>
-                 )}
-                 
-                                                     </div>
-                                                 </div>
-                                        
-                                         ))
-                                     ) : (
-                                         <p>No reviews found.</p>
-                                     )
-                                 ) : (
-                                     <p>No user logged in.</p>
-                                 )}
+                                }
                                  
                 
            

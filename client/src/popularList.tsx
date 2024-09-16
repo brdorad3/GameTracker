@@ -44,7 +44,7 @@ const PopularList = () => {
       
         if (location.state.length > 0) {
           fetchData();
-          console.log(res)
+          
         }
       }, [location.state]);
 

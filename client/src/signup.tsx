@@ -27,7 +27,7 @@ const handleSubmit = async(e: React.FormEvent) => {
             
         });
         setMessage(newMessages);
-        console.log(message)
+       
   });   
 }
 
@@ -69,18 +69,18 @@ const handleSubmit = async(e: React.FormEvent) => {
                  required
                 placeholder="Confirm password"
                 />
+                
                 </div>
                 <button type="submit" className=" text-sec border-2 border-sec px-6 py-3 rounded-[4px] bg-acc text-lg font-bold chakra">SIGNUP</button>
             </form>
+           
+           
             <p className="text-sec space">Already have an account? <Link to="/login" className="text-acc border-b-[1px] border-acc chakra">Log in</Link></p>
+          
         </div>
-         {message.length > 0 && (
-                <ul>
-                    {message.map((msg, index) => (
-                        <li key={index} className="text-white">{msg}</li>
-                    ))}
-                </ul>
-            )}
+        {message &&
+            <p className="text-red-500 absolute right-32 bottom-[45%] text-sm w-96">{message}</p>
+        }
         
         </div>
         </>
