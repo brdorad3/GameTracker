@@ -105,6 +105,10 @@
   .seeall{
     font-size: 15px;
   }
+  .card2{
+    max-width: 200px;
+    min-width: 200px;
+  }
   
 }
 @media screen and (max-width:450px){
@@ -113,4 +117,10 @@
     max-width: 180px;
     min-width: 180px;
   }
+  .card3{
+    max-width: 160px;
+    min-width: 160px;
+  }
+  
+
 }

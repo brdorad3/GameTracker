@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Navbar from "./navbar";
 import Icon from '@mdi/react';
 import { mdiStar } from '@mdi/js';
-import { mdiChevronDown, mdiChevronRight, mdiChevronLeft, mdiHandExtended, mdiController,mdiCheck } from '@mdi/js';
+import { mdiChevronDown, mdiHandExtended, mdiController,mdiCheck } from '@mdi/js';
 import Cover from "./cover"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -87,11 +87,9 @@ const GameDetail = () => {
     })
     const [errMess, setErrMess] = useState('')
     const [planningList, setPlanningList] = useState(false)
-    const [index, setIndex] = useState(0)
-    const [show, setShow] = useState(false)
     const [sim, setSim] = useState<any[]>([])
     const [gamePop, setGamePop] = useState<any[]>([])
-    
+   
 
     useEffect(() => {
     
@@ -101,8 +99,8 @@ const GameDetail = () => {
   
   
   },[location.state]);
- 
-  
+
+
   
     useEffect(() => {
         const fetchData = async () => {
@@ -239,31 +237,7 @@ const GameDetail = () => {
       alert("Log in to rate games!")
       }
 
-      useEffect(() => {
-        const timer = setTimeout(() => {
-          setShow(true);
-        }, 1500);
-        return () => clearTimeout(timer);
-      }, [])
 
-      const handleRight = () => {
-    
-        if (index >= 1) {
-          setIndex(0);
-        } else {
-          
-          setIndex(index + 1);
-        }
-      }
-      const handleLeft = () => {
-        
-        if (index <= 0) {
-          setIndex(2);
-        } else {
-          
-          setIndex(index - 1);
-        }
-      }
 
 
 
@@ -273,52 +247,54 @@ const GameDetail = () => {
       <Navbar/>
         
    {res &&
-   <div className={`${toggle ? "brightness-50 overflow-hidden": "brightness-100"}  relative w-full h-[92%] px-64 py-6 text-white`}>
+   <div className={`${toggle ? "brightness-50 overflow-hidden": "brightness-100"}  relative w-full h-[92%] max-sm:h-[120%] px-64 py-6 text-white max-sm:px-2`}>
     <div className="flex flex-col gap-2">
    <div
-     className="absolute inset-0 bg-cover brightness-50"
+     className="absolute inset-0 bg-cover max-sm:bg-center brightness-50"
      style={{ backgroundImage: `url(${res?.filteredArtwork && res.filteredArtwork.length > 0 ? res.filteredArtwork : res.coverUrl})` }}
    ></div>
-   <h1 className="relative z-10 text-white text-6xl space">{res?.name}</h1>
-   <div className="flex gap-5">
+   <h1 className="relative z-10 text-white text-6xl space max-sm:text-3xl max-sm:pt-4">{res?.name}</h1>
+   <div className="flex gap-5 max-sm:pb-3">
     <div className="flex gap-4 w-[270px] pb-2">
     <p className="text-prim relative font-normal">{res.rel}</p>
     {res.age && res.age.length > 0 &&
     <p className="text-white relative">{t(res.age[0].rating)}</p>
   }
   </div>
-  <div className="w-[700px]">
+  <div className="w-[700px] max-sm:hidden">
 
   </div>
   <div>
   <p className="text-white relative space">{cat(res.category)}</p>
   </div>
    </div>
-   <div className="flex gap-5 relative">
-    <img src={res.realCover} alt="" className="w-[270px] h-[400px] relative" />
+   <div className="flex gap-5 relative max-sm:grid max-sm:grid-rows-2 max-sm:grid-cols-2">
+    <img src={res.realCover} alt="" className="w-[270px] h-[400px] relative max-sm:w-[160px] max-sm:h-[215px] max-sm:row-start-2 max-sm:rounded-md max-sm:justify-self-center max-sm:mt-8" />
     {res.vid && res.vid.length > 0 ?
-  <iframe src={`https://youtube.com/embed/${res.vid[0].video_id}`} className="relative min-w-[700px] h-[400px] " ></iframe>:
+    <div className="max-sm:w-screen">
+  <iframe src={`https://youtube.com/embed/${res.vid[0].video_id}`} className="relative min-w-[700px] h-[400px] max-sm:h-[300px] max-sm:row-start-1 max-sm:max-w-full max-sm:min-w-full" ></iframe></div>:
   res.videos ?
-  <iframe src={`https://youtube.com/embed/${res.videos[0].video_id}`} className="relative min-w-[700px] h-[400px]" ></iframe>:
-  <div className="relative min-w-[700px] h-[400px] bg-prim flex items-center justify-center brightness-200">This video is unavailable!</div>
+  <div className="max-sm:w-screen">
+  <iframe src={`https://youtube.com/embed/${res.videos[0].video_id}`} className="relative min-w-[700px] h-[400px] max-sm:h-[300px] max-sm:row-start-1 max-sm:max-w-full max-sm:min-w-full" ></iframe></div>:
+  <div className="relative min-w-[700px] h-[400px] max-sm:h-[300px] bg-prim flex items-center justify-center brightness-200 max-sm:row-start-1 max-sm:max-w-full max-sm:min-w-full">This video is unavailable!</div>
   }
   
-  <div className="w-full h-[400px] relative bg-prim flex flex-col justify-around py-2  ">
-    <div className="flex justify-evenly ">
-    <div className=" bg-white p-3 rounded-xl sh10">
+  <div className="w-full h-[400px] relative bg-prim flex flex-col justify-around py-2 max-sm:row-start-2 max-sm:px-6 max-sm:h-[270px] max-sm:rounded-sm">
+    <div className="flex justify-evenly max-sm:flex-col max-sm:gap-2">
+    <div className=" bg-white p-3 rounded-xl sh10 max-sm:p-2">
       <div className="flex gap-2 items-center">
 
-    <Icon path={mdiStar} size={2} className="text-acc"/>
+    <Icon path={mdiStar}  className="text-acc max-sm:w-7 w-12"/>
     
-      <p className="text-4xl text-sec chakra">{(res.rating/10).toFixed(1)}</p>
+      <p className="text-4xl text-sec chakra max-sm:text-2xl">{(res.rating/10).toFixed(1)}</p>
     </div>
-      <p className=" text-sec chakra" >{res.rating_count} user ratings</p>
+      <p className=" text-sec chakra max-sm:text-sm" >{res.rating_count} user ratings</p>
       </div>
     
-    <div className="bg-white p-3 rounded-xl sh10">
+    <div className="bg-white p-3 rounded-xl sh10 max-sm:p-2">
       <div className="flex items-center gap-1">
-    <Icon path={mdiStar} size={2} className="text-acc"/>
-      <p className="text-4xl text-sec chakra">{(res.aggregated_rating/10).toFixed(1)}</p>
+    <Icon path={mdiStar}  className="text-acc max-sm:w-7 w-12"/>
+      <p className="text-4xl text-sec chakra max-sm:text-2xl">{(res.aggregated_rating/10).toFixed(1)}</p>
      </div>
       <p className="text-sec chakra">{res.aggregated_rating_count} critic reviews</p>
     </div>
@@ -326,8 +302,8 @@ const GameDetail = () => {
 <div className="flex flex-col gap-7 items-center">
   
   <div className="relative">
-  <div className="flex items-center rounded-3xl gap-1 sh11 justify-around border-2 bg-acc border-sec w-44 px-3 " >
-    <p className="text-sec p-1 text-lg space font-bold hover:cursor-pointer" onClick={() => setToggle(!toggle)}>Add to list</p>
+  <div className="flex items-center rounded-3xl gap-1 sh11 justify-around border-2 bg-acc border-sec w-44 px-3 max-sm:px-2 max-sm:w-36 " >
+    <p className="text-sec p-1 text-lg space font-bold hover:cursor-pointer max-sm:text-base" onClick={() => setToggle(!toggle)}>Add to list</p>
     <div className="bg-sec w-[1px] h-12 relative p-0" ></div>
    
    <div onClick={() => setPlanningList(!planningList)}>
@@ -345,8 +321,8 @@ const GameDetail = () => {
 </div>
 
   {
-    gamePop && gamePop.length > 0 &&
-<div className="flex justify-evenly bg-white mx-3 rounded-md  py-2 sh10">
+    gamePop && gamePop.length > 0 && 
+<div className="flex justify-evenly bg-white mx-3 rounded-md  py-2 sh10 max-sm:hidden">
     <div className="flex flex-col items-center">
     <Icon path={mdiHandExtended} size={2} className="text-black"></Icon>
     <p className="text-sec space">Want</p>
@@ -385,32 +361,32 @@ const GameDetail = () => {
    </div>
   </div>
   {res.themes && 
-  <div className="relative mt-5">
-    <ul className="flex gap-2">
+  <div className="relative mt-5 max-sm:ml-3">
+    <ul className="flex flex-wrap gap-2">
    { res.themes.map((theme: any, index: any)=> (
       <li className="text-sec relative bg-prim py-1 px-3 rounded-2xl border-[3px] border-sec" key={index}>{theme.name}</li>
     ))}
     </ul>
   </div>
 }
-<div className={`w-full  bg-prim relative mt-14 rounded-t-lg py-3 px-4 sh10 border-l-2 border-t border-r-2 border-sec`}>
+<div className={`w-full  bg-prim relative mt-14 rounded-t-lg py-3 px-4 sh10 border-l-2 border-t border-r-2 border-sec max-sm:px-2 `}>
 
 
   
-   <div className="bg-white max-w-[75%] rounded-r-3xl p-2 mt-2 border-[3px] border-acc sh10"> 
+   <div className="bg-white max-w-[75%] rounded-r-3xl p-2 mt-2 border-[3px] border-acc sh10 max-sm:max-w-[85%] max-sm:border-2"> 
 <ul className="flex flex-wrap gap-2 items-center">
-  <p className="text-lg font-bold text-acc chakra">Genre:</p>
+  <p className="text-lg font-bold text-acc chakra max-sm:text-bass">Genre:</p>
 {res && res.genres &&
   res.genres.map((slot: any,  index)=>(
-<li className="text-[17px] chakra text-sec font-black" key={index}>{slot.name},</li>
+<li className="text-[17px] chakra text-sec font-black max-sm:text-[15px]" key={index}>{slot.name},</li>
   ))
   }
  </ul>
  <ul className="flex flex-wrap gap-2 items-center">
-  <p className="text-lg font-bold text-acc chakra">Platforms:</p>
+  <p className="text-lg font-bold text-acc chakra max-sm:text-base">Platforms:</p>
 {res && res.platforms &&
   res.platforms.map((slot: any, index)=>(
-<li className="text-[17px] chakra text-sec font-black" key={index}>{slot.name},</li>
+<li className="text-[17px] chakra text-sec font-black max-sm:text-[15px]" key={index}>{slot.name},</li>
   ))
   }
  </ul>
@@ -439,49 +415,49 @@ const GameDetail = () => {
   }
   
 
-  <div className="bg-prim w-full  py-6 flex flex-col gap-8 px-10 rounded-md ">
-    <div className="flex justify-evenly items-center border-b border-sec pb-8">
+  <div className="bg-prim w-full  py-6 flex flex-col gap-8 px-10 rounded-md max-sm:px-1">
+    <div className="flex justify-evenly items-center border-b border-sec pb-8 max-sm:grid max-sm:grid-cols-2 max-sm:gap-y-4">
 
 
-    <ol className="bg-white border-2 border-sec p-2 rounded-md h-[250px] shadow-sm w-56 list-disc border-b-8 rounded-b-2xl sh11">
+    <ol className="bg-white border-2 border-sec p-2 rounded-md h-[250px] shadow-sm w-56 list-disc border-b-8 rounded-b-2xl max-sm:w-40 sh11 max-sm:col-start-1">
     <h2 className="bangers text-2xl text-sec">Main developer</h2>
     <div className="w-[75%] h-[1px] bg-sec mb-3"></div>
     {res.dev ? 
     res.dev.map((slot: any, index: any)=> (
-      <li className="text-sec indie text-xl ml-6 font-black" key={index}>{slot.company.name}</li>
+      <li className="text-sec max-sm:text-base text-xl ml-6 font-black max-sm:font-bold" key={index}>{slot.company.name}</li>
     )):
-    <p className="text-white indie text-xl font-black ml-6">-</p>}
+    <p className="text-white max-sm:text-base text-xl font-black ml-6">-</p>}
   </ol>
-  <ol className="bg-white border-2 border-sec py-2 pl-3 rounded-md h-[250px]  w-56 list-disc border-b-8 rounded-b-2xl">
+  <ol className="bg-white border-2 border-sec py-2 pl-3 rounded-md h-[250px]  w-56 list-disc border-b-8 rounded-b-2xl max-sm:w-40">
   <h2 className="text-2xl bangers text-sec  ">Main publisher</h2>
   <div className="w-[75%] h-[1px] bg-sec mb-3"></div>
     {res.publisher && res.publisher.length > 0 ? 
     res.publisher.map((slot: any, index)=> (
-      <li className="text-sec indie text-xl font-black ml-6" key={index}>{slot.company.name}</li>
+      <li className="text-sec max-sm:text-base text-xl font-black ml-6 max-sm:font-bold" key={index}>{slot.company.name}</li>
     )):
-    <p className="text-white indie text-xl font-black ml-6">-</p>}
+    <p className="text-white max-sm:text-base text-xl font-black ml-6">-</p>}
   </ol>
-  <ol className="bg-white border-2 border-sec p-2 rounded-md  w-56 list-disc h-[250px] border-b-8 rounded-b-2xl">
+  <ol className="bg-white border-2 border-sec p-2 rounded-md  w-56 list-disc h-[250px] border-b-8 rounded-b-2xl max-sm:w-40">
   <h2 className="text-2xl bangers text-sec">Game modes</h2>
   <div className="w-[75%] h-[1px] bg-sec mb-3"></div>
     {res.game_modes ? 
     res.game_modes.map((slot: any, index)=> (
-      <li className="text-sec indie text-xl font-black ml-6  " key={index}>{slot.name}</li>
+      <li className="text-sec max-sm:text-base text-xl font-black ml-6 max-sm:font-bold" key={index}>{slot.name}</li>
     )):
-    <p className="text-white indie text-xl font-black ml-6">-</p>}
+    <p className="text-white max-sm:text-base text-xl font-black ml-6">-</p>}
   </ol>
-  <ol className="bg-white border-2 border-sec p-2 rounded-md h-[250px] w-56 list-disc border-b-8 rounded-b-2xl">
+  <ol className="bg-white border-2 border-sec p-2 rounded-md h-[250px] w-56 list-disc border-b-8 rounded-b-2xl max-sm:w-40">
   <h2 className="text-2xl bangers text-sec">player perspectives</h2>
   <div className="w-[75%] h-[1px] bg-sec mb-3"></div>
     {res.player_perspectives ? 
     res.player_perspectives.map((slot: any, index:any)=> (
-      <li className="text-sec indie text-xl font-black ml-6 " key={index}>{slot.name}</li>
+      <li className="text-sec max-sm:text-base text-xl font-black ml-6 max-sm:font-bold" key={index}>{slot.name}</li>
     )):
-    <p className="text-white indie text-xl font-black ml-6">-</p>}
+    <p className="text-white max-sm:text-base text-xl font-black ml-6">-</p>}
   </ol>
   </div>
-    <div className="w-full px-20 flex gap-10">
-        <div className="flex min-w-[50%] min-h-32 gap-3 rounded-lg justify-between">
+    <div className="w-full px-20 flex gap-10 max-sm:px-2 max-sm:grid max-sm:grid-rows-2">
+        <div className="flex min-w-[50%] min-h-32 gap-3 rounded-lg justify-between max-sm:row-start-1">
     <div className="py-5 bg-white w-1/2 rounded-sm sh10 pl-5 ">
       <h2 className="text-sec text-3xl bangers ">Franchises</h2> 
       <div className="h-[2px] w-[60%] bg-acc mb-3"></div>
@@ -504,7 +480,7 @@ const GameDetail = () => {
     }
     </div>
     </div>
-      <div className="bg-white rounded-sm p-2 sh10 w-full pl-5">
+      <div className="bg-white rounded-sm p-2 sh10 w-full pl-5 max-sm:row-start-2">
     <h2 className="text-sec text-3xl bangers">DLCs</h2>
     <div className="h-[2px] w-[7%] bg-acc mb-3"></div>
       {res.expansions ? 
@@ -545,28 +521,17 @@ const GameDetail = () => {
   
   }
   </div>
-  <div className="flex flex-col p-[10px]  my-10">
+  <div className="flex flex-col p-[10px]  my-10 max-sm:p-1">
     <h2 className="text-sec text-4xl bangers mt-3 pl-2">Similar games</h2>
     <div className="w-32 h-[2px] bg-acc mb-4 ml-2"></div>
-    <div className="my-12 flex relative justify-between">
-
-    {show ?
-          <div className="p-[11px] bg-white absolute top-[40%] left-5 z-50 cursor-pointer rounded-full" onClick={() => handleLeft()}>
-          <Icon path={mdiChevronLeft} size={1.4} className="text-sec hover:text-slate-600"></Icon>
-        </div>:
-        null
-          }
-      
-  <Cover tests = {{sim, index}}  />
     
-  {show ? 
-        <div className="p-[11px] bg-white absolute top-[40%] right-5 z-50 rounded-full cursor-pointer" onClick={() => handleRight()}>
-        <Icon path={mdiChevronRight} size={1.4} className="text-sec hover:text-slate-600"></Icon>
-        </div>:
-        null
-        }
 
-    </div>
+      
+  <Cover tests = {{sim}}  />
+    
+  
+
+    
   </div>
 </div>
  </div>
@@ -579,12 +544,12 @@ const GameDetail = () => {
    <p className="text-lg text-black">{errMess}</p>
    </div>
    }
-   <div className={` ${toggle ? "absolute": "hidden"} z-50 inset-0 top-[25%] left-[30%] w-[650px] h-[350px] bg-sec sh4 rounded-md`}>
-    <div className=" border-b-2 border-acc flex mt-10 mx-5">
-    <p className="text-white text-2xl space mb-6 ml-2">{res?.name}</p>
+   <div className={` ${toggle ? "absolute": "hidden"} z-50 inset-0 top-[25%] left-[30%] w-[650px] h-[350px] bg-sec sh4 rounded-md max-sm:left-4  max-sm:w-[90%] max-sm:h-fit`}>
+    <div className=" border-b-2 border-acc flex mt-10 mx-5 max-sm:mx-2">
+    <p className="text-white text-2xl space mb-6 ml-2 max-sm:text-lg">{res?.name}</p>
     
     </div>
-    <form onSubmit={handleSubmit} className="ml-8  flex gap-10 mt-16 items-center">
+    <form onSubmit={handleSubmit} className="ml-8  flex gap-10 mt-16 items-center max-sm:ml-1 max-sm:flex-col max-sm:mt-10">
       <div className="flex flex-col">
       <label htmlFor="status" className="text-white text-lg">Status: </label>
       <select name="status" id="status" className="outline-none w-48 h-9 pl-2 rounded-sm bg-prim"
@@ -612,7 +577,7 @@ const GameDetail = () => {
       onChange={(e) => setReview({...review, score: Number(e.target.value)}) }
        />
        </div>
-       <button type="submit" name="save" className="border-2 border-prim text-acc  h-9 px-5 self-end chakra text-xl font-bold
+       <button type="submit" name="save" className="border-2 border-prim text-acc  h-9 px-5 self-end chakra text-xl font-bold max-sm:mb-3 max-sm:mr-3
        
        ">Save</button>
     </form>

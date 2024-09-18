@@ -147,16 +147,19 @@ return(
     <>
     <Navbar/>
     <div className="bg-prim">
-    <div className="mx-64 bg-white rounded-md sh10 mt-5">
-        <div className="pl-[60px] py-8 border-b-2 border-sec">
+    <div className="mx-64 bg-white rounded-md sh10 mt-5 max-sm:mx-2">
+        <div className="pl-[60px] py-8 border-b-2 border-sec max-sm:pl-3">
             <h1 className="text-3xl pb-3 text-sec chakra font-bold">Top 100 games</h1>
             <div className="">
-                <div  className="flex gap-5 " >
+                <div  className="flex flex-col gap-7" >
+                  <div className="flex gap-5">
                   <form >
                     <div className="flex flex-col relative" >
                       
                     <label className="p-1 text-lg text-sec space" htmlFor="platform">Platform:</label>
-                    <input type="text" className="rounded-md h-9 w-80 p-1 pl-2 bg-prim sh11 placeholder-slate-600 border-2 border-sec" placeholder="Xbox 360 "
+                    <input type="text" className="rounded-md h-9 w-80 p-1 pl-2 bg-prim sh11 placeholder-slate-600 border-2 border-sec
+                    max-sm:w-40
+                    " placeholder="Xbox 360 "
                      id="platform"
                      maxLength={25}
                     onChange={(e) => handleInputChange(e)}
@@ -184,7 +187,9 @@ return(
                     </form>
                     <form className="flex flex-col relative" onSubmit={(e) => handleYearSubmit(e)}>
                     <label className="p-1 text-lg text-sec space" htmlFor="year">Year:</label>
-                    <input type="text" className="rounded-md  h-9 w-80 p-1 pl-2 bg-prim border-2 border-sec sh11 placeholder-slate-600" placeholder="2015 " id="year"
+                    <input type="text" className="rounded-md  h-9 w-80 p-1 pl-2 bg-prim border-2 border-sec sh11 placeholder-slate-600
+                    max-sm:w-32
+                    " placeholder="2015 " id="year"
                     minLength={4}
                     maxLength={4}
                     onChange={(e) => setYear(e.target.value)}
@@ -193,7 +198,8 @@ return(
                     <Icon path={mdiMagnify} size={1} />
                     </button>
                     </form>
-                    <div className="flex items-center gap-2 self-end">
+                    </div>
+                    <div className="flex items-center gap-2 self-end max-sm:self-start">
                       <label htmlFor="sort" className="p-1 text-lg text-sec space">Sort by:</label>
                     <select name="sort" id="sort" className="py-1 px-2 rounded-md bg-prim sh11 border-2 border-sec " onChange={handleChange} >
                       <option value="total_rating" className="bg-prim">Rating</option>
@@ -203,30 +209,30 @@ return(
                 </div>
             </div>
         </div>
-        <div className="px-10 py-5 flex flex-col ">
+        <div className="px-10 py-5 flex flex-col min-h-screen max-sm:px-2 ">
             {res &&
             res.map((slot:any, index) => (
                 <div className="flex justify-between border-b-[1px] border-sec py-4 pl-5" key={index}>
-                    <div className="flex gap-5">
-              <Link to={`/detail/${slot.id}`} state={slot.id}>  <img src={slot.coverUrl} alt="" className="border border-sec" /> </Link>
+                    <div className="flex gap-5 max-sm:gap-3">
+              <Link to={`/detail/${slot.id}`} state={slot.id}>  <img src={slot.coverUrl} alt="" className="border border-sec max-w-[90px] min-w-[90px] h-[120px] max-sm:max-w-[70px] max-sm:min-w-[70px] max-sm:h-[95px] " /> </Link>
                 <div className="flex flex-col">
-                    <div className="flex pt-2">
-                    <Link to={`/detail/${slot.id}`} state={slot.id} className="flex items-end gap-1 text-sec gr">
-                      <p className=" text-lg  chakra font-bold">{index + 1}. </p>
-                    <h3 className=" text-lg  chakra font-black ">{slot.name}</h3></Link>
+                    <div className="flex pt-2 max-sm:pt-0">
+                    <Link to={`/detail/${slot.id}`} state={slot.id} className="flex items-start gap-1 text-sec gr">
+                      <p className=" text-lg  chakra font-bold max-sm:text-sm">{index + 1}. </p>
+                    <h3 className=" text-lg  chakra font-black max-sm:text-sm">{slot.name}</h3></Link>
                     </div>
                     <div className="flex gap-2">
-                        <p className="text-sec chakra">{slot.rel}</p>
-                        <p className="text-sec space">	&#40;{slot.total_rating_count} total ratings&#41;</p>
+                        <p className="text-sec chakra max-sm:text-[12px]">{slot.rel}</p>
+                        <p className="text-sec space max-sm:text-[12px]">	&#40;{slot.total_rating_count} total ratings&#41;</p>
                     </div>
                     <div className="self-start  py-[2px] px-[6px] rounded-[4px] border-2 bg-acc border-sec mt-2">
-                        <p className="text-sec chakra font-bold">{cat(slot.category)}</p>
+                        <p className="text-sec chakra font-bold max-sm:text-sm">{cat(slot.category)}</p>
                     </div>
                 </div>
                 </div>
-                <div className="flex items-center mr-10 gap-1">
-                <Icon path={mdiStar} size={1.4} className="text-acc" />
-                    <p className="text-[22px] text-sec chakra font-medium ">{(slot.total_rating/10).toFixed(1)}/10</p>
+                <div className="flex items-center mr-10 gap-1 max-sm:mr-1">
+                <Icon path={mdiStar}  className="text-acc max-sm:w-6 w-10" />
+                    <p className="text-[22px] text-sec chakra font-medium max-sm:text-base">{(slot.total_rating/10).toFixed(1)}/10</p>
                     
                 </div>
                 </div>

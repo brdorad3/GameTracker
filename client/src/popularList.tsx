@@ -51,10 +51,10 @@ const PopularList = () => {
     return(
         <>
     <Navbar/>
-    <div className="grid grid-cols-6 px-64 py-24 gap-y-10">
+    <div className="grid grid-cols-6 px-64 py-24 gap-y-10 max-sm:px-1 max-sm:grid-cols-2 max-sm:justify-items-center">
     {res &&
    res.map((game) => (
-    <div className=" bg-sec rounded-b-md min-w-[210px] max-w-[210px] sh3 hover:scale-[1.03]"  >
+    <div className=" bg-sec rounded-b-md min-w-[210px] max-w-[210px] sh3 hover:scale-[1.03] max-sm:min-w-[170px] max-sm:max-w-[170px]"  >
     <Link
                       to={`/detail/${game.id}`}
                       state={game.id}
@@ -62,7 +62,7 @@ const PopularList = () => {
                       className=""
                   >
     {game.coverUrl &&
-    <img src={game.coverUrl} className="w-full h-[250px] rounded-sm" alt="" />
+    <img src={game.coverUrl} className="w-full h-[250px] rounded-sm max-sm:h-[220px]" alt="" />
 }
 </Link>
   
