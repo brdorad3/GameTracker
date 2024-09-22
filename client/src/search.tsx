@@ -59,9 +59,9 @@ const Search = () => {
       {
         res.length > 0 ?
       
-      <ul className="flex flex-col gap-5 px-64 py-10">
+      <ul className="flex flex-col gap-5 px-64 py-10 max-sm:px-2">
         {res.map((game: any, index: any) => (
-          <li key={index} className="flex gap-5 py-3 rounded-md sh10 mb-5 pl-10 bg-white">
+          <li key={index} className="flex gap-5 py-3 rounded-md sh10 mb-5 pl-10 bg-white max-sm:pl-2">
             {game.coverUrl ? (
              <Link to={`/detail/${game.id}`} state={game.id} > <img src={game.coverUrl} alt={game.name} className="w-[80px] h-[106px] " /></Link>
             ) : (
@@ -72,14 +72,14 @@ const Search = () => {
             )}
             <div>
             <div className="flex gap-2 pt-3">
-           <Link to={`/detail/${game.id}`} state={game.id}> <p className="text-sec text-xl font-medium hover:underline hover:underline-offset-2">{game.name}</p> </Link>
-            <p className="text-sec text-xl">&#40; {game.rel} &#41;</p>
+           <Link to={`/detail/${game.id}`} state={game.id}> <p className="text-sec text-xl font-medium hover:underline hover:underline-offset-2 max-sm:text-base">{game.name}</p> </Link>
+            <p className="text-sec text-xl max-sm:text-base">&#40; {game.rel} &#41;</p>
             </div>
             <div>
             <ul className="flex gap-1">
               
                   { game.platforms && game.platforms.map((platform: any, index: number) => (
-                    <li key={index} className="text-sec text-[12px] ">{platform.name}       /</li>
+                    <li key={index} className="text-sec text-[12px] max-sm:hidden">{platform.name}       /</li>
                   ))}
                 </ul>
             </div>

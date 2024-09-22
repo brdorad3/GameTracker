@@ -255,7 +255,7 @@ const GameDetail = () => {
    ></div>
    <h1 className="relative z-10 text-white text-6xl space max-sm:text-3xl max-sm:pt-4">{res?.name}</h1>
    <div className="flex gap-5 max-sm:pb-3">
-    <div className="flex gap-4 w-[270px] pb-2">
+    <div className="flex gap-4 w-[270px] pb-2 max-sm:w-20">
     <p className="text-prim relative font-normal">{res.rel}</p>
     {res.age && res.age.length > 0 &&
     <p className="text-white relative">{t(res.age[0].rating)}</p>
@@ -272,10 +272,10 @@ const GameDetail = () => {
     <img src={res.realCover} alt="" className="w-[270px] h-[400px] relative max-sm:w-[160px] max-sm:h-[215px] max-sm:row-start-2 max-sm:rounded-md max-sm:justify-self-center max-sm:mt-8" />
     {res.vid && res.vid.length > 0 ?
     <div className="max-sm:w-screen">
-  <iframe src={`https://youtube.com/embed/${res.vid[0].video_id}`} className="relative min-w-[700px] h-[400px] max-sm:h-[300px] max-sm:row-start-1 max-sm:max-w-full max-sm:min-w-full" ></iframe></div>:
+  <iframe src={`https://youtube.com/embed/${res.vid[0].video_id}`} className="relative min-w-[700px] h-[400px] max-sm:h-[300px] max-sm:row-start-1 max-sm:max-w-[96%] max-sm:min-w-[96%]" ></iframe></div>:
   res.videos ?
   <div className="max-sm:w-screen">
-  <iframe src={`https://youtube.com/embed/${res.videos[0].video_id}`} className="relative min-w-[700px] h-[400px] max-sm:h-[300px] max-sm:row-start-1 max-sm:max-w-full max-sm:min-w-full" ></iframe></div>:
+  <iframe src={`https://youtube.com/embed/${res.videos[0].video_id}`} className="relative min-w-[700px] h-[400px] max-sm:h-[300px] max-sm:row-start-1 max-sm:max-w-[96%] max-sm:min-w-[96%]" ></iframe></div>:
   <div className="relative min-w-[700px] h-[400px] max-sm:h-[300px] bg-prim flex items-center justify-center brightness-200 max-sm:row-start-1 max-sm:max-w-full max-sm:min-w-full">This video is unavailable!</div>
   }
   

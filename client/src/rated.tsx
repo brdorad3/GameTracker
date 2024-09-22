@@ -89,11 +89,11 @@ const Rated = () => {
         breakpoints={{
           365:{
             slidesPerView:2,
-            spaceBetween:20
+            spaceBetween: 5
           },
           675: {
             slidesPerView: 3,
-            spaceBetween:10
+           
           },
           880:{
             slidesPerView:4,
@@ -120,7 +120,7 @@ const Rated = () => {
             <div className=" bg-sec rounded-b-md min-w-[210px] max-w-[210px] sh10 hover:scale-[1.03] card
             "  >
               <Link to={`/detail/${game.id}`} state={game.id} key={game.id} >
-            <img src={game.coverUrl} className="w-full h-[250px] " alt="" />
+            <img src={game.coverUrl} className="w-full h-[250px] max-sm:h-[220px]" alt="" />
             </Link>
             <div className="">
             <Link to={`/detail/${game.id}`} state={game.id} key={game.id} >

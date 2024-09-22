@@ -123,11 +123,11 @@ const Reviews = () => {
                 breakpoints={{
                     365:{
                         slidesPerView:2,
-                        spaceBetween:20
+                        spaceBetween: 5
                       },
                       675: {
                         slidesPerView: 3,
-                        spaceBetween:10
+                        
                       },
                       880:{
                         slidesPerView:4,
@@ -161,7 +161,7 @@ const Reviews = () => {
                                             {game.cover && (
                                                 <img
                                                     src={game.cover}
-                                                    className="w-full h-[250px]"
+                                                    className="w-full h-[250px] max-sm:h-[220px]"
                                                     alt=""
                                                 />
                                             )}

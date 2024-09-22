@@ -148,11 +148,11 @@ useEffect(() => {
           
           365:{
             slidesPerView:2,
-            spaceBetween:20
+            spaceBetween:5
           },
           675: {
             slidesPerView: 3,
-            spaceBetween: 10
+            
           },
           880:{
             slidesPerView:4
@@ -184,7 +184,7 @@ useEffect(() => {
                                className=""
                            >
              {game.coverUrl &&
-             <img rel="preload" src={game.coverUrl} className="w-full h-[250px]" alt="" />
+             <img rel="preload" src={game.coverUrl} className="w-full h-[250px] max-sm:h-[220px]" alt="" />
 }
 </Link>
            

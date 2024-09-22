@@ -212,9 +212,9 @@ return(
         <div className="px-10 py-5 flex flex-col min-h-screen max-sm:px-2 ">
             {res &&
             res.map((slot:any, index) => (
-                <div className="flex justify-between border-b-[1px] border-sec py-4 pl-5" key={index}>
+                <div className="flex justify-between border-b-[1px] border-sec py-4 pl-5 max-sm:pl-2" key={index}>
                     <div className="flex gap-5 max-sm:gap-3">
-              <Link to={`/detail/${slot.id}`} state={slot.id}>  <img src={slot.coverUrl} alt="" className="border border-sec max-w-[90px] min-w-[90px] h-[120px] max-sm:max-w-[70px] max-sm:min-w-[70px] max-sm:h-[95px] " /> </Link>
+              <Link to={`/detail/${slot.id}`} state={slot.id}>  <img src={slot.coverUrl} alt="" className="border border-sec max-w-[90px] min-w-[90px] h-[120px] max-sm:max-w-[70px] max-sm:min-w-[70px] max-sm:min-h-[95px] max-sm:max-h-[95px] " /> </Link>
                 <div className="flex flex-col">
                     <div className="flex pt-2 max-sm:pt-0">
                     <Link to={`/detail/${slot.id}`} state={slot.id} className="flex items-start gap-1 text-sec gr">
