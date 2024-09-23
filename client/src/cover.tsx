@@ -10,15 +10,10 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 
-
-
 const Cover = (props: any) =>{
-
     const [res, setRes] = useState<any[]>([])
     
-    
     useEffect(() => {
-
         
     const forCover = props.tests.sim.map((game: any) =>({
         ...game,
@@ -26,12 +21,9 @@ const Cover = (props: any) =>{
         
 }))
 
-
-
 setRes(forCover)
 
     }, [props.tests.sim])
-    
 
 
     return (
