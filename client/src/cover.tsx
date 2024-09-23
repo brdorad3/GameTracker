@@ -25,7 +25,6 @@ setRes(forCover)
 
     }, [props.tests.sim])
 
-
     return (
         <>
        <div className="relative">
