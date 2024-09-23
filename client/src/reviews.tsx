@@ -38,14 +38,13 @@ const Reviews = () => {
             const response = await Promise.all(
                 data.map((slot: any) => {
                     return fetch(
-                        "http://localhost:8080/https://api.igdb.com/v4/games",
+                        import.meta.env.VITE_IGDB_API + "/games",
                         {
                             method: "POST",
                             headers: {
                                 Accept: "application/json",
-                                "Client-ID": "28k8glj9djgyr0opcwll92beduld5h",
-                                Authorization:
-                                    "Bearer ag34gl29glo4dukxxlx33gmei0j626",
+                                "Client-ID": import.meta.env.VITE_CLIENT_ID,
+                                "Authorization": import.meta.env.VITE_AUTHORIZATION,
                             },
                             body: `fields name, cover.url ;
                                    where name = "${slot.game}";`,

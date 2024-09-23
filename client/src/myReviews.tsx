@@ -12,11 +12,7 @@ const MyReviews = () => {
 const navigate = useLocation()
 const [filters, setFilters] = useState('all')
 const [res, setRes] = useState(navigate.state)
-
-//const res = navigate.state
 const [test, setTest] = useState<any[]>([])
-
-
 
 
 useEffect(()=>{

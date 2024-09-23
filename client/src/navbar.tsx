@@ -23,13 +23,13 @@ const Navbar: React.FC = () => {
       const fetchData = async () => {
         try {
           const response = await fetch(
-            "http://localhost:8080/https://api.igdb.com/v4/games",
+            import.meta.env.VITE_IGDB_API + "/games",
             {
               method: 'POST',
               headers: {
                 'Accept': 'application/json',
-                'Client-ID': '28k8glj9djgyr0opcwll92beduld5h',
-                'Authorization': 'Bearer ag34gl29glo4dukxxlx33gmei0j626',
+                'Client-ID': import.meta.env.VITE_CLIENT_ID,
+                'Authorization': import.meta.env.VITE_AUTHORIZATION,
               },
               body: `search "${value}"; fields name, cover.url, first_release_date, platforms.name, total_rating, total_rating_count, themes;
                limit 5;where themes != (42) & total_rating_count > 0;

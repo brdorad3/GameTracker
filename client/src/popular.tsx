@@ -24,13 +24,13 @@ useEffect(() => {
   const fetchPopularityData = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8080/https://api.igdb.com/v4/popularity_primitives",
+        import.meta.env.VITE_IGDB_API + "/popularity_primitives",
         {
           method: 'POST',
           headers: {
             "Accept": 'application/json',
-            'Client-ID': '28k8glj9djgyr0opcwll92beduld5h',
-            "Authorization": 'Bearer ag34gl29glo4dukxxlx33gmei0j626',
+            'Client-ID': import.meta.env.VITE_CLIENT_ID,
+            "Authorization": import.meta.env.VITE_AUTHORIZATION,
           },
           body: `
             fields game_id, popularity_type, value;
@@ -73,13 +73,13 @@ useEffect(() => {
     try {
       const gameIds = res.map((slot: any) => slot.game_id).join(',');
       const response = await fetch(
-        "http://localhost:8080/https://api.igdb.com/v4/games",
+        import.meta.env.VITE_IGDB_API + "/games",
         {
           method: 'POST',
           headers: {
             "Accept": 'application/json',
-            'Client-ID': '28k8glj9djgyr0opcwll92beduld5h',
-            "Authorization": 'Bearer ag34gl29glo4dukxxlx33gmei0j626',
+            'Client-ID': import.meta.env.VITE_CLIENT_ID,
+            "Authorization": import.meta.env.VITE_AUTHORIZATION,
           },
           body: `
             fields name, total_rating, cover.url;

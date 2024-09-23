@@ -43,13 +43,13 @@ const Top100 = () => {
 const fetchData = async () => {
   try{
     const response = await fetch(
-      "http://localhost:8080/https://api.igdb.com/v4/platforms",
+      import.meta.env.VITE_IGDB_API + "/platforms",
       {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
-          'Client-ID': '28k8glj9djgyr0opcwll92beduld5h',
-          'Authorization': 'Bearer ag34gl29glo4dukxxlx33gmei0j626',
+          'Client-ID': import.meta.env.VITE_CLIENT_ID,
+          'Authorization': import.meta.env.VITE_AUTHORIZATION,
         },
         body: `fields name;
         search "${search}";
@@ -91,13 +91,13 @@ fetchData()
             query += ` sort ${val} desc; limit 100;`;
 
             const response = await fetch(
-              "http://localhost:8080/https://api.igdb.com/v4/games",
+              import.meta.env.VITE_IGDB_API +"/games",
               {
                 method: 'POST',
                 headers: {
                   'Accept': 'application/json',
-                  'Client-ID': '28k8glj9djgyr0opcwll92beduld5h',
-                  'Authorization': 'Bearer ag34gl29glo4dukxxlx33gmei0j626',
+                  'Client-ID': import.meta.env.VITE_CLIENT_ID,
+                  'Authorization': import.meta.env.VITE_AUTHORIZATION,
                 },
                 body: query,
               }

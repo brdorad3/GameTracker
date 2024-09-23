@@ -15,6 +15,7 @@ import { body, validationResult } from "express-validator";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken";
 import routes from "./routes/index"
+import helmet from "helmet";
 
 const app = express();
 
@@ -35,6 +36,7 @@ const corsOptions = {
   };
 
 app.use(cors(corsOptions))
+app.use(helmet());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
 app.use(passport.initialize());
