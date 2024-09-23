@@ -63,7 +63,6 @@ const calculateCustomPopularity = (gamePop: any[]) => {
     }
   });
 
-
   return 0.2 * wantToPlayValue + 0.4 * playingValue;
 };
 
