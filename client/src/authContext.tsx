@@ -40,7 +40,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
     const fetchUserDetails = async (userId: string) => {
         try {
-            const response = await axios.get(`http://localhost:3000/api/user/${userId}`);
+            const response = await axios.get(`${import.meta.env.VITE_URL}/api/user/${userId}`);
             setUser(response.data);
         } catch (error) {
             console.error('Failed to fetch user details', error);
