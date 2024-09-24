@@ -25,7 +25,7 @@ const Rated = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://gametracker-1.onrender.com/https://api.igdb.com/v4" + "/games",
+          import.meta.env.VITE_IGDB_API + "/games",
           {
             method: 'POST',
             headers: {
