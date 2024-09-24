@@ -30,7 +30,7 @@ async function main() {
 
 
 const corsOptions = {
-    origin: 'https://game-tracker-rhqien96t-brdorads-projects.vercel.app/',
+    origin: 'https://game-tracker-n4s1wnaqy-brdorads-projects.vercel.app/',
     credentials: true,
     optionSuccessStatus: 200
   };
