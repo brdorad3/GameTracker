@@ -36,12 +36,12 @@ const handleSubmit = async(e: React.FormEvent) => {
         <>
         <Navbar/>
         <div className="w-screen h-[90%] flex  justify-center">
-            <div className="absolute top-[25%] flex flex-col gap-10 items-center justify-center bg-white p-10 sh2 rounded-lg">
-            <h1 className="text-4xl text-sec space font-black">SIGNUP</h1>
+            <div className="absolute top-[25%] flex flex-col gap-10 items-center justify-center bg-white p-10 sh2 rounded-lg max-sm:p-5">
+            <h1 className="text-4xl text-sec space font-black max-sm:text-3xl">SIGNUP</h1>
             <form onSubmit={handleSubmit} className="flex flex-col gap-12">
                 <div className="flex flex-col gap-6">
                 <input type="text"
-                className="w-80 h-14 rounded-[4px] pl-4 bg-sec placeholder-prim text-prim"
+                className="w-80 h-14 rounded-[4px] pl-4 bg-sec placeholder-prim text-prim max-sm:w-72"
                 minLength={3}
                 maxLength={25}
                 required
@@ -51,7 +51,7 @@ const handleSubmit = async(e: React.FormEvent) => {
                 placeholder="Username"
                 />
                 <input type="password"
-                className="w-80 h-14 rounded-[4px] pl-4 bg-sec placeholder-prim text-prim"
+                className="w-80 h-14 rounded-[4px] pl-4 bg-sec placeholder-prim text-prim max-sm:w-72"
                 minLength={8}
                 maxLength={25}
                 value={password}

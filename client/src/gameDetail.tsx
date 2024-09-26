@@ -195,7 +195,7 @@ const GameDetail = () => {
                 headers: {
                   'Accept': 'application/json',
                   'Client-ID': import.meta.env.VITE_CLIENT_ID,
-                  'Authorization': import.meta.env.AUTHORIZATION,
+                  'Authorization': import.meta.env.VITE_AUTHORIZATION,
                 },
                 body: `fields *;
                 

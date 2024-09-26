@@ -39,12 +39,12 @@ setMessage(e.response.data.message);
         <>
         <Navbar/>
         <div className="w-screen h-[92%] flex justify-center relative">
-            <div className="absolute top-[25%] flex flex-col gap-10 items-center justify-center bg-white py-10 px-10 rounded-lg sh2">
-            <h1 className="text-4xl text-sec space font-black">LOGIN</h1>
+            <div className="absolute top-[25%] flex flex-col gap-10 items-center justify-center bg-white p-10 max-sm-p-5 rounded-lg sh2">
+            <h1 className="text-4xl text-sec space font-black max-sm:text-3xl">LOGIN</h1>
             <form onSubmit={handleSubmit} className="flex flex-col gap-12 relative">
                 <div className="flex flex-col gap-6">
                 <input type="text"
-                className="w-80 h-14 rounded-[4px] pl-4 bg-sec placeholder-prim text-prim " 
+                className="w-80 h-14 rounded-[4px] pl-4 bg-sec placeholder-prim text-prim max-sm:w-72" 
                 minLength={3}
                 maxLength={25}
                 required
@@ -54,7 +54,7 @@ setMessage(e.response.data.message);
                 placeholder="Username"
                 />
                 <input type="password"
-                className="w-80 h-14 rounded-[4px] pl-4 bg-sec placeholder-prim text-prim"
+                className="w-80 h-14 rounded-[4px] pl-4 bg-sec placeholder-prim text-prim max-sm:w-72"
                 minLength={8}
                 maxLength={25}
                 required
